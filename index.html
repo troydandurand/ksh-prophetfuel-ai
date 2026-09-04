@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Kyle Harris — Case Ledger · Private</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --green: #33e612;
+    --gold: #C8A84E;
+    --red: #ff2d2d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { zoom: 1.15; }
+  @supports not (zoom: 1) { html { font-size: 115%; } }
+  body {
+    background: var(--navy);
+    color: var(--green);
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 500;
+    min-height: 100vh;
+    padding: 40px 20px 20px;
+    text-shadow: 0 0 1px rgba(51,230,18,0.35);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #gate {
+    max-width: 440px;
+    width: 100%;
+    padding: 24px 26px;
+    border: 3px double var(--gold);
+    text-align: center;
+    background: rgba(200,168,78,0.03);
+  }
+  #gate .brand {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  #gate h1 {
+    color: var(--gold);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 4px rgba(200,168,78,0.5);
+  }
+  #gate .sub {
+    color: var(--green);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  #gate .anchor {
+    color: var(--red);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin: 10px 0 16px 0;
+    padding: 6px;
+    border-top: 1px solid rgba(255,45,45,0.4);
+    border-bottom: 1px solid rgba(255,45,45,0.4);
+    text-shadow: 0 0 4px rgba(255,45,45,0.5);
+  }
+  #gate p.instr {
+    color: var(--green);
+    font-size: 12px;
+    margin-bottom: 14px;
+    opacity: 0.9;
+  }
+  #gate input[type="password"], #gate input[type="tel"], #gate input[type="text"] {
+    background: var(--navy);
+    color: var(--green);
+    border: 2px solid var(--green);
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    padding: 10px 14px;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 3px;
+    outline: none;
+  }
+  #gate input:focus { border-color: var(--gold); }
+  #gate button {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 3px;
+    padding: 11px 24px;
+    margin-top: 12px;
+    cursor: pointer;
+    width: 100%;
+  }
+  #gate button:hover { background: var(--green); }
+  #gate button:disabled { opacity: 0.5; cursor: wait; }
+  #gate-error {
+    color: var(--red);
+    margin-top: 10px;
+    min-height: 18px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 4px rgba(255,45,45,0.4);
+  }
+  #gate .step-label {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  #gate footer {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(200,168,78,0.3);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+  .step { display: none; }
+  .step.active { display: block; }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="brand">PROFITFUEL&trade; &middot; PRIVATE PORTAL</div>
+  <h1>KYLE HARRIS</h1>
+  <div class="sub">CONSOLIDATED CASE LEDGER</div>
+  <div class="anchor">PRIVILEGED &middot; ATTORNEY WORK-PRODUCT &middot; DO NOT DISTRIBUTE</div>
+
+  <div class="step active" id="step-pin">
+    <div class="step-label">STEP 1 OF 2 &middot; PASSCODE</div>
+    <p class="instr">Enter passcode to continue.</p>
+    <input type="password" id="pw" autocomplete="off" placeholder="&bull; &bull; &bull; &bull; &bull; &bull; &bull; &bull; &bull; &bull;">
+    <button id="btn-pin" onclick="checkPw()">ENTER</button>
+  </div>
+
+  <div class="step" id="step-phone">
+    <div class="step-label">STEP 2 OF 2 &middot; SMS VERIFICATION</div>
+    <p class="instr">Enter your authorized mobile number. A 6-digit code will be sent by SMS.</p>
+    <input type="tel" id="phone" autocomplete="tel" placeholder="+1XXXXXXXXXX">
+    <button id="btn-send" onclick="sendCode()">SEND CODE</button>
+  </div>
+
+  <div class="step" id="step-code">
+    <div class="step-label">STEP 2 OF 2 &middot; ENTER CODE</div>
+    <p class="instr">Enter the 6-digit code sent to your phone.</p>
+    <input type="text" id="code" autocomplete="one-time-code" inputmode="numeric" maxlength="6" placeholder="6-digit code">
+    <div style="margin-top:12px;text-align:left;font-size:11px;letter-spacing:2px;color:#C8A84E">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" id="trust-device" checked style="width:18px;height:18px;cursor:pointer;accent-color:#C8A84E">
+        <span>TRUST THIS DEVICE &middot; 30 DAYS</span>
+      </label>
+    </div>
+    <button id="btn-verify" onclick="verifyCode()">VERIFY</button>
+    <div style="margin-top:10px;text-align:center">
+      <a href="#" onclick="revokeTrust();return false" style="color:#C8A84E;font-size:9px;letter-spacing:2px;opacity:0.6;text-decoration:none">REVOKE ALL TRUSTED DEVICES</a>
+    </div>
+  </div>
+
+  <div id="gate-error"></div>
+  <footer>KSH &middot; TRAVIS COUNTY TX &middot; S337 EXT7</footer>
+</div>
+
+<script>
+  var MASTER = '24';
+  var MASTER_KYLE = '1988';
+  // Troy's authorized phone — MUST be in E.164 format (e.g. '+16125551234').
+  // Kyle PIN 1988 auto-routes the SMS OTP here so Troy can relay via Getting Out.
+  // TODO: Troy — replace this placeholder with your live number before Kyle uses PIN 1988.
+  var TROY_PHONE = '+14242340660';
+  var currentPhone = '';
+  var isKyleSession = false;
+
+  function destination() {
+    // Unified post-login destination (D-S337-EXT7-N433, 2026-09-04) —
+    // mobile branch retired. case/index.html is responsive and holds the
+    // MASTER DOSSIER MONOLITH card. One source of truth for desktop + phone.
+    return 'case/index.html';
+  }
+
+  var TRUST_KEY = 'ksh_trust_v1';
+  var TRUST_DAYS = 30;
+
+  function setTrustToken() {
+    try {
+      var payload = {
+        exp: Date.now() + (TRUST_DAYS * 86400 * 1000),
+        issued: Date.now(),
+        v: 1
+      };
+      localStorage.setItem(TRUST_KEY, JSON.stringify(payload));
+    } catch(e) {}
+  }
+
+  function checkTrustToken() {
+    try {
+      var raw = localStorage.getItem(TRUST_KEY);
+      if (!raw) return false;
+      var payload = JSON.parse(raw);
+      if (!payload || !payload.exp || payload.v !== 1) return false;
+      if (payload.exp <= Date.now()) {
+        localStorage.removeItem(TRUST_KEY);
+        return false;
+      }
+      return true;
+    } catch(e) { return false; }
+  }
+
+  function revokeTrust() {
+    try {
+      localStorage.removeItem(TRUST_KEY);
+      sessionStorage.removeItem('ksh_in_v2');
+      sessionStorage.removeItem('ksh_kyle_session');
+    } catch(e) {}
+    setError('DEVICE TRUST REVOKED &middot; RE-VERIFY REQUIRED');
+  }
+
+  function unlock() {
+    try {
+      sessionStorage.setItem('ksh_in_v2', '1');
+      if (isKyleSession) sessionStorage.setItem('ksh_kyle_session', '1');
+      // Kyle path never sets device trust (Troy's phone is receiving, not Kyle's device)
+      if (!isKyleSession) {
+        var trustBox = document.getElementById('trust-device');
+        if (trustBox && trustBox.checked) setTrustToken();
+      }
+    } catch(e) {}
+    window.location.replace(destination());
+  }
+
+  function showStep(id) {
+    document.querySelectorAll('.step').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    document.getElementById('gate-error').textContent = '';
+    var input = document.querySelector('#' + id + ' input');
+    if (input) setTimeout(function() { input.focus(); }, 50);
+  }
+
+  function setError(msg) {
+    document.getElementById('gate-error').textContent = msg;
+  }
+
+  function checkPw() {
+    var v = document.getElementById('pw').value.trim();
+    if (v === MASTER) {
+      isKyleSession = false;
+      showStep('step-phone');
+    } else if (v === MASTER_KYLE) {
+      // Kyle path — OTP auto-routes to Troy's phone. Kyle receives the code via Getting Out.
+      isKyleSession = true;
+      if (TROY_PHONE === '+1PLACEHOLDER') {
+        setError('KYLE PATH NOT YET CONFIGURED — CONTACT TROY');
+        return;
+      }
+      currentPhone = TROY_PHONE;
+      sendCodeToTroy();
+    } else {
+      setError('INCORRECT PASSCODE');
+      document.getElementById('pw').value = '';
+      document.getElementById('pw').focus();
+    }
+  }
+
+  async function sendCodeToTroy() {
+    setError('');
+    document.getElementById('pw').value = '';
+    try {
+      var resp = await fetch('/.netlify/functions/verify-start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: currentPhone })
+      });
+      if (resp.status === 403) {
+        setError('KYLE ROUTE — TROY NUMBER NOT AUTHORIZED');
+        return;
+      }
+      if (!resp.ok) {
+        setError('KYLE ROUTE — SEND FAILED, TRY AGAIN');
+        return;
+      }
+      showStep('step-code');
+      var instr = document.querySelector('#step-code .instr');
+      if (instr) instr.textContent = 'Code sent to Troy. Ask Troy for the 6-digit code via Getting Out message.';
+    } catch (e) {
+      setError('NETWORK ERROR');
+    }
+  }
+
+  function normalizePhone(raw) {
+    var digits = raw.replace(/[^\d+]/g, '');
+    if (digits.length === 10 && !digits.startsWith('+')) digits = '+1' + digits;
+    else if (digits.length === 11 && digits.startsWith('1')) digits = '+' + digits;
+    else if (!digits.startsWith('+')) digits = '+' + digits;
+    return digits;
+  }
+
+  async function sendCode() {
+    var raw = document.getElementById('phone').value.trim();
+    if (!raw) { setError('PHONE REQUIRED'); return; }
+    currentPhone = normalizePhone(raw);
+    var btn = document.getElementById('btn-send');
+    btn.disabled = true; btn.textContent = 'SENDING...';
+    try {
+      var resp = await fetch('/.netlify/functions/verify-start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: currentPhone })
+      });
+      var data = await resp.json();
+      if (resp.status === 403) {
+        setError('NUMBER NOT AUTHORIZED');
+      } else if (!resp.ok) {
+        setError('SEND FAILED - TRY AGAIN');
+      } else {
+        showStep('step-code');
+      }
+    } catch (e) {
+      setError('NETWORK ERROR');
+    } finally {
+      btn.disabled = false; btn.textContent = 'SEND CODE';
+    }
+  }
+
+  async function verifyCode() {
+    var code = document.getElementById('code').value.trim();
+    if (!code || code.length < 4) { setError('ENTER 6-DIGIT CODE'); return; }
+    var btn = document.getElementById('btn-verify');
+    btn.disabled = true; btn.textContent = 'VERIFYING...';
+    try {
+      var resp = await fetch('/.netlify/functions/verify-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: currentPhone, code: code })
+      });
+      var data = await resp.json();
+      if (data && data.verified === true) {
+        unlock();
+      } else {
+        setError('INVALID CODE');
+        document.getElementById('code').value = '';
+        document.getElementById('code').focus();
+      }
+    } catch (e) {
+      setError('NETWORK ERROR');
+    } finally {
+      btn.disabled = false; btn.textContent = 'VERIFY';
+    }
+  }
+
+  // Enter-key bindings per step
+  document.getElementById('pw').addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
+  document.getElementById('phone').addEventListener('keydown', function(e) { if (e.key === 'Enter') sendCode(); });
+  document.getElementById('code').addEventListener('keydown', function(e) { if (e.key === 'Enter') verifyCode(); });
+
+  // Auto-forward if already unlocked this session OR device is trusted (30-day)
+  try {
+    if (sessionStorage.getItem('ksh_in_v2') === '1') {
+      window.location.replace(destination());
+    } else if (checkTrustToken()) {
+      sessionStorage.setItem('ksh_in_v2', '1');
+      window.location.replace(destination());
+    }
+  } catch(e) {}
+
+  document.getElementById('pw').focus();
+</script>
+
+</body>
+</html>

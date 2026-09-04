@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>KYLE — FULL STACK CALL SHEET v6</title>
+<script>
+  // Gate check — if user didn't unlock via /index.html PIN 24, kick back
+  try {
+    if (sessionStorage.getItem('ksh_in_v2') !== '1') {
+      window.location.replace('/');
+    }
+  } catch(e) { window.location.replace('/'); }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --neon: #33e612;
+  --navy: #0a1628;
+  --gold: #C8A84E;
+  --red: #ff3838;
+  --blue: #4fc3f7;
+  --dim: #6a8a6a;
+  --card: #0d1e35;
+  --border: #1a3050;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: rgba(200,168,78,0.3); }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--navy);
+  color: var(--neon);
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 16px 14px 60px; }
+h1 {
+  color: var(--gold);
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 8px 0 6px;
+}
+.sub {
+  text-align: center;
+  color: var(--neon);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--gold);
+  border-radius: 6px;
+  padding: 14px 14px 12px;
+  margin-bottom: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 720px) {
+  .block { grid-template-columns: 1fr; gap: 10px; }
+}
+.left { min-width: 0; }
+.right { min-width: 0; }
+.rank {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+.name {
+  color: var(--gold);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.contact { margin-bottom: 10px; }
+.contact a {
+  display: block;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 1px;
+  padding: 8px 10px;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+.contact a:active { background: var(--gold); color: var(--navy); }
+.contact .email { font-size: 14px; color: var(--neon); word-break: break-all; }
+.beth {
+  background: rgba(200,168,78,0.08);
+  border: 1px dashed var(--gold);
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 10px;
+}
+.beth .lbl {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 10px;
+  display: block;
+  margin-bottom: 4px;
+}
+.beth a {
+  display: block;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 5px 8px;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 3px;
+}
+.beth a:active { background: var(--gold); color: var(--navy); }
+.beth .email { font-size: 13px; color: var(--neon); word-break: break-all; }
+.script {
+  background: rgba(200,168,78,0.06);
+  border-left: 3px solid var(--gold);
+  padding: 10px 12px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+.script .lbl {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 6px;
+}
+.script .quote {
+  color: var(--neon);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.check input {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--neon);
+  cursor: pointer;
+}
+.check label {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.check input:checked + label { color: var(--neon); }
+.notes-lbl {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 4px;
+}
+textarea.notes {
+  width: 100%;
+  min-height: 220px;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--neon);
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  line-height: 1.4;
+  padding: 12px 14px;
+  resize: vertical;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.mic-hint {
+  font-size: 11px;
+  color: var(--gold);
+  margin: 4px 0 6px;
+  letter-spacing: 0.5px;
+}
+textarea.notes:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.tools {
+  position: sticky;
+  top: 0;
+  background: var(--navy);
+  padding: 8px 0 10px;
+  z-index: 10;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.tools button {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 8px 14px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 4px;
+}
+.tools button.danger { background: var(--red); color: #fff; }
+.saved {
+  color: var(--neon);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.tag.v { background: var(--neon); color: var(--navy); }
+.tag.p { background: var(--gold); color: var(--navy); }
+.tag.u { background: var(--red); color: #fff; }
+.footer {
+  text-align: center;
+  color: var(--gold);
+  border-top: 1px solid var(--gold);
+  padding-top: 14px;
+  margin-top: 30px;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+/* CATEGORY TAG SYSTEM */
+.cat {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 2px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.cat-legal    { background: #C8A84E; color: #0a1628; }
+.cat-referral { background: #4fc3f7; color: #0a1628; }
+.cat-resource { background: #33e612; color: #0a1628; }
+.cat-voice    { background: #ff3838; color: #fff;     }
+.cat-fund     { background: #b47dff; color: #0a1628; }
+.cat-political{ background: #ff9633; color: #0a1628; }
+
+.block[data-cat="legal"]     { border-left-color: #C8A84E; }
+.block[data-cat="referral"]  { border-left-color: #4fc3f7; }
+.block[data-cat="resource"]  { border-left-color: #33e612; }
+.block[data-cat="voice"]     { border-left-color: #ff3838; }
+.block[data-cat="fund"]      { border-left-color: #b47dff; }
+.block[data-cat="political"] { border-left-color: #ff9633; }
+
+.filter-bar {
+  text-align: center;
+  padding: 6px 0 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+.filter-bar button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  padding: 5px 9px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.filter-bar button.active-all      { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.filter-bar button.active-legal    { background: #C8A84E; color: #0a1628; border-color: #C8A84E; }
+.filter-bar button.active-referral { background: #4fc3f7; color: #0a1628; border-color: #4fc3f7; }
+.filter-bar button.active-resource { background: #33e612; color: #0a1628; border-color: #33e612; }
+.filter-bar button.active-voice    { background: #ff3838; color: #fff;     border-color: #ff3838; }
+.filter-bar button.active-fund     { background: #b47dff; color: #0a1628; border-color: #b47dff; }
+.filter-bar button.active-political{ background: #ff9633; color: #0a1628; border-color: #ff9633; }
+
+/* KYLE MASTER CARD */
+.kyle-card {
+  background: linear-gradient(135deg, #0d1e35 0%, #142850 100%);
+  border: 2px solid var(--gold);
+  border-radius: 6px;
+  padding: 14px 14px 12px;
+  margin-bottom: 16px;
+}
+.kyle-card .hdr {
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 13px;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.kyle-card .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.kyle-card .row:last-of-type { border-bottom: none; }
+.kyle-card .k {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 11px;
+  min-width: 90px;
+}
+.kyle-card .v {
+  color: var(--neon);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: right;
+  flex: 1;
+  word-break: break-word;
+}
+.kyle-card a.tap {
+  display: block;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  padding: 10px 12px;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-top: 8px;
+  text-align: center;
+}
+.kyle-card a.tap:active { background: var(--gold); color: var(--navy); }
+.kyle-card a.tap.gold { color: var(--gold); border-color: var(--gold); }
+
+/* PRINT — cleaner PDF output */
+@media print {
+  html, body { background: #fff; color: #000; }
+  .tools, .filter-bar, .mic-hint { display: none !important; }
+  .block, .kyle-card { background: #fff; color: #000; page-break-inside: avoid; border: 1px solid #666; }
+  .name, .rank, .kyle-card .hdr, .kyle-card .k, .cat { color: #000 !important; }
+  .kyle-card .v, .script .quote, textarea.notes { color: #000 !important; }
+  .contact a, .beth a, .kyle-card a.tap { color: #000 !important; background: #f7f7f7; border: 1px solid #999; }
+  textarea.notes { background: #fff; border: 1px solid #999; min-height: auto; }
+  .cat-legal    { background: #ffe08a !important; }
+  .cat-referral { background: #b3e5fc !important; }
+  .cat-resource { background: #b9f6ca !important; }
+  .cat-voice    { background: #ffcdd2 !important; }
+  .cat-fund     { background: #e1bee7 !important; }
+  .cat-political{ background: #ffd180 !important; }
+  .footer { color: #000; border-color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="tools">
+  <button onclick="saveAll()">SAVE</button>
+  <button onclick="emailNotes()">📧 EMAIL ME</button>
+  <button onclick="exportNotes()">💾 EXPORT</button>
+  <button onclick="printPDF()">🖨 PRINT / PDF</button>
+  <button class="danger" onclick="clearAll()">CLEAR</button>
+  <div id="savedMsg" class="saved"></div>
+</div>
+
+<div class="filter-bar">
+  <button data-f="all" class="active-all" onclick="filterCat('all', this)">ALL</button>
+  <button data-f="legal" onclick="filterCat('legal', this)">LEGAL</button>
+  <button data-f="referral" onclick="filterCat('referral', this)">REFERRAL</button>
+  <button data-f="resource" onclick="filterCat('resource', this)">RESOURCE</button>
+  <button data-f="voice" onclick="filterCat('voice', this)">VOICE</button>
+  <button data-f="fund" onclick="filterCat('fund', this)">FUND</button>
+  <button data-f="political" onclick="filterCat('political', this)">POLITICAL</button>
+</div>
+
+<h1>KYLE — FULL STACK CALL SHEET</h1>
+<div class="sub">LEGAL &middot; REFERRAL &middot; RESOURCE &middot; VOICE &middot; FUND &middot; POLITICAL</div>
+
+<div class="kyle-card">
+  <div class="hdr">KYLE SCOTT HARRIS — MASTER CARD</div>
+  <div class="row"><span class="k">HOMETOWN</span><span class="v">MELISSA, TEXAS (Collin County)</span></div>
+  <div class="row"><span class="k">HELD</span><span class="v">TRAVIS COUNTY, TEXAS</span></div>
+  <div class="row"><span class="k">SINCE</span><span class="v">NOVEMBER 2025</span></div>
+  <div class="row"><span class="k">FACILITY</span><span class="v">TRAVIS COUNTY CORRECTIONAL COMPLEX — DEL VALLE</span></div>
+  <div class="row"><span class="k">ADDRESS</span><span class="v">3614 Bill Price Rd, Del Valle, TX 78617</span></div>
+  <a class="tap" href="tel:5128549770">📞 TRAVIS CO SHERIFF / JAIL (512) 854-9770</a>
+  <a class="tap" href="tel:5128544180">📞 INMATE INFORMATION (512) 854-4180</a>
+  <a class="tap gold" href="tel:6127609857">📞 BETH MARTIN (MOTHER) (612) 760-9857</a>
+</div>
+
+
+<!-- BLOCK 1 -->
+<div class="block" data-id="uap" data-cat="fund">
+  <div class="left">
+    <div class="rank">#1 &middot; TIER 1</div>
+    <div class="name"><span class="cat cat-fund">LEGAL FUND</span>UNITED AMERICAN PATRIOTS <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:8002829299">📞 (800) 282-9299</a>
+      <a href="mailto:contact@uap.ngo" class="email">✉ contact@uap.ngo</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — my name is Troy DanDurand. I'm calling because United American Patriots is one of the only organizations built specifically for warriors facing prosecution — that specialty matters. I have a Special Operations Forces brother, Kyle Scott Harris, in that posture. Could you route me to the right attorney contact and the funding pathway? Thank you for the work you do."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_uap"><label for="chk_uap">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_uap" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 2 -->
+<div class="block" data-id="gbf" data-cat="fund">
+  <div class="left">
+    <div class="rank">#2A &middot; ARMY SF TREE</div>
+    <div class="name"><span class="cat cat-fund">FUND</span>GREEN BERET FOUNDATION <span class="tag v">VERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:8442877133">📞 (844) 287-7133</a>
+      <a href="mailto:info@greenberetfoundation.org" class="email">✉ info@greenberetfoundation.org</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The Green Beret Foundation carries De Oppresso Liber [DAY oh-PRES-soh LEE-behr] — to free the oppressed — into the peacetime fight, and that's a rare and needed mission. I have an Army Special Forces brother, Kyle Scott Harris, who needs the Regiment's Immediate Financial Assistance program for a legal-defense matter. Who is his brotherhood point of contact? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_gbf"><label for="chk_gbf">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_gbf" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 3 -->
+<div class="block" data-id="nsf" data-cat="fund">
+  <div class="left">
+    <div class="rank">#2B &middot; NSW TREE</div>
+    <div class="name"><span class="cat cat-fund">FUND</span>NAVY SEAL FOUNDATION <span class="tag v">VERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:7577445326">📞 (757) 744-5326</a>
+      <a href="https://navySEALfoundation.org/request-support/" class="email">🌐 Request Support form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The Navy SEAL Foundation's 'warrior for our warriors' commitment is what makes NSW families keep answering the door. I have a Naval Special Warfare brother, Kyle Scott Harris, who is pinned down in a county-level fight. Could you walk me through Warrior Support for this posture? Thank you for what you do."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_nsf"><label for="chk_nsf">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_nsf" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 4 -->
+<div class="block" data-id="mrf" data-cat="fund">
+  <div class="left">
+    <div class="rank">#2C &middot; MARSOC TREE</div>
+    <div class="name"><span class="cat cat-fund">FUND</span>MARINE RAIDER FOUNDATION <span class="tag v">VERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:9515519309">📞 (951) 551-9309</a>
+      <a href="mailto:info@marineraiderfoundation.org" class="email">✉ info@marineraiderfoundation.org</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The Marine Raider Foundation's commitment to full reintegration of transitioning Raiders is one of the most complete missions in the Special Operations Forces space. I have a Raider brother, Kyle Scott Harris, working through legal reintegration right now. Could you point me to the Raider brotherhood contact and the Raider Support pathway? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_mrf"><label for="chk_mrf">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_mrf" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 5 -->
+<div class="block" data-id="aca" data-cat="fund">
+  <div class="left">
+    <div class="rank">#2D &middot; AFSOC TREE</div>
+    <div class="name"><span class="cat cat-fund">FUND</span>AIR COMMANDO ASSOCIATION <span class="tag v">VERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:8505810099">📞 (850) 581-0099</a>
+      <a href="mailto:info@aircommando.org" class="email">✉ info@aircommando.org</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Keeping 'Any Time, Any Place' operational for the community is exactly why Air Commando families continue to trust the Association. I have an Air Commando brother, Kyle Scott Harris, in a county-level fight. Could you walk me through Warrior Grants and his brotherhood contact? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_aca"><label for="chk_aca">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_aca" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 6 -->
+<div class="block" data-id="sowf" data-cat="referral">
+  <div class="left">
+    <div class="rank">#3 &middot; TRAFFIC CONTROLLER</div>
+    <div class="name"><span class="cat cat-referral">REFERRAL</span>SPECIAL OPS WARRIOR FOUNDATION <span class="tag v">VERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:8138059400">📞 (813) 805-9400</a>
+      <a href="mailto:alexg@specialops.org" class="email">✉ alexg@specialops.org</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Special Operations Warrior Foundation is the one organization that knows every Special Operations Forces branch's warrior desk cold — that routing capability is exactly what I need today. I have a SOF brother, Kyle Scott Harris. I understand his situation is scope-outside your Immediate Financial Assistance — the ask is a warm handoff to the right branch foundation warrior desk. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_sowf"><label for="chk_sowf">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_sowf" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 7 -->
+<div class="block" data-id="lsw" data-cat="legal">
+  <div class="left">
+    <div class="rank">#4 &middot; LEGAL PIPE</div>
+    <div class="name"><span class="cat cat-legal">LEGAL</span>LAWYERS SERVING WARRIORS (via VVA) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:8004048862">📞 (800) 404-8862</a>
+      <a href="mailto:info@vva.org" class="email">✉ info@vva.org — ask for LSW intake</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Lawyers Serving Warriors — carrying 'Never again shall one generation of veterans abandon another' into a working legal referral network — matters more than ever. I have a Special Operations Forces veteran, Kyle Scott Harris, needing that referral pipe. Could you walk me through the intake timeline? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_lsw"><label for="chk_lsw">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_lsw" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 8 -->
+<div class="block" data-id="nacdl" data-cat="legal">
+  <div class="left">
+    <div class="rank">#5 &middot; ATTORNEY LOCATOR</div>
+    <div class="name"><span class="cat cat-legal">LEGAL</span>NACDL MIL &amp; VETERANS COMMITTEE <span class="tag v">VERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:2028728600">📞 (202) 872-8600</a>
+      <a href="https://www.nacdl.org/directory/public" class="email">🌐 Find a Lawyer directory</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The National Association of Criminal Defense Lawyers Military and Veterans Committee exists because warrior criminal defense is its own specialty — no other bar association covers that ground. I have a Special Operations Forces veteran, Kyle Scott Harris, needing veteran-friendly criminal counsel in [state]. What is the fastest routing? Thank you for the specialty."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_nacdl"><label for="chk_nacdl">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_nacdl" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 9 -->
+<div class="block" data-id="wdp" data-cat="legal">
+  <div class="left">
+    <div class="rank">#6 &middot; CRIMINAL DEFENSE</div>
+    <div class="name"><span class="cat cat-legal">LEGAL</span>WARRIOR DEFENSE PROJECT <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:7035962225">📞 (703) 596-2225</a>
+      <a href="mailto:info@warriordefenseproject.org" class="email">✉ info@warriordefenseproject.org</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Warrior Defense Project is one of the few benches purpose-built for defenders in criminal proceedings — a rare and needed specialty. I have a Special Operations Forces defender, Kyle Scott Harris, in criminal proceedings in [state]. What does engagement look like, and who is closest? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_wdp"><label for="chk_wdp">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_wdp" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 10 -->
+<div class="block" data-id="corn" data-cat="legal">
+  <div class="left">
+    <div class="rank">#7 &middot; JAG BRAIN TRUST</div>
+    <div class="name"><span class="cat cat-legal">JAG BRAIN</span>PROF. GEOFFREY CORN — S. Texas COL Houston <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:7136598040">📞 (713) 659-8040 (school)</a>
+      <a href="https://www.stcl.edu/faculty-staff/geoffrey-s-corn/" class="email">🌐 faculty page</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning, Professor Corn — Troy DanDurand calling. Your published work on veteran defense in civilian courts is why I'm on the phone. I have a Special Operations Forces veteran, Kyle Scott Harris, in a county-level fight in Texas. I am not asking for representation — I am asking who on the Texas bench you would send this to. Thank you for the scholarship."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_corn"><label for="chk_corn">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_corn" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 11 -->
+<div class="block" data-id="rvl" data-cat="legal">
+  <div class="left">
+    <div class="rank">#8 &middot; JAG BRAIN TRUST</div>
+    <div class="name"><span class="cat cat-legal">JAG BRAIN</span>PROF. RACHEL VANLANDINGHAM — Southwestern <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2137386754">📞 (213) 738-6754 (school)</a>
+      <a href="https://www.swlaw.edu/faculty/rachel-vanlandingham" class="email">🌐 faculty page</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning, Professor VanLandingham — Troy DanDurand calling. Your leadership at the National Institute of Military Justice and your published work on prosecutorial overreach against veterans is what put your name on my list. I have a Special Operations Forces veteran, Kyle Scott Harris, in county criminal court. Who is the veteran-defense attorney you would call first? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_rvl"><label for="chk_rvl">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_rvl" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 12 -->
+<div class="block" data-id="fid" data-cat="legal">
+  <div class="left">
+    <div class="rank">#9 &middot; JAG BRAIN TRUST</div>
+    <div class="name"><span class="cat cat-legal">JAG BRAIN</span>PROF. EUGENE FIDELL — Yale Law <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2034324992">📞 (203) 432-4992 (Yale Law)</a>
+      <a href="https://law.yale.edu/eugene-r-fidell" class="email">🌐 faculty page</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning, Professor Fidell — Troy DanDurand calling. Under your founding presidency, the National Institute of Military Justice became the referral phonebook of the military-justice bar. I have a Special Operations Forces veteran, Kyle Scott Harris, in county criminal court in [state]. Who is the right lawyer? Thank you for the institution you built."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_fid"><label for="chk_fid">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_fid" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 13 -->
+<div class="block" data-id="dun" data-cat="legal">
+  <div class="left">
+    <div class="rank">#10 &middot; JAG BRAIN TRUST</div>
+    <div class="name"><span class="cat cat-legal">JAG BRAIN</span>MAJ GEN (RET) CHARLES DUNLAP — Duke LENS <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:9196137006">📞 (919) 613-7006 (Duke Law)</a>
+      <a href="https://law.duke.edu/lens/" class="email">🌐 LENS Center</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning, General Dunlap — Troy DanDurand calling. Running the Air Force Judge Advocate General enterprise as Deputy JAG puts you in exactly the network I need. I have a Special Operations Forces veteran, Kyle Scott Harris, in county criminal court. Two names on your veteran-defense referral bench would move this. Thank you for your service."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_dun"><label for="chk_dun">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_dun" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 14 -->
+<div class="block" data-id="hut" data-cat="legal">
+  <div class="left">
+    <div class="rank">#11 &middot; JAG BRAIN TRUST</div>
+    <div class="name"><span class="cat cat-legal">JAG BRAIN</span>RADM (RET) JOHN HUTSON — fmr Navy JAG <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:6035135300">📞 (603) 513-5300 (UNH Law)</a>
+      <a href="https://law.unh.edu/faculty" class="email">🌐 UNH Law faculty</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning, Admiral Hutson — Troy DanDurand calling. As former Judge Advocate General of the Navy, your voice on veteran-defense counsel still moves rooms. I have a Special Operations Forces veteran, Kyle Scott Harris, in county criminal court. Two attorneys on your bench who defend veterans hardest would be exactly the help he needs. Thank you, sir."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_hut"><label for="chk_hut">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_hut" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 15 -->
+<div class="block" data-id="cruz" data-cat="political">
+  <div class="left">
+    <div class="rank">#12 &middot; POLITICAL VOICE</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>SEN. TED CRUZ (TX) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022245922">📞 (202) 224-5922</a>
+      <a href="https://www.cruz.senate.gov/contact" class="email">🌐 contact form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling for Senator Cruz's Military and Veterans Legislative Assistant. The Senator's Senate Judiciary work on constitutional due process is why this file belongs on that desk. Kyle Scott Harris — Special Operations Forces veteran, county-level fight where due process is the whole question. Please route the file. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_cruz"><label for="chk_cruz">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_cruz" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 16 -->
+<div class="block" data-id="corn2" data-cat="political">
+  <div class="left">
+    <div class="rank">#13 &middot; POLITICAL VOICE</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>SEN. JOHN CORNYN (TX) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022242934">📞 (202) 224-2934</a>
+      <a href="https://www.cornyn.senate.gov/contact/" class="email">🌐 contact form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling for Senator Cornyn's Judiciary staffer. Senator Cornyn's service as Texas Attorney General and on the Texas Supreme Court means his office understands county-level process from the inside. Kyle Scott Harris — Special Operations Forces veteran caught in exactly that. Please route the file. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_corn2"><label for="chk_corn2">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_corn2" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 17 -->
+<div class="block" data-id="cren" data-cat="political">
+  <div class="left">
+    <div class="rank">#14 &middot; POLITICAL VOICE</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>REP. DAN CRENSHAW (TX-2, ret. SEAL) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022256565">📞 (202) 225-6565</a>
+      <a href="https://crenshaw.house.gov/contact" class="email">🌐 contact form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling for Congressman Crenshaw's Chief of Staff. This is a Sea, Air, and Land to Special Operations Forces brother request. Kyle Scott Harris is in a county-level fight in [state]. A buddy-to-buddy assist through the office would help. Thank you for the Congressman's continued service."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_cren"><label for="chk_cren">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_cren" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 18 -->
+<div class="block" data-id="roy" data-cat="political">
+  <div class="left">
+    <div class="rank">#15 &middot; POLITICAL VOICE</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>REP. CHIP ROY (TX-21, fmr AUSA) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022254236">📞 (202) 225-4236</a>
+      <a href="https://roy.house.gov/contact" class="email">🌐 contact form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling for Congressman Roy's Judiciary staffer. The Congressman's background as an Assistant United States Attorney and his House Judiciary seat make this file line up with his bench. Kyle Scott Harris — Special Operations Forces veteran in a county-level fight that reads like a due-process case study. Please route the file. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_roy"><label for="chk_roy">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_roy" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 19 -->
+<div class="block" data-id="cot" data-cat="political">
+  <div class="left">
+    <div class="rank">#16 &middot; POLITICAL VOICE</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>SEN. TOM COTTON (AR, Army Ranger) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022242353">📞 (202) 224-2353</a>
+      <a href="https://www.cotton.senate.gov/contact/" class="email">🌐 contact form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling for Senator Cotton's Armed Services staffer. This is a Ranger to Special Operations Forces brother request. Kyle Scott Harris is in a county-level fight in [state]. A heads-up to the Senator's team would help. Thank you for the Senator's service."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_cot"><label for="chk_cot">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_cot" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 20 -->
+<div class="block" data-id="ern" data-cat="political">
+  <div class="left">
+    <div class="rank">#17 &middot; POLITICAL VOICE</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>SEN. JONI ERNST (IA, ret. Lt Col) <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022243254">📞 (202) 224-3254</a>
+      <a href="https://www.ernst.senate.gov/contact" class="email">🌐 contact form</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling for Senator Ernst's Veterans Affairs staffer. The Senator's cross-committee seats on Armed Services and Veterans Affairs make her office the right node for this file. Kyle Scott Harris — Special Operations Forces veteran in a county-level fight in [state]. Please route the file. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_ern"><label for="chk_ern">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_ern" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 21 -->
+<div class="block" data-id="sfa" data-cat="referral">
+  <div class="left">
+    <div class="rank">#18 &middot; LOCAL BENCH</div>
+    <div class="name"><span class="cat cat-referral">REFERRAL</span>SPECIAL FORCES ASSOCIATION <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="tel:9104844025">📞 (910) 484-4025 (unverified)</a>
+      <a href="https://specialforcesassociation.org" class="email">🌐 chapter locator</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The Special Forces Association chapter network is the fastest brotherhood-eyes-on-target resource in the community. I have a Green Beret brother, Kyle Scott Harris, in a county-level fight in [state]. Which chapter is closest to him? Thank you for the network you maintain."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_sfa"><label for="chk_sfa">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_sfa" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 22 -->
+<div class="block" data-id="leg" data-cat="referral">
+  <div class="left">
+    <div class="rank">#19 &middot; LOCAL BENCH</div>
+    <div class="name"><span class="cat cat-referral">REFERRAL</span>AMERICAN LEGION — VA&amp;R desk <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2028612700">📞 (202) 861-2700</a>
+      <a href="https://www.legion.org" class="email">🌐 post locator</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. American Legion posts remain the first door most veterans knock on because the Veterans Affairs and Rehabilitation network works. I have a Special Operations Forces veteran, Kyle Scott Harris, under county-level legal pressure. Which post is closest to him, and who is the VA&amp;R officer? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_leg"><label for="chk_leg">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_leg" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 23 -->
+<div class="block" data-id="vfw" data-cat="referral">
+  <div class="left">
+    <div class="rank">#20 &middot; LOCAL BENCH</div>
+    <div class="name"><span class="cat cat-referral">REFERRAL</span>VFW — Service Officer Network <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:8167563390">📞 (816) 756-3390</a>
+      <a href="https://www.vfw.org" class="email">🌐 post locator</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The Veterans of Foreign Wars Service Officer network is one of the most durable veteran-support instruments in the country. I have a Special Operations Forces veteran, Kyle Scott Harris, in a county-level fight. Which post is closest to him, and who is the Service Officer? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_vfw"><label for="chk_vfw">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_vfw" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK 24 -->
+<div class="block" data-id="va" data-cat="political">
+  <div class="left">
+    <div class="rank">#21 &middot; PAPER TRAIL</div>
+    <div class="name"><span class="cat cat-political">POLITICAL</span>HOUSE + SENATE VA COMMITTEES <span class="tag p">PARTIAL</span></div>
+    <div class="contact">
+      <a href="tel:2022259756">📞 House VA (202) 225-9756</a>
+      <a href="tel:2022249126">📞 Senate VA (202) 224-9126</a>
+    </div>
+    <div class="beth">
+      <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+      <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+      <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+    </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling to flag a Special Operations Forces veteran in crisis for the constituent-services desk. Kyle Scott Harris, [branch], in a county-level criminal matter in [state]. Could you walk me through the constituent-flag documentation and route this to the veteran services desk? Thank you for what the Committee does."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_va"><label for="chk_va">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_va" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+
+<!-- BLOCK NIMJ -->
+<div class="block" data-id="nimj" data-cat="legal">
+  <div class="left">
+    <div class="rank">#22 &middot; TIER 1.5 JAG</div>
+    <div class="name"><span class="cat cat-legal">JAG PIPE</span>NATIONAL INSTITUTE OF MILITARY JUSTICE <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.nimj.org/" target="_blank">🌐 nimj.org</a>
+      <a href="mailto:info@nimj.org" class="email">✉ info@nimj.org</a>
+      <a href="tel:2022744322">📞 (202) 274-4322</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — my name is Troy DanDurand. The National Institute of Military Justice is one of the only places that maintains a working rolodex of former Judge Advocate General attorneys who take civilian cases quietly — that specialty matters. I have a Special Operations Forces brother, Kyle Scott Harris, needing a referral to a former Judge Advocate General with civilian-defense capacity. Could you point me to the right fellow or affiliated counsel? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_nimj"><label for="chk_nimj">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_nimj" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK JAGA -->
+<div class="block" data-id="jaga" data-cat="legal">
+  <div class="left">
+    <div class="rank">#23 &middot; TIER 1.5 JAG</div>
+    <div class="name"><span class="cat cat-legal">JAG PIPE</span>JUDGE ADVOCATE GENERAL ALUMNI BAR — CROSS-BRANCH <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.jaga.org/" target="_blank">🌐 jaga.org</a>
+      <a href="mailto:info@jaga.org" class="email">✉ info@jaga.org</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The Judge Advocate General Association's alumni network is uniquely positioned to route service-connected legal matters to former military counsel in civilian practice. I have a Special Operations Forces brother, Kyle Scott Harris, facing a county-level matter and needing former Judge Advocate General perspective. Could you tell me the best path to reach members with Texas civilian-defense practice? Thank you for what you do."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_jaga"><label for="chk_jaga">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_jaga" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK TLFV -->
+<div class="block" data-id="tlfv" data-cat="legal">
+  <div class="left">
+    <div class="rank">#24 &middot; TIER 1.5 TEXAS</div>
+    <div class="name"><span class="cat cat-legal">TX LEGAL</span>TEXAS LAWYERS FOR TEXAS VETERANS — STATE BAR OF TEXAS <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.texasbar.com/AM/Template.cfm?Section=Texas_Lawyers_for_Texas_Veterans" target="_blank">🌐 texasbar.com/veterans</a>
+      <a href="tel:8002042222">📞 (800) 204-2222</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Texas Lawyers for Texas Veterans is one of the strongest state-bar veteran programs in the country — that infrastructure matters. I have a Special Operations Forces veteran, Kyle Scott Harris, currently in Travis County needing pro bono criminal defense referral. Could you walk me through the veteran legal clinic schedule near Travis County or Central Texas? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_tlfv"><label for="chk_tlfv">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_tlfv" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK SBOT -->
+<div class="block" data-id="sbot" data-cat="legal">
+  <div class="left">
+    <div class="rank">#25 &middot; TIER 1.5 TEXAS</div>
+    <div class="name"><span class="cat cat-legal">TX LEGAL</span>STATE BAR OF TEXAS — LAWYER REFERRAL SERVICE <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.texasbar.com/" target="_blank">🌐 texasbar.com</a>
+      <a href="tel:8002529690">📞 (800) 252-9690</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. The State Bar of Texas Lawyer Referral and Information Service is the fastest path to filter by veteran-friendly criminal-defense counsel in Travis County. I have a Special Operations Forces veteran, Kyle Scott Harris, needing that filter today. Could you match me to a criminal-defense attorney with veteran and pro bono practice near Austin? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_sbot"><label for="chk_sbot">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_sbot" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK TTVC -->
+<div class="block" data-id="ttvc" data-cat="legal">
+  <div class="left">
+    <div class="rank">#26 &middot; TIER 1.5 TEXAS</div>
+    <div class="name"><span class="cat cat-legal">TX LEGAL</span>TEXAS TECH UNIVERSITY SCHOOL OF LAW — VETERANS LEGAL CLINIC <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.depts.ttu.edu/law/clinics/veterans-clinic/" target="_blank">🌐 law.ttu.edu/vets</a>
+      <a href="tel:8068346099">📞 (806) 834-6099</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Texas Tech School of Law's Veterans Legal Clinic has quietly become one of the best clinical programs for veteran clients in the state — the training there matters. I have a Special Operations Forces veteran, Kyle Scott Harris, needing intake or referral to a criminal-defense attorney with veteran-competent representation. Could you tell me the clinic's intake window and any partner-attorney network? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_ttvc"><label for="chk_ttvc">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_ttvc" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK BLVC -->
+<div class="block" data-id="blvc" data-cat="legal">
+  <div class="left">
+    <div class="rank">#27 &middot; TIER 1.5 TEXAS</div>
+    <div class="name"><span class="cat cat-legal">TX LEGAL</span>BAYLOR LAW — VETERANS CLINIC (WACO) <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://law.baylor.edu/" target="_blank">🌐 baylor.edu/law/vets</a>
+      <a href="tel:2547101911">📞 (254) 710-1911</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Baylor Law's veterans work has produced some of Texas's most respected pro bono attorneys — that pipeline matters. I have a Special Operations Forces veteran, Kyle Scott Harris, held in Travis County, home in Melissa Texas, needing referral to a veteran-competent criminal defense attorney with Central Texas or Dallas–Fort Worth reach. Could you tell me the veterans clinic contact or a Baylor Law alumni referral pathway? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_blvc"><label for="chk_blvc">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_blvc" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK CCID -->
+<div class="block" data-id="ccid" data-cat="legal">
+  <div class="left">
+    <div class="rank">#28 &middot; TIER 1.5 TEXAS</div>
+    <div class="name"><span class="cat cat-legal">TX LEGAL</span>CAPITAL AREA PRIVATE DEFENDER SERVICE — TRAVIS COUNTY MANAGED ASSIGNED COUNSEL <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.capds.org/" target="_blank">🌐 capds.org</a>
+      <a href="tel:5125248611">📞 (512) 524-8611</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Travis County's indigent defense coordination is the front door for anyone needing appointed counsel who meets the qualifications — that gatekeeping matters. I am helping route a Special Operations Forces veteran, Kyle Scott Harris, currently in custody in Travis County. Could you confirm the process for appointed-counsel review and whether veteran-competent counsel is on the wheel? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_ccid"><label for="chk_ccid">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_ccid" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK LANT -->
+<div class="block" data-id="lant" data-cat="legal">
+  <div class="left">
+    <div class="rank">#29 &middot; TIER 1.5 TEXAS</div>
+    <div class="name"><span class="cat cat-legal">TX LEGAL</span>TEXAS RIOGRANDE LEGAL AID — TRAVIS COUNTY VETERANS PROGRAM <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.trla.org/" target="_blank">🌐 trla.org</a>
+      <a href="tel:5123745740">📞 (512) 374-2700</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Texas RioGrande Legal Aid serves Travis County and runs one of the stronger veteran-priority intakes in the state. I have a Special Operations Forces veteran, Kyle Scott Harris, currently in custody in Travis County. Could you walk me through the intake and any veteran-priority pathway or partner-attorney list? Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_lant"><label for="chk_lant">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_lant" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK SRS -->
+<div class="block" data-id="srs" data-cat="voice">
+  <div class="left">
+    <div class="rank">#30 &middot; TIER 5 VOICE</div>
+    <div class="name"><span class="cat cat-voice">VOICE</span>SHAWN RYAN SHOW — SRS MEDIA <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.shawnryanshow.com/pages/contact" target="_blank">🌐 shawnryanshow.com/pages/contact</a>
+      <a href="mailto:info@shawnryanshow.com" class="email">✉ info@shawnryanshow.com</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand submitting to the Shawn Ryan Show team. Shawn's platform is one of the very few that consistently gives Special Operations Forces veterans in trouble a fair public hearing — that platform matters. I have a Special Operations Forces brother, Kyle Scott Harris, in Travis County Texas since November of last year. Requesting a producer review for potential coverage and community support routing. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_srs"><label for="chk_srs">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_srs" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK MANN -->
+<div class="block" data-id="mann" data-cat="voice">
+  <div class="left">
+    <div class="rank">#31 &middot; TIER 5 VOICE</div>
+    <div class="name"><span class="cat cat-voice">VOICE</span>SCOTT MANN — TASK FORCE PINEAPPLE / ROONEY BIN NETWORK <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://rooftopleadership.com/" target="_blank">🌐 rooftopleadership.com</a>
+      <a href="mailto:info@rooftopleadership.com" class="email">✉ info@rooftopleadership.com</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Scott Mann's Task Force Pineapple and Rooftop Leadership network is uniquely built to move on Special Operations Forces brothers who need public advocacy and community response — that capability is rare. I have a Special Forces brother, Kyle Scott Harris, in Travis County Texas since November last year. Requesting a warm handoff to Scott's team for review and community routing. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_mann"><label for="chk_mann">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_mann" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK JOCKO -->
+<div class="block" data-id="jocko" data-cat="voice">
+  <div class="left">
+    <div class="rank">#32 &middot; TIER 5 VOICE</div>
+    <div class="name"><span class="cat cat-voice">VOICE</span>JOCKO WILLINK — ORIGIN USA / JOCKO PODCAST <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://originmaine.com/pages/contact" target="_blank">🌐 originmaine.com/contact</a>
+      <a href="mailto:podcast@jocko.com" class="email">✉ podcast@jocko.com</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand reaching out to Jocko's team. Origin USA's veteran-community reach and the Jocko Podcast platform have shown up for Special Operations Forces brothers in real need — that discipline matters. I have a Naval Special Warfare brother, Kyle Scott Harris, in Travis County Texas since November last year. Requesting team-level review for potential community routing or introduction. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_jocko"><label for="chk_jocko">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_jocko" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK TRIK -->
+<div class="block" data-id="trik" data-cat="voice">
+  <div class="left">
+    <div class="rank">#33 &middot; TIER 5 VOICE</div>
+    <div class="name"><span class="cat cat-voice">VOICE</span>MIKE RITLAND — TRIKOS / WARRIOR DOG FOUNDATION <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://mikeritland.com/" target="_blank">🌐 mikeritland.com</a>
+      <a href="mailto:info@warriordogfoundation.org" class="email">✉ info@warriordogfoundation.org</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Mike Ritland's platform and the Warrior Dog Foundation both carry deep credibility inside the Naval Special Warfare community — that network matters. I have a Naval Special Warfare brother, Kyle Scott Harris, currently in Travis County Texas since November of last year. Requesting a warm introduction or team-level review. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_trik"><label for="chk_trik">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_trik" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK PARN -->
+<div class="block" data-id="parn" data-cat="voice">
+  <div class="left">
+    <div class="rank">#34 &middot; TIER 5 VOICE</div>
+    <div class="name"><span class="cat cat-voice">VOICE</span>SEAN PARNELL — BATTLEGROUND PLATFORM <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.seanparnellusa.com/" target="_blank">🌐 seanparnellusa.com</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand reaching out to Sean Parnell's team. Sean's Battleground platform and his Airborne veteran roots make his voice carry weight in the veteran-defense conversation. I have a Special Operations Forces brother, Kyle Scott Harris, in Travis County Texas since November last year. Requesting team-level review for potential platform amplification or community routing. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_parn"><label for="chk_parn">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_parn" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK LUTT -->
+<div class="block" data-id="lutt" data-cat="voice">
+  <div class="left">
+    <div class="rank">#35 &middot; TIER 5 VOICE</div>
+    <div class="name"><span class="cat cat-voice">VOICE</span>MARCUS LUTTRELL — TEAM NEVER QUIT / LONE SURVIVOR NETWORK <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://teamneverquit.com/" target="_blank">🌐 teamneverquit.com</a>
+      <a href="mailto:info@teamneverquit.com" class="email">✉ info@teamneverquit.com</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Team Never Quit and Marcus's Lone Survivor network are two of the most trusted platforms inside the Naval Special Warfare community — that trust is earned. I have a Naval Special Warfare brother, Kyle Scott Harris, in Travis County Texas since November of last year. Requesting a warm introduction to Marcus's team or a community routing pathway. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_lutt"><label for="chk_lutt">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_lutt" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK GSG -->
+<div class="block" data-id="gsg" data-cat="fund">
+  <div class="left">
+    <div class="rank">#36 &middot; TIER 6 FUND</div>
+    <div class="name"><span class="cat cat-fund">CROWDFUND</span>GIVESENDGO — VETERAN LEGAL DEFENSE PLATFORM <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.givesendgo.com/" target="_blank">🌐 givesendgo.com</a>
+      <a href="mailto:info@givesendgo.com" class="email">✉ info@givesendgo.com</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand reaching out to the GiveSendGo team. GiveSendGo's principled stance on First Amendment fundraising has made it the trusted platform for veteran legal defense — that posture matters. I am setting up a fundraising campaign for a Special Operations Forces brother, Kyle Scott Harris, in Travis County Texas. Requesting a walkthrough of the veteran legal defense campaign setup and any priority-review pathway. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_gsg"><label for="chk_gsg">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_gsg" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK LSVF -->
+<div class="block" data-id="lsvf" data-cat="fund">
+  <div class="left">
+    <div class="rank">#37 &middot; TIER 6 FUND</div>
+    <div class="name"><span class="cat cat-fund">PATRON</span>LONE SURVIVOR FOUNDATION — PATRON NETWORK <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.lonesurvivorfoundation.org/" target="_blank">🌐 lonesurvivorfoundation.org</a>
+      <a href="tel:8325810862">📞 (832) 581-0862</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Lone Survivor Foundation's work with Special Operations Forces veterans facing crisis has built one of the deepest patron networks in the country — that reach matters. I have a Naval Special Warfare brother, Kyle Scott Harris, in Travis County Texas since November last year. Requesting a warm handoff for programmatic support review and any patron introduction pathway. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_lsvf"><label for="chk_lsvf">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_lsvf" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK TFD -->
+<div class="block" data-id="tfd" data-cat="fund">
+  <div class="left">
+    <div class="rank">#38 &middot; TIER 6 FUND</div>
+    <div class="name"><span class="cat cat-fund">PATRON</span>TASK FORCE DAGGER FOUNDATION — SOF PATRON NETWORK <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://www.taskforcedagger.org/" target="_blank">🌐 taskforcedagger.org</a>
+      <a href="mailto:info@taskforcedagger.org" class="email">✉ info@taskforcedagger.org</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Task Force Dagger Foundation's exclusive focus on active and former Special Operations Forces service members and their families gives it one of the most credible patron networks in the community. I have a Special Operations Forces brother, Kyle Scott Harris, in Travis County Texas since November last year. Requesting a warm handoff for support review and community-donor routing. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_tfd"><label for="chk_tfd">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_tfd" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<!-- BLOCK CVA -->
+<div class="block" data-id="cva" data-cat="fund">
+  <div class="left">
+    <div class="rank">#39 &middot; TIER 6 FUND</div>
+    <div class="name"><span class="cat cat-fund">DONOR</span>CONCERNED VETERANS FOR AMERICA — DONOR NETWORK <span class="tag u">UNVERIFIED</span></div>
+    <div class="contact">
+      <a href="https://cv4a.org/" target="_blank">🌐 cv4a.org</a>
+    </div>
+      <div class="beth">
+        <span class="lbl">FACILITATOR — KYLE'S MOTHER</span>
+        <a href="tel:6127609857">📞 BETH MARTIN (612) 760-9857</a>
+        <a href="mailto:harrisbeth71@yahoo.com" class="email">✉ harrisbeth71@yahoo.com</a>
+      </div>
+    <div class="script">
+      <span class="lbl">READ ALOUD</span>
+      <div class="quote">"Good morning — Troy DanDurand calling. Concerned Veterans for America has built one of the strongest advocacy-focused veteran donor networks in the country. I have a Special Operations Forces brother, Kyle Scott Harris, in Travis County Texas since November last year. Requesting a review for possible community routing or introduction to a member with legal-defense-fund interest. Thank you."</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="check"><input type="checkbox" id="chk_cva"><label for="chk_cva">✓ LEFT MESSAGE</label></div>
+    <span class="notes-lbl">NOTES</span>
+    <div class="mic-hint">🎤 TAP MIC ON KEYBOARD TO DICTATE</div>
+    <textarea class="notes" id="note_cva" placeholder="who answered · callback time · next step · dictate freely" autocapitalize="sentences" autocorrect="on" spellcheck="true" inputmode="text" rows="8"></textarea>
+  </div>
+</div>
+
+<div class="footer">
+  NO MAN LEFT BEHIND<br>
+  <span style="font-size:11px;color:var(--dim);letter-spacing:1px">v6 FULL STACK &middot; legal + fund + voice + political &middot; auto-save + filter</span>
+</div>
+
+</div>
+
+<script>
+const KEY = 'kyle_mobile_v6';
+
+function saveAll() {
+  const data = {};
+  document.querySelectorAll('.block').forEach(b => {
+    const id = b.dataset.id;
+    data[id] = {
+      chk: document.getElementById('chk_' + id).checked,
+      note: document.getElementById('note_' + id).value
+    };
+  });
+  localStorage.setItem(KEY, JSON.stringify(data));
+  const m = document.getElementById('savedMsg');
+  m.textContent = 'SAVED · ' + new Date().toLocaleTimeString();
+  setTimeout(() => m.textContent = '', 3000);
+}
+
+function loadAll() {
+  const raw = localStorage.getItem(KEY);
+  if (!raw) return;
+  const data = JSON.parse(raw);
+  Object.keys(data).forEach(id => {
+    const chk = document.getElementById('chk_' + id);
+    const note = document.getElementById('note_' + id);
+    if (chk) chk.checked = data[id].chk;
+    if (note) note.value = data[id].note;
+  });
+}
+
+function clearAll() {
+  if (!confirm('Clear all checks and notes?')) return;
+  localStorage.removeItem(KEY);
+  document.querySelectorAll('input[type=checkbox]').forEach(c => c.checked = false);
+  document.querySelectorAll('textarea.notes').forEach(t => t.value = '');
+  const m = document.getElementById('savedMsg');
+  m.textContent = 'CLEARED';
+  setTimeout(() => m.textContent = '', 2000);
+}
+
+function cleanName(nameEl) {
+  const clone = nameEl.cloneNode(true);
+  clone.querySelectorAll('span').forEach(s => s.remove());
+  return clone.textContent.replace(/\s+/g, ' ').trim();
+}
+
+function contactLines(b) {
+  const lines = [];
+  b.querySelectorAll('.contact a[href^="tel:"]').forEach(a => {
+    lines.push('  ' + a.textContent.trim());
+  });
+  b.querySelectorAll('.contact a[href^="mailto:"]').forEach(a => {
+    lines.push('  ' + a.textContent.trim());
+  });
+  return lines;
+}
+
+function exportNotes() {
+  let out = 'KYLE CALL SHEET — NOTES EXPORT — ' + new Date().toString() + '\n\n';
+  document.querySelectorAll('.block').forEach(b => {
+    const id = b.dataset.id;
+    const name = cleanName(b.querySelector('.name'));
+    const chk = document.getElementById('chk_' + id).checked ? '[✓ LEFT MSG]' : '[ ]';
+    const note = document.getElementById('note_' + id).value.trim();
+    out += chk + ' ' + name + '\n';
+    contactLines(b).forEach(l => out += l + '\n');
+    if (note) out += '  NOTES: ' + note.replace(/\n/g, '\n         ') + '\n';
+    out += '\n';
+  });
+  const blob = new Blob([out], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'kyle_call_notes_' + new Date().toISOString().slice(0,10) + '.txt';
+  a.click();
+}
+
+function buildNotesBody() {
+  let out = 'KYLE CALL SHEET — NOTES — ' + new Date().toString() + '\n\n';
+  document.querySelectorAll('.block').forEach(b => {
+    const id = b.dataset.id;
+    const name = cleanName(b.querySelector('.name'));
+    const chk = document.getElementById('chk_' + id).checked ? '[✓ LEFT MSG]' : '[ ]';
+    const note = document.getElementById('note_' + id).value.trim();
+    if (chk === '[✓ LEFT MSG]' || note) {
+      out += chk + ' ' + name + '\n';
+      contactLines(b).forEach(l => out += l + '\n');
+      if (note) out += '  NOTES: ' + note.replace(/\n/g, '\n         ') + '\n';
+      out += '\n';
+    }
+  });
+  return out;
+}
+
+function emailNotes() {
+  saveAll();
+  const body = buildNotesBody();
+  const date = new Date().toISOString().slice(0,10);
+  const subject = encodeURIComponent('KYLE CALL SHEET NOTES — ' + date);
+  const b = encodeURIComponent(body);
+  // If very long, warn — most mail clients truncate around 2000-8000 chars in mailto
+  if (b.length > 6000) {
+    alert('Notes are long — some mail clients may truncate. If so, use EXPORT instead and attach the .txt file.');
+  }
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + b;
+}
+
+function printPDF() {
+  saveAll();
+  window.print();
+}
+
+document.addEventListener('input', () => saveAll());
+document.addEventListener('change', () => saveAll());
+function filterCat(cat, btn) {
+  document.querySelectorAll('.filter-bar button').forEach(b => {
+    b.className = '';
+  });
+  btn.className = 'active-' + cat;
+  document.querySelectorAll('.block').forEach(b => {
+    b.style.display = (cat === 'all' || b.dataset.cat === cat) ? '' : 'none';
+  });
+}
+window.addEventListener('load', loadAll);
+</script>
+</body>
+</html>

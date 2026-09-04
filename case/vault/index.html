@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, notranslate">
+<script>
+  // First gate: portal 2FA must already be satisfied
+  try {
+    if (sessionStorage.getItem('ksh_in_v2') !== '1') {
+      window.location.replace('../../index.html');
+    }
+  } catch(e) { window.location.replace('../../index.html'); }
+</script>
+<title>ΤΑΜΕΙΟΝ · Vault Gate — Kyle Scott Harris Defense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1628; --gold:#C8A84E; --deep-gold:#8a6f26; --ivory:#f5efe0;
+    --red:#c62828; --red-glow:#ff2d2d;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family:'Cinzel',Georgia,serif;background:radial-gradient(circle at 50% 30%, #1a2a44 0%, #0a1628 60%, #000 100%);color:var(--ivory);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .gate{max-width:640px;width:100%;background:linear-gradient(135deg,#0a1628 0%,#1a1a44 100%);border:3px double var(--gold);border-radius:12px;padding:40px 36px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.6),0 0 20px rgba(200,168,78,.15)}
+  .kicker{color:var(--red-glow);font-size:12px;letter-spacing:6px;font-weight:800;margin-bottom:6px;text-shadow:0 0 6px rgba(255,45,45,.5)}
+  .seal{color:var(--gold);font-size:40px;letter-spacing:6px;font-weight:900;margin:12px 0 4px;text-shadow:0 0 10px rgba(200,168,78,.6)}
+  .greek{color:var(--gold);font-style:italic;font-size:14px;letter-spacing:2px;margin-bottom:24px;opacity:.9}
+  .warning{background:rgba(255,45,45,.08);border:1px solid var(--red);border-radius:6px;padding:14px 18px;margin:20px 0;color:#ffb3b3;font-size:13px;line-height:1.6;text-align:left}
+  .warning strong{color:var(--red-glow)}
+  input[type="password"]{width:100%;padding:16px 18px;font-family:'Courier New',monospace;font-size:16px;letter-spacing:2px;background:#000;color:var(--ivory);border:2px solid var(--gold);border-radius:6px;text-align:center;margin:16px 0;outline:none}
+  input[type="password"]:focus{border-color:var(--red-glow);box-shadow:0 0 0 3px rgba(255,45,45,.2)}
+  button{background:var(--gold);color:var(--navy);border:none;padding:14px 40px;font-family:'Cinzel',Georgia,serif;font-size:16px;font-weight:900;letter-spacing:2px;border-radius:6px;cursor:pointer;margin:8px 4px;transition:all .15s}
+  button:hover{background:#e6c96b;transform:translateY(-1px)}
+  button.secondary{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+  #status{margin-top:14px;font-size:13px;min-height:20px;color:var(--red-glow)}
+  #status.ok{color:#66ff8a}
+  .rule{border-top:1px solid rgba(200,168,78,.3);margin:24px 0}
+  .footer{color:var(--ivory);font-size:11px;letter-spacing:1px;opacity:.5;margin-top:16px}
+</style>
+<script src="/case/print-shield.js" defer></script>
+</head>
+<body>
+
+<div class="gate">
+  <div class="kicker">BUCKET 4 · ATTORNEY EYES ONLY · SECOND GATE</div>
+  <div class="seal">ΤΑΜΕΙΟΝ</div>
+  <div class="greek">[tah-MEE-on] · The Vault · Privileged Core Strategy</div>
+
+  <div class="warning">
+    <strong>ACCESS RESTRICTED.</strong> This vault holds Bucket 4 privileged Theory of Defense doctrine. Entry restricted to Troy DanDurand and counsel of record for Kyle Scott Harris. Kyle Scott Harris does not need vault access — his access is under privilege at attorney visit. Contents protected by attorney work-product doctrine (Fed. R. Civ. P. 26(b)(3), Tex. R. Civ. P. 192.5). Unauthorized access, screen capture, transcription, or transmission of contents forfeits Bucket 4 status.
+  </div>
+
+  <form id="gate-form" onsubmit="return checkPassphrase(event)">
+    <input type="password" id="passphrase" placeholder="ENTER VAULT PASSPHRASE" autocomplete="off" spellcheck="false" autofocus>
+    <div>
+      <button type="submit">🔓 UNLOCK VAULT</button>
+      <button type="button" class="secondary" onclick="window.location.href='../index.html'">← EXIT</button>
+    </div>
+    <div id="status"></div>
+  </form>
+
+  <div class="rule"></div>
+  <div class="footer">
+    D-S337-EXT7-VAULT · 2026-07-19 · Verbal firewall: "Save that for the attorney visit."
+  </div>
+</div>
+
+<script>
+// SHA-256 hash of vault passphrase.
+// ROTATE THIS HASH: (1) pick a new passphrase; (2) run: printf 'YOUR-PASSPHRASE' | shasum -a 256
+// (3) paste the hex digest below; (4) commit + push. Passphrase itself is NEVER stored.
+var VAULT_HASH = '01032d8da1460a2771bc05811f09e7e921054d242d5aeacb2c784b40300c45bb';
+var VAULT_KEY = 'ksh_vault_v1';
+var VAULT_TTL_MIN = 30; // Session expires after 30 minutes idle
+
+async function sha256(str) {
+  var buf = new TextEncoder().encode(str);
+  var hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+}
+
+async function checkPassphrase(e) {
+  e.preventDefault();
+  var input = document.getElementById('passphrase').value.trim();
+  var status = document.getElementById('status');
+  status.className = '';
+  status.textContent = 'VERIFYING...';
+  if (!input) {
+    status.textContent = 'Passphrase required.';
+    return false;
+  }
+  var hash = await sha256(input);
+  if (hash === VAULT_HASH) {
+    var payload = { exp: Date.now() + VAULT_TTL_MIN*60*1000, v: 1 };
+    sessionStorage.setItem(VAULT_KEY, JSON.stringify(payload));
+    status.className = 'ok';
+    status.textContent = 'ACCESS GRANTED. Redirecting...';
+    setTimeout(function(){ window.location.href = 'landing.html'; }, 400);
+  } else {
+    status.textContent = 'ACCESS DENIED.';
+    document.getElementById('passphrase').value = '';
+  }
+  return false;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# ============================================================
+# BUCKET 4 HARDENING — D-S337-EXT7-VAULT (2026-07-19)
+# Kill deploy previews + branch deploys. Only production serves.
+# Deploy previews bypass the 2FA gate and would leak the portal
+# to anyone with a preview URL. Same for branch deploys.
+# ============================================================
+
+[context.deploy-preview]
+  command = "echo 'Deploy previews DISABLED — Bucket 4 hardening' && exit 1"
+
+[context.branch-deploy]
+  command = "echo 'Branch deploys DISABLED — Bucket 4 hardening' && exit 1"
+
+# ============================================================
+# SECURITY HEADERS — reinforce gate discipline
+# ============================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
+
+[[headers]]
+  for = "/case/vault/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, private"
+    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet, notranslate"

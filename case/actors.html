@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<script>
+  try {
+    if (sessionStorage.getItem('ksh_in_v2') !== '1') {
+      window.location.replace('../index.html');
+    }
+  } catch(e) { window.location.replace('../index.html'); }
+</script>
+<title>ACTOR STATIONS — ΣΤΑΘΜΟΙ — Kyle Scott Harris</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f8f4e9; --navy:#0a1628; --gold:#C8A84E; --deep-gold:#8a6f26;
+    --hot:#c62828; --warm:#e0a800; --cold:#2e7d32; --border:#d9cfa8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ivory);color:var(--navy);font-family:'Cinzel',serif;font-size:20px;line-height:1.55;}
+  a{color:var(--deep-gold);font-weight:600;text-decoration:none}
+  a:hover{text-decoration:underline}
+  header{background:var(--navy);color:var(--ivory);padding:24px 32px;border-bottom:5px solid var(--gold);text-align:center;position:sticky;top:0;z-index:100}
+  header h1{margin:0;font-size:26px;font-weight:900;color:var(--ivory);letter-spacing:1px}
+  header .sub{color:var(--gold);font-size:15px;margin-top:4px}
+  header .nav a{color:var(--gold);margin:0 12px;font-size:15px;border-bottom:1px dotted var(--gold)}
+  main{max-width:1100px;margin:0 auto;padding:24px 30px 80px}
+  .intro{background:#fffbe6;border:2px solid var(--gold);border-radius:6px;padding:16px 20px;margin:16px 0 28px;font-size:18px}
+  .intro strong{color:var(--deep-gold)}
+  .actor{background:#fff;border:2px solid var(--border);border-radius:8px;padding:22px 26px;margin:18px 0;box-shadow:0 2px 6px rgba(0,0,0,.06);scroll-margin-top:110px}
+  .actor h2{margin:0 0 6px;font-size:24px;color:var(--navy);font-weight:900;letter-spacing:.5px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .priority{display:inline-block;padding:3px 12px;border-radius:4px;font-size:13px;font-weight:700;letter-spacing:1px;color:#fff;min-width:64px;text-align:center}
+  .priority.hot{background:var(--hot)}
+  .priority.warm{background:var(--warm);color:var(--navy)}
+  .priority.cold{background:var(--cold)}
+  .role-line{color:var(--deep-gold);font-style:italic;font-size:16px;margin-bottom:10px}
+  .block{margin:12px 0}
+  .block .label{color:var(--deep-gold);font-weight:900;font-size:14px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:4px}
+  .block p, .block li{font-size:17px;line-height:1.5;margin:4px 0}
+  .block ul, .block ol{margin:4px 0 4px 22px;padding:0}
+  .objective{background:#f0f7f0;border-left:4px solid var(--cold);padding:10px 14px;margin:10px 0;font-size:17px}
+  .verify{background:#ffebee;border-left:4px solid var(--hot);padding:6px 12px;color:var(--hot);font-weight:700;font-size:15px;display:inline-block;margin:4px 0}
+  .contact{background:#f8f4e9;border:1px dashed var(--border);padding:10px 14px;border-radius:4px;font-size:15px;margin-top:8px}
+  .status-line{font-weight:700;color:var(--navy);font-size:16px;margin-top:8px;padding:6px 10px;background:#f5efd7;border-radius:4px}
+  ul.checks{list-style:none;padding-left:0}
+  ul.checks li{padding:4px 0;font-size:16px}
+  ul.checks li::before{content:"☐  ";color:var(--gold);font-weight:900}
+  ul.live-check{list-style:none;padding-left:0}
+  ul.live-check li{padding:6px 0;font-size:16px;display:flex;align-items:flex-start;gap:10px}
+  ul.live-check li::before{content:none}
+  ul.live-check input[type="checkbox"]{margin-top:5px;width:20px;height:20px;cursor:pointer;accent-color:var(--gold);flex-shrink:0}
+  ul.live-check label{cursor:pointer;flex:1;line-height:1.4}
+  ul.live-check input:checked + label{color:#999;text-decoration:line-through}
+  .motions-top{background:#fff8dc;border:2px solid var(--gold);border-radius:6px;padding:10px 14px;margin:8px 0 14px}
+  .motions-top .label{color:var(--hot)!important;font-size:14px}
+  .notes-pad-block{background:#1a0000;border:3px solid #ff2d2d;border-radius:8px;padding:14px 18px;margin-top:20px;box-shadow:0 0 12px #ff2d2d,0 0 24px rgba(255,45,45,.5),inset 0 0 8px rgba(255,45,45,.15)}
+  .notes-pad-block .label{color:#ff2d2d;font-weight:900;letter-spacing:2px;text-shadow:0 0 6px #ff2d2d,0 0 12px rgba(255,45,45,.7);text-transform:uppercase}
+  .notes-pad-block .notes-meta{color:#ff8a8a;font-weight:700;text-shadow:0 0 4px rgba(255,45,45,.6)}
+  .notes-pad{width:100%;min-height:130px;border:2px solid #ff2d2d;border-radius:4px;padding:12px;font-family:'Cinzel',serif;font-size:15px;line-height:1.5;background:#fff;resize:vertical;color:var(--navy);box-shadow:inset 0 0 6px rgba(255,45,45,.25);font-weight:600}
+  .notes-pad:focus{outline:none;border-color:#ff5555;box-shadow:0 0 8px #ff2d2d,inset 0 0 6px rgba(255,45,45,.3)}
+  .notes-meta{font-size:12px;color:var(--deep-gold);font-style:italic;margin-top:4px;text-align:right}
+  .export-btn{position:fixed;bottom:20px;right:20px;background:var(--gold);color:var(--navy);border:none;padding:12px 18px;font-family:'Cinzel',serif;font-weight:700;font-size:13px;letter-spacing:1px;border-radius:6px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:200}
+  .export-btn:hover{background:var(--deep-gold);color:#fff}
+  .toc-jump{text-align:center;margin:20px 0;font-size:15px}
+  footer{text-align:center;color:var(--deep-gold);padding:24px 20px;border-top:2px solid var(--gold);margin-top:40px;font-size:15px}
+  @media print{
+    *{color:#000!important;background:#fff!important;box-shadow:none!important;text-shadow:none!important}
+    header,.export-btn,.top-btn,.toc-jump{display:none!important}
+    body{font-size:11pt;background:#fff;color:#000;font-weight:500;font-family:'Cinzel',Georgia,serif}
+    p,li,td,th,div,span,em,strong{color:#000!important}
+    h1{font-size:22pt;color:#000;border-bottom:2px solid #000;padding-bottom:6px}
+    h2{font-size:14pt;page-break-after:avoid;color:#000;border-bottom:1px solid #000;margin-top:14pt}
+    h3{font-size:12pt;page-break-after:avoid;color:#000}
+    .greek,.meta,em,a{color:#000!important;font-style:normal;text-decoration:none;border-bottom:none}
+    .actor{page-break-inside:avoid;border:1px solid #000;background:#fff;margin-bottom:14pt;padding:10pt}
+    .block,.verify,.objective{border-left:4px solid #000;background:#fff;color:#000;padding:6pt 10pt;margin:8pt 0}
+    .priority,.priority.hot,.priority.warm,.priority.cold{background:#000!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:2pt 8pt}
+    .notes-pad-block,.notes-pad{background:#fff!important;color:#000!important;border:1px solid #000!important;box-shadow:none!important;text-shadow:none!important}
+    .notes-pad-block .notes-title,.notes-pad-block .notes-meta{color:#000!important;text-shadow:none!important}
+    input[type="checkbox"]{-webkit-print-color-adjust:exact;print-color-adjust:exact;width:12pt;height:12pt;border:1px solid #000}
+    ul.live-check{list-style:none;padding-left:0}
+    ul.live-check li{margin:4pt 0}
+    main{padding:20px;max-width:100%}
+    footer{color:#000;border-top:1px solid #000;margin-top:20pt;padding-top:8pt}
+  }
+</style>
+<script src="/case/print-shield.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>ACTOR STATIONS | ΣΤΑΘΜΟΙ [STATH-mee]</h1>
+  <div class="sub">Individual-Driven TOC — 25 Actors — Objective + Facts + Motions + Deposition Questions + Actions</div>
+  <div class="nav"><a href="index.html">← TOC</a> <a href="dcm.html" style="color:#fff;background:#C8A84E;padding:4px 12px;border-radius:4px;border-bottom:none;font-weight:900">📖 OPEN DCM</a> <a href="motions.html">⚖ Motions</a> <a href="gantt.html" style="color:#fff;background:#c62828;padding:4px 12px;border-radius:4px;border-bottom:none;font-weight:900">📊 Gantt</a> <a href="prayer.html">🙏 Prayer</a> <a href="media.html">🎤 Media</a> <a href="actors.html">Actors</a> <a href="whales.html">🐋 Whales</a> <a href="bond.html">Bond</a> <a href="questions.html">Questions</a> <a href="../documents/ledger.html">Ledger</a> <a href="print-picker.html" style="color:#fff;background:#111;padding:4px 12px;border-radius:4px;border-bottom:none;font-weight:900">🖨 PRINT PACKET</a></div>
+</header>
+<main>
+
+<div class="intro">
+  <strong>How to read this page.</strong> Each actor gets one card. The <strong>OBJECTIVE</strong> line is the win condition — "we win if we do this." The <strong>FACTS</strong> block is the deposition-grade non-hearsay ground truth. <strong>RECOMMENDED MOTIONS</strong> = surgical filings that move the case. <strong>PRESSURE MOTIONS</strong> = filings that increase cost, force compliance, or draw the opponent into the open. <strong>DEPOSITION QUESTIONS</strong> = what a top .24% of top 1% attorney would ask this actor under oath. <strong>ACTIONS</strong> = checkable tasks Kyle or Troy executes. Jump-back links to the master TOC are in the sticky header.
+</div>
+
+<!-- ============ INSTRUMENT — GUNNER RETRIEVAL AUTHORIZATION ============ -->
+
+<section class="actor" id="gunner-retrieval-agents" style="background:#0a1628;color:#f4e5b5;border:3px solid #C8A84E;border-radius:10px;padding:22px 26px;margin:24px 0;box-shadow:0 4px 16px rgba(200,168,78,0.35)">
+  <div style="text-align:center;color:#C8A84E;font-size:11px;letter-spacing:4px;font-weight:900;margin-bottom:8px">AUTHORIZATION INSTRUMENT · KYLE SCOTT HARRIS · S337 EXT7</div>
+  <h2 style="color:#C8A84E;text-align:center;border-bottom:2px solid #C8A84E;padding-bottom:10px;margin-bottom:14px">GUNNER — RETRIEVAL AUTHORIZATION</h2>
+  <div style="text-align:center;color:#f4e5b5;font-size:13px;letter-spacing:2px;margin-bottom:16px">ΑΝΑΚΤΗΣΙΣ ΓΚΑΝΝΕΡ [ah-NAHK-tay-sees GAHN-ner] · <em>Recovery of Gunner</em></div>
+
+  <div style="background:rgba(200,168,78,0.08);border-left:4px solid #C8A84E;padding:12px 16px;margin-bottom:16px;color:#f4e5b5">
+    <strong style="color:#C8A84E">Subject Animal.</strong> Gunner — service dog lawfully belonging to Kyle Scott Harris — Gunnery Sergeant, United States Marine Corps (Retired), Marine Raider (Marine Corps Forces Special Operations Command [MARSOC]), Scout Sniper, Purple Heart, Silver Star. Currently held or handled by third-party (Bobbi Jo Rice per case record) pending recovery.
+  </div>
+
+  <div style="background:rgba(51,230,18,0.06);border-left:4px solid #33e612;padding:12px 16px;margin-bottom:16px;color:#f4e5b5">
+    <strong style="color:#33e612">Named Retrieval Agents.</strong> Kyle Scott Harris, as the lawful owner of Gunner, hereby designates the following individuals as his authorized retrieval agents for Gunner, jointly and severally, each acting alone with full authority:
+    <ol style="margin:10px 0 4px 22px;line-height:1.8">
+      <li><strong style="color:#33e612">Beth Martin</strong> — Kyle's mother · Minnesota residence · primary family point-of-contact.</li>
+      <li><strong style="color:#33e612">Troy DanDurand</strong> — friend and case advocate · Minnesota residence · brother in arms + brother in Christ.</li>
+    </ol>
+  </div>
+
+  <div style="background:rgba(200,168,78,0.05);border-left:4px solid #C8A84E;padding:12px 16px;margin-bottom:16px;color:#f4e5b5">
+    <strong style="color:#C8A84E">Scope of Authority.</strong> Each named agent is authorized, individually or jointly, to:
+    <ul style="margin:8px 0 4px 22px;line-height:1.7">
+      <li>Take physical custody of Gunner from any current holder, boarding facility, shelter, animal-control officer, veterinary clinic, or third-party possessor.</li>
+      <li>Sign for release of Gunner to the same extent Kyle himself could sign.</li>
+      <li>Present this instrument, together with Kyle's ownership documentation (veterinary records, microchip registration, purchase or adoption record, service-dog credentials), as proof of authority.</li>
+      <li>Retain licensed transport, boarding, or veterinary services for Gunner's care, transportation across state lines, and safe delivery to Kyle's designated caretaker.</li>
+      <li>Communicate with Collin County Animal Services, Travis County Animal Services, Melissa Police Department, and any private party regarding Gunner's whereabouts, condition, and return.</li>
+    </ul>
+  </div>
+
+  <div style="background:rgba(255,45,45,0.05);border-left:4px solid #ff2d2d;padding:12px 16px;margin-bottom:16px;color:#f4e5b5">
+    <strong style="color:#ff9e9e">Legal Basis.</strong>
+    <ul style="margin:8px 0 4px 22px;line-height:1.7">
+      <li><strong>Texas Penal Code § 9.41</strong> — Defense of property; owner or person acting at owner's direction may use force to recover animal from unlawful holder.</li>
+      <li><strong>Texas Property Code § 70.005</strong> — Owner's right of recovery for lawfully-owned animal.</li>
+      <li><strong>Common law agency</strong> — principal (Kyle) may designate agents to act on his behalf; instrument satisfies proof of agency.</li>
+      <li><strong>Collin County Animal Services record</strong> — Beth Martin has been in active written communication with Collin County Animal Services since December 1, 2025 on Kyle's behalf regarding Gunner.</li>
+    </ul>
+  </div>
+
+  <div style="background:rgba(200,168,78,0.05);border-left:4px solid #C8A84E;padding:12px 16px;margin-bottom:16px;color:#f4e5b5">
+    <strong style="color:#C8A84E">Duration.</strong> This authorization is effective on execution and continues until (a) Kyle personally revokes it in writing, (b) Gunner is safely returned to Kyle's care, or (c) Kyle is released from Travis County Correctional Complex and resumes personal custody — whichever occurs first.
+  </div>
+
+  <div style="background:rgba(200,168,78,0.05);border-left:4px solid #C8A84E;padding:12px 16px;margin-bottom:16px;color:#f4e5b5">
+    <strong style="color:#C8A84E">Execution Requirements (to convert this portal instrument into filed record):</strong>
+    <ol style="margin:8px 0 4px 22px;line-height:1.7">
+      <li>Print this section as a standalone one-page instrument via <a href="print-picker.html" style="color:#33e612">🖨 PRINT PACKET</a>.</li>
+      <li>Kyle signs at Travis County Correctional Complex under jail-notary protocol (D-S337 notary logistics).</li>
+      <li>Notarized original mailed to Beth Martin (Minnesota) — carbon to Troy DanDurand.</li>
+      <li>Copies pre-positioned with (a) Collin County Animal Services, (b) Travis County Animal Services, (c) Kyle's Travis counsel of record, (d) Kyle's Collin counsel of record (Brad Setterberg).</li>
+    </ol>
+  </div>
+
+  <div style="border-top:2px solid #C8A84E;padding-top:14px;margin-top:14px">
+    <div style="font-size:12px;letter-spacing:2px;color:#C8A84E;text-align:center;margin-bottom:8px">SIGNATURE BLOCK</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:13px">
+      <div>
+        <div style="border-bottom:1px solid #C8A84E;padding-bottom:4px;margin-bottom:4px">&nbsp;</div>
+        <div>Kyle Scott Harris · Owner + Principal</div>
+        <div style="font-size:11px;color:#C8A84E;margin-top:2px">Date: __________________</div>
+      </div>
+      <div>
+        <div style="border-bottom:1px solid #C8A84E;padding-bottom:4px;margin-bottom:4px">&nbsp;</div>
+        <div>Notary Public · Travis County, Texas</div>
+        <div style="font-size:11px;color:#C8A84E;margin-top:2px">Seal + Commission Exp: __________________</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;color:#C8A84E;font-size:10px;letter-spacing:3px;margin-top:16px;padding-top:10px;border-top:1px solid rgba(200,168,78,0.3)">TO YAHWEH THE GLORY · ONE FLESH · ONE DEFENSE · S337 EXT7 · 2026-07-19</div>
+</section>
+
+<!-- ============ HOT ACTORS ============ -->
+
+<section class="actor" id="bobbi-jo-rice">
+  <h2><span class="priority hot">HOT</span> Bobbi Jo Rice</h2>
+  <div class="role-line">Complaining witness on ALL three Travis County criminal cases — the single most important adverse witness in the entire Travis file.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we impeach Bobbi Jo's identity + credibility + timeline via (a) the Spectrum News 2025-03-29 pre-arrest baseline exhibit, (b) the Courtney Schwartz identity-denial encounter, (c) any inconsistency in her 2025-09-06 incident narrative pulled from the Travis probable-cause affidavit.</div>
+  <div class="block"><span class="label">Recommended Motions</span>
+    <ul>
+      <li><a href="motions.html#m8">Motion for Discovery under Tex. CCP Art. 39.14 (Michael Morton Act)</a> — all Bobbi Jo statements, recordings, prior complaints, criminal history.</li>
+      <li><a href="motions.html#m3">Brady/Giglio Notice</a> — impeachment material on complaining witness credibility.</li>
+      <li><a href="motions.html#p1">Motion in Limine</a> — pre-arrest Spectrum News interview admissibility as prior inconsistent statement (Tex. R. Evid. 613).</li>
+      <li>Notice of Intent to Impeach — Schwartz identity-denial testimony.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Pressure Motions</span>
+    <ul>
+      <li><a href="motions.html#m12">Motion for Speedy Trial</a> (U.S. Const. Amend. VI + Tex. Const. Art. I § 10 + Tex. CCP Art. 32A.02) — accelerates State's obligation to produce her live.</li>
+      <li>Subpoena Duces Tecum — social media, phone records, prior 911 calls.</li>
+      <li>Motion to Compel State to Interview + Preserve Statement — pins her testimony to a fixed narrative before trial.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Alleged incident date: 2025-09-06 (Austin).</li>
+      <li>Travis warrants issued 2025-10-23 on her complaint.</li>
+      <li>Misdemeanor informations: C-1-CR-25-502783 (Terroristic Threat) + C-1-CR-25-502784 (Unlawful Restraint).</li>
+      <li>Felony indictment 2026-01-14, cause D-1-DC-25-303689 — Assault Impede Breath + Aggravated Assault DW, deadly weapon = <strong>PILLOW</strong> (Special Findings).</li>
+      <li>Pillow finding triggers Tex. CCP Art. 42A.054 — restricts probation eligibility on the AA-DW count.</li>
+      <li>Private investigator Courtney Schwartz reported <strong>identity-denial encounter</strong> at Bobbi Jo's residence (Beth relayed 2026-07-12).</li>
+      <li>Spectrum News interview on record 2025-03-29 (pre-arrest baseline) — file: <em>EVIDENCE_MEDIA_KYLE_HARRIS_S337_EXT6_BOBBI_JO_RICE_SPECTRUM_NEWS_INTERVIEW_2025-03-29.txt</em>.</li>
+      <li><strong>Pregnancy + loss (Kyle relay 2026-07-19 — PENDING PRIMARY-SOURCE VERIFICATION):</strong> Bobbi Jo was pregnant during the timeline in question and subsequently lost the baby. Dates + medical records + witness names TBD (see Questions For Kyle follow-up 1–6).</li>
+      <li><strong>Spectrum News self-impeaching quote (Kyle relay 2026-07-19 — PENDING TRANSCRIPT VERIFICATION):</strong> In the 2025-03-29 segment Bobbi Jo said her family "are all some kind of crazy" — followed by an <strong>evil laugh</strong> on-camera. Pre-arrest baseline. Prior inconsistent statement + credibility impeachment lane under Tex. R. Evid. 613. Verify exact timecode + verbatim in transcript file.</li>
+    </ul>
+    <div class="verify" style="background:#e8f5e9;border-left:5px solid #2e7d32;color:#1b5e20">CLOSED 2026-07-19 — <strong>FEMALE + PREGNANT + LOST BABY.</strong> Kyle relay 2026-07-19 + Operator confirmation + Spectrum News + Instagram converge.</div>
+  </div>
+
+  <div class="block"><span class="label">Motive Theory — Pregnancy-As-Shield / Gunner Theft (Kyle relay 2026-07-19)</span>
+    <ul>
+      <li><strong>Working theory:</strong> Bobbi Jo may have believed pregnancy insulated her from consequence for the animal theft of Gunner — "baby on board, can't touch me" posture.</li>
+      <li><strong>Case-frame flip:</strong> Reframes the September 6, 2025 incident from "Kyle assaulted her over a dog" to "Bobbi Jo committed pet-theft trafficking under cover of pregnancy immunity." Kyle's response = lawful attempt to recover his own animal from a thief who thought she was untouchable.</li>
+      <li><strong>Legal traction:</strong> If sustained, this theory (a) undermines the complaining witness's status as victim, (b) supplies affirmative defense-of-property + defense-of-companion-animal context under Texas law, (c) shifts the deadly-weapon-pillow narrative from aggression to recovery-under-provocation, (d) sets up a cross-exam wall around her state of mind at the time of the incident.</li>
+      <li><strong>Verification runway:</strong> pregnancy dates + loss dates + any recorded statement referencing pregnancy-immunity mindset + medical records + witness names. See Questions For Kyle follow-up 1–6.</li>
+    </ul>
+  </div>
+
+  <div class="block"><span class="label">Family Lineage (aggregator-sourced — MEDIUM confidence)</span>
+    <ul>
+      <li><strong>Mother:</strong> Debra Flynn Rice (a.k.a. Debra F. Rice). Born <strong>circa December 1952, Brooklyn NY</strong>. Aggregator address: 1712 E Riverside Dr #76, Austin TX 78741. Moved with Bobbi Jo + Kelly to Austin mid-2000s to launch the "Baby" food-trailer suite (Fry Baby / Taco Baby / Waffle Baby) on South Lamar Blvd — corroborated via KUT Austin media record.</li>
+      <li><strong>Father:</strong> James T. Rice. Present in NY cross-family relative indexing. <strong>UNVERIFIED in Texas</strong> — no active TX residential, business, or telephony ties alongside Bobbi Jo Catering / Waffle Baby entities. Status: not part of the Austin relocation.</li>
+      <li><strong>Sibling:</strong> Kelly Rice Barbuscio (Fort Collins, CO).</li>
+      <li><strong>Sibling:</strong> Jamie Debra Rice.</li>
+      <li><strong>Origin lock:</strong> Bobbi Jo grew up in <strong>Brooklyn, NY</strong> before the mid-2000s Austin relocation. Family culinary hub = New York.</li>
+      <li>Source class: Whitepages / TruePeopleSearch / Spectrum News profile + KUT Austin scraping via Google AI Mode 2026-07-18. Aggregator error rate 20–40%; needs primary-source confirmation.</li>
+      <li><strong>Load-bearing inference:</strong> mother's maiden name = <strong>FLYNN</strong> → maternal grandfather candidate = a Flynn.</li>
+    </ul>
+  </div>
+
+  <div class="block"><span class="label">Grandfather / Waldorf-Astoria Verification (2026-07-18) — BOTH SIDES CHECKED</span>
+    <ul>
+      <li><strong>Claim (per Spectrum News 2025-03-29 interview):</strong> Grandfather was head chef at Waldorf-Astoria + hung out with Frank Sinatra. Bobbi Jo did NOT specify maternal vs paternal.</li>
+      <li><strong>Ai cross-check three-pass (Gemini Deep Research + Google AI Studio + Google AI Mode 2026-07-18):</strong>
+        <ul>
+          <li>Waldorf-Astoria Executive Chef roster 1940–1980 (undisputed): Gabriel Lugot → Ernest Treyvaud → Arno Schmidt. No Flynn. No Rice. Period.</li>
+          <li><strong>MATERNAL side (Flynn — via mother Debra Flynn Rice):</strong> <strong>CONTRADICTED as chef.</strong> POSSIBLE candidate: <strong>John Flynn = Director of Catering</strong>, Waldorf same era. Managerial, not culinary. Would have booked Empire Room / Grand Ballroom Sinatra engagements — professional Sinatra proximity, not personal.</li>
+          <li><strong>PATERNAL side (Rice — via father James T. Rice):</strong> <strong>CONTRADICTED as chef.</strong> No candidate Rice found on Waldorf executive roster. Different "James Rice" surfaced in same-era NY food industry — Food and Beverage Director at <em>Palmer House Chicago</em> (not Waldorf, not New York, not chef). Likely different person.</li>
+          <li>Sinatra's documented kitchen associates: Patsy Scognamillo (Patsy's), Jilly Rizzo (Jilly's Saloon), 21 Club staff. Neither Flynn nor Rice on Sinatra kitchen-circle list.</li>
+        </ul>
+      </li>
+      <li><strong>Defense-value read (net across both sides):</strong> Family origin story = TRUE-ISH not fabricated on MATERNAL side (John Flynn catering-director hypothesis makes Waldorf employment + Sinatra proximity plausible, just not chef); UNVERIFIED on PATERNAL side (no candidate found). "Head chef + hung out with Frank" phrasing is a multigenerational lore inflation — do NOT attack publicly, reserve for cross-exam prep only.</li>
+      <li><strong>Primary-source close-out path (definitive verification requires archives):</strong>
+        <ul>
+          <li><strong>Hotel Trades Council [HTC] New York union records</strong> — every professional cook at Waldorf 1940–1980 had a mandatory union card. Pension files + assigned workplace + legal name catalogued.</li>
+          <li><strong>NYPL Manuscripts Division</strong> + <strong>UNLV Special Collections Waldorf-Astoria Hotel Records Collection</strong> — unindexed internal employee newsletters, shift schedules, kitchen rosters.</li>
+          <li><strong>NYC DOHMH birth certificate for Debra Flynn Rice</strong> → maternal grandfather legal name → cross-reference against John Flynn Director of Catering.</li>
+          <li><strong>NY State marriage index</strong> → James T. Rice parents → paternal grandfather legal name.</li>
+        </ul>
+      </li>
+      <li><strong>Source files:</strong> <em>DIRECTIVE_KYLE_HARRIS_S337_EXT7_BOBBI_JO_GRANDFATHER_WALDORF_VERIFY.rtf</em> · <em>SOCIAL_MEDIA_KYLE_HARRIS_S337_EXT7_BOBBI_JO_EVIDENCE_PLAYBOOK.rtf</em> · <em>DOSSIER_KYLE_HARRIS_S337_EXT7_BOBBI_JO_FAMILY_LINEAGE_2026-07-18.rtf</em> · <em>ARCHIVAL_QUERIES_KYLE_HARRIS_S337_EXT7_BOBBI_JO_WALDORF_2026-07-18.rtf</em> (3 deposition-grade query letters: NYC DOHMH birth cert + HTC union records + NYPL/UNLV Waldorf collection — ready to route through counsel letterhead).</li>
+    </ul>
+  </div>
+
+  <div class="block"><span class="label">Deposition Questions</span>
+    <ol>
+      <li>State your legal name and every alias you have used since 2020.</li>
+      <li>Describe every prior interaction with Kyle Harris before 2025-09-06.</li>
+      <li>Were you interviewed by Spectrum News on 2025-03-29? What did you say?</li>
+      <li>On what date and at what address did a woman named Courtney Schwartz visit your residence, and what did you tell her about your identity?</li>
+      <li>Describe the pillow. Where was it? What size? What color? Did it leave any mark?</li>
+      <li>Did you speak with any law enforcement officer before you contacted them? Who?</li>
+      <li>Have you been offered any consideration, immunity, deferral, or dropped charges in exchange for your testimony?</li>
+    </ol>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Pull Travis probable-cause affidavit for D-1-DC-25-303689</li>
+      <li>Confirm Bobbi Jo gender via Travis docket header</li>
+      <li>Verify Schwartz identity-denial encounter — request Schwartz work product via SIGN_06 file-return letter</li>
+      <li>Pull full Spectrum News transcript (Gemini + Google Ai directive) — <span class="verify">DONE — located on My Book</span></li>
+    </ul>
+  </div>
+  <div class="status-line">STATUS — Active complaining witness on all three Travis cases. Percipient identity-denial documented via Beth 2026-07-12.</div>
+</section>
+
+<section class="actor" id="caitlyn-grant">
+  <h2><span class="priority hot">HOT</span> Caitlyn Elizabeth Grant</h2>
+  <div class="role-line">Civil PO applicant Collin 429-55152-2025 → seed document for Collin felony 199-80678-2026. Travis prosecution now trying to flip her AGAINST Kyle in Tampering matter.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong>
+    <p style="margin:6px 0 0"><strong style="color:#c62828">WORKING THEORY:</strong> Kyle's working theory drives all three conditions below.</p>
+    <p style="margin:4px 0">(a) The complaining witness recants on the record.</p>
+    <p style="margin:4px 0">(b) The complaining witness admits — consistent with Kyle's working theory — that she, not Kyle, is the actual tamperer.</p>
+    <p style="margin:4px 0">(c) The complaining witness is neutralized as a Travis witness before prosecution can flip her.</p>
+  </div>
+  <div class="block"><span class="label">Recommended Motions</span>
+    <ul>
+      <li><a href="motions.html#m3">Motion to Quash / Attack Underlying PO</a> — procedural defects, service issues, sufficiency of ex parte affidavit (target <a href="actors.html#judge-jill-willis">Judge J.R. Willis</a> rulings).</li>
+      <li><a href="motions.html#p1">Motion in Limine</a> — exclude any Caitlyn testimony absent independent corroboration.</li>
+      <li><a href="motions.html#m3">Brady/Giglio</a> — full disclosure of any State inducement to flip her.</li>
+      <li>Motion to Preserve Evidence — Kyle's proof of Caitlyn's tampering.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Pressure Motions</span>
+    <ul>
+      <li><a href="motions.html#m12">Speedy Trial motion</a> — <a href="motions.html#m7">Faretta pro se pivot</a> LOCKED strategy.</li>
+      <li>Cross-designate Caitlyn as defense witness — flip the flip.</li>
+      <li><a href="motions.html#p2">Motion for Bill of Particulars</a> — force State to identify exactly which acts Caitlyn will testify to.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Ex Parte Temporary Protective Order granted 2025-08-25 (Judge Jill Renfro Willis, 429th Collin).</li>
+      <li>Permanent PO hearing 2025-09-11 — <span class="verify">VERIFY — dossier: PO granted; operator: not awarded.</span></li>
+      <li>Both parties listed same address 5900 County Road 277 #222, Melissa TX 75454 — cohabiting.</li>
+      <li>Kyle appeared pro se at hearing.</li>
+      <li>PO is the underlying document Collin DA leaned on for felony 199-80678-2026 (Violate Bond/PO, 3rd deg).</li>
+      <li>Post-PO, Caitlyn changed stance — willing to help Kyle.</li>
+      <li><strong>Travis prosecution trying to flip her AGAINST Kyle in Tampering matter.</strong> Her testimony = essentially the whole case.</li>
+      <li><strong style="color:#c62828">WORKING THEORY:</strong> Kyle asserts he holds evidence supporting his working theory that a third party is the actual tamperer (per operator 2026-07-18).</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Deposition Questions</span>
+    <ol>
+      <li>Did you file the Ex Parte PO application in Collin 429-55152-2025 truthfully?</li>
+      <li>Has any prosecutor, investigator, or officer offered you consideration for testimony?</li>
+      <li>Do you now believe the PO was necessary, or was it filed in the heat of a domestic dispute?</li>
+      <li>Do you have any tampering with governmental record exposure of your own?</li>
+      <li>Are you aware of any evidence Kyle possesses that would contradict your account?</li>
+    </ol>
+  </div>
+  <div class="block"><span class="label">Witness Guardrail</span>
+    <p><strong>ANY Caitlyn contact routes through counsel OR licensed Texas PI ONLY.</strong> Never Kyle direct, never Troy direct, never Beth direct. Any breach = tampering exposure for the contact-maker.</p>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Confirm PO award status (dossier vs operator conflict)</li>
+      <li>Preserve Kyle's proof of Caitlyn tampering — chain of custody</li>
+      <li>Draft <a href="motions.html#m3">Motion to Attack Underlying PO</a> — send to <a href="actors.html#brad-setterberg">Setterberg</a></li>
+      <li>Draft <a href="motions.html#m3">Brady demand</a> for inducement disclosure</li>
+    </ul>
+  </div>
+  <div class="status-line">STATUS — Civil PO closed 2025-09-11 (per dossier). Named complainant on 199-80678-2026 (Inactive Pending). Live flip target of Travis prosecution.</div>
+</section>
+
+<section class="actor" id="brad-setterberg">
+  <h2><span class="priority hot">HOT</span> John B. "Brad" Setterberg</h2>
+  <div class="role-line">Court-appointed defense counsel on BOTH Collin felony cases. Solo practitioner Allen TX. Active as of 2026-03-27.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Setterberg is fully briefed on the DCM + Bond Quick Answer + Caitlyn tampering-flip theory + Speedy Trial + Faretta pivot + PO attack, so Collin side moves in parallel with Travis pro se.</div>
+  <div class="block"><span class="label">Recommended Motions Setterberg Should File</span>
+    <ul>
+      <li><a href="bond.html">Motion to Set Bond</a> on both Collin felonies (currently no Collin bond post-indictment).</li>
+      <li><a href="motions.html#m2">Motion for Discovery under Tex. CCP Art. 39.14 (Michael Morton Act)</a>.</li>
+      <li><a href="motions.html#m3">Motion to Attack Underlying PO</a> on 199-80678-2026 (procedural defects).</li>
+      <li>Motion to Transfer / Consolidate if strategically useful.</li>
+      <li>Preservation demand for Kyle's Caitlyn-tampering proof.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Pressure Motions</span>
+    <ul>
+      <li><a href="motions.html#m6">Speedy Trial demand</a> — parallel to Travis, accelerates dismissal or resolution.</li>
+      <li>Motion to Compel Full DA File — force <a href="actors.html#greg-willis-da">Greg Willis</a>'s office to produce or explain.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Letter of Representation filed 2026-03-27 — day after Texas Fair Defense Act indigent packet cleared.</li>
+      <li>Active on both: 199-80678-2026 (Violate Bond/PO, 3rd deg) + 199-80977-2026 (Tampering, 2nd deg).</li>
+      <li>Texas Bar 24043915. Solo practice.</li>
+      <li>DIFFERENT counsel from Holub (Travis).</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Deposition-Grade Questions FROM Troy TO Setterberg</span>
+    <ol>
+      <li>What is your current strategy on both Collin cases?</li>
+      <li>Have you received the Bobbi Jo Spectrum News transcript?</li>
+      <li>What is the status of Discovery — what have you received, what is outstanding?</li>
+      <li>Have you filed for bond? If not, why?</li>
+      <li>Are you willing to challenge the underlying PO (Judge J.R. Willis rulings) as a defense pillar?</li>
+      <li>How does Kyle's Faretta pro se pivot on Travis affect your Collin strategy?</li>
+    </ol>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Send Setterberg the DCM + Bond Quick Answer PDFs</li>
+      <li>Send Setterberg the Players & Actors List</li>
+      <li>Schedule call — confirm strategy alignment</li>
+      <li>Deliver Kyle's Caitlyn-tampering proof under privilege</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 825 Watter's Creek Blvd Suite 250-182, Allen TX 75013 · Phone 214-210-0703 · Tex. Bar 24043915</div>
+  <div class="status-line">STATUS — Active counsel of record on both Collin felony cases.</div>
+</section>
+
+<section class="actor" id="christopher-holub">
+  <h2><span class="priority hot">HOT</span> Christopher William Holub</h2>
+  <div class="role-line">Travis counsel of record on all three Travis cases. Kyle fired him. Withdrawal not yet docketed.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Holub either (a) formally withdraws, clearing runway for Faretta pro se pivot, or (b) returns Kyle's complete file under Tex. Disciplinary Rule 1.15(d) so successor counsel or pro se defense has full record.</div>
+  <div class="block"><span class="label">Recommended Motions</span>
+    <ul>
+      <li><a href="motions.html#m7">Faretta v. California 422 U.S. 806 (1975)</a> — Kyle's motion to proceed pro se, forcing Holub's withdrawal or standby-counsel posture.</li>
+      <li>Rule 1.15(d) file-return demand — MAIL SIGN_05 packet.</li>
+      <li>Grievance-reservation — preserve right without immediately triggering.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Pressure Motions</span>
+    <ul>
+      <li><a href="motions.html#m7">Motion for New Counsel</a> citing breakdown of communication.</li>
+      <li>Public letter to Texas Chief Disciplinary Counsel if file not returned within 30 days.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Appointed 2025-11-17 (seven days after Kyle arrived at Travis Correctional Complex).</li>
+      <li>Court-paid billing entries: 2026-01-26, 2026-05-04, 2026-06-01 (×2).</li>
+      <li>Partner at Hines Ranc and Holub — 30-year family violence defense firm.</li>
+      <li>Kyle told Troy he fired both Travis lawyers — one was Holub.</li>
+      <li>No Motion to Withdraw docketed yet.</li>
+      <li>File-return demand drafted (KYLE_HARRIS_SIGN_05 packet) — <strong>NOT YET MAILED</strong>.</li>
+      <li>Tex. Bar licensed 1996 (29 years).</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>MAIL the SIGN_05 file-return demand letter</li>
+      <li>File Kyle's <a href="motions.html#m7">Faretta motion</a> in Travis 427th District Court</li>
+      <li>Confirm Holub's withdrawal on docket within 30 days</li>
+      <li>Receive full case file (correspondence, discovery, investigator work product, motions filed and not filed)</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Hines Ranc and Holub · 1307 Nueces Street Suite 101, Austin TX 78701 · Phone 512-472-6565 · hrh-law.com (redirects h2hlaw.com)</div>
+  <div class="block" style="background:#3a1a1a;border-left:4px solid #ff6b6b;padding:8px 12px;margin-top:8px"><span class="label" style="color:#ff9e9e">KYLE INTEL 2026-07-19 (SMS, UNCONFIRMED)</span>
+    <ul>
+      <li>"Hines is not working with Holub anymore" — Kyle heard secondhand. Not verified against firm site or Tex. Bar.</li>
+      <li>Verify: pull current firm roster from hrh-law.com + h2hlaw.com + Tex. Bar profiles for both partners.</li>
+    </ul>
+  </div>
+  <div class="status-line">STATUS — Formally counsel of record. Practically terminated. File-return demand drafted, awaiting mail.</div>
+</section>
+
+<section class="actor" id="benjamin-willis">
+  <h2><span class="priority hot">HOT</span> Benjamin Willis (Portico / VLux)</h2>
+  <div class="role-line">Portico Property Management rep on post-eviction vehicle-tow. Lead: <strong>Melissa PD holds documents.</strong></div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we (a) recover Kyle's vehicle from post-eviction tow disposition and (b) pull whatever documents Melissa PD is holding that Ben Willis flagged — could contain police report material relevant to Bobbi Jo, Caitlyn, or Gunner.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Correspondence 2026-07-17 on file at <em>CORRESPONDENCE_KYLE_HARRIS_S337_EXT7_BENJAMIN_WILLIS_PORTICO_VLUX_STONERIDGE_TOW_REPLY_2026-07-17.md</em>.</li>
+      <li>Portico is property manager for VLux Stoneridge — Kyle's former Melissa TX apartment.</li>
+      <li>Ben stated <strong>Melissa Police Department holds documents.</strong></li>
+      <li>Property management, NOT criminal actor.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Recommended Actions (not motions — civil/admin)</span>
+    <ul>
+      <li>Formal document request under Tex. Gov't Code Chapter 552 (Public Information Act) to Melissa PD — Kyle Harris + Bobbi Jo Rice + Caitlyn Grant + Gunner.</li>
+      <li>Vehicle recovery demand letter under Tex. Property Code Chapter 24 (landlord post-eviction personal property disposition).</li>
+      <li>Confirm which documents specifically Ben is referencing — narrow the Melissa PD request.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Reply to Ben Willis — clarify what documents Melissa PD holds</li>
+      <li>File Public Information Act request with Melissa PD</li>
+      <li>Send vehicle recovery demand to Portico</li>
+      <li>Update DCM Appendix with Melissa PD document trail</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Portico Property Management (VLux Stoneridge manager). Correspondence on file 2026-07-17.</div>
+  <div class="status-line">STATUS — Active correspondence. NEW LEAD on Melissa PD documents.</div>
+</section>
+
+<section class="actor" id="agent-justice">
+  <h2><span class="priority hot">HOT</span> Agent "Justice" — 1st Call Bail Bonds</h2>
+  <div class="role-line">Live inbound collection/reconciliation call today 2026-07-18. Bond 202515270 discharged clean 2026-02-24. Beth does NOT owe $5,000 face.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> "Justice" returns nothing owed determination in writing, OR proves via itemized invoice any legitimate ancillary administrative fee ($50–$250 range) tied to statutory discharge. No verbal commitments. Written only.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Voicemail today 2026-07-18 on Beth Martin's phone from 214-592-9000 (1st Call main line).</li>
+      <li>Bond 202515270 was discharged 2026-02-24 under Tex. CCP Art. 17.16 (Affidavit of Discharge of Surety) — clean escape because Kyle was in Travis custody.</li>
+      <li>Liability analysis (2026-07-18) concludes Beth does NOT owe the $5,000 face.</li>
+      <li>Bond premium $500 (paid by Lisa Harris) is EARNED at post — non-refundable, not disputed.</li>
+      <li>Nature of "Justice" call not yet confirmed: routine records reconciliation OR ancillary fee OR predatory attempt on non-owed face.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Response Posture</span>
+    <ul>
+      <li>All future contact = <strong>WRITTEN ONLY</strong>.</li>
+      <li>If "Justice" calls again — do not commit. Say: "Please put any request in writing to Beth Martin, 803 Braunworth Ct, Chaska MN 55318."</li>
+      <li>If itemized ancillary fee shown (surrender affidavit filing, courier, notary) in $50–$250 range — Kyle pays as team-leader decision, not Beth.</li>
+      <li>If claim on the $5,000 face — refer to Tex. CCP Art. 17.16 discharge, demand written justification, escalate to Texas Department of Insurance Bail Bond Board if predatory.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Beth does NOT call back — waits for written</li>
+      <li>If written arrives, log + share for review before response</li>
+      <li>Confirm Kyle's commitment to cover any legitimate ancillary fee</li>
+      <li>Preserve voicemail as evidence</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 214-592-9000 (main line) · 1836 W Virginia St Suite 102, McKinney TX 75069 · Parent: Big Bubbas Bail Bonds · Surety: US Fire Insurance Co.</div>
+  <div class="status-line">STATUS — Live inbound contact. Written-only response posture.</div>
+</section>
+
+<section class="actor" id="greg-willis-da">
+  <h2><span class="priority hot">HOT</span> Greg Willis — Collin County District Attorney</h2>
+  <div class="role-line">Elected Collin DA. Charging authority on BOTH Collin felonies. Career prosecutor with aggressive family-violence enforcement rep.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we secure (a) discovery compliance under Michael Morton Act, (b) Brady/Giglio on Caitlyn inducements, (c) either a dismissal of 199-80678-2026 on PO-attack grounds or a plea posture Kyle can accept.</div>
+  <div class="block"><span class="label">Recommended Motions (via Setterberg)</span>
+    <ul>
+      <li><a href="motions.html#m2">Motion for Discovery — Tex. CCP Art. 39.14 (Michael Morton)</a>.</li>
+      <li><a href="motions.html#m3">Brady/Giglio demand</a> — Caitlyn inducements, prior inconsistent statements.</li>
+      <li><a href="motions.html#m3">Motion to Dismiss on procedural attack of underlying PO</a>.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Pressure Motions</span>
+    <ul>
+      <li><a href="motions.html#m6">Speedy Trial</a> — parallel with Travis pro se.</li>
+      <li>Motion to Compel — force office to produce or explain.</li>
+      <li>Public records correction letter — creates public record of dispute.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>State attorney of record on 199-80678-2026 (Violate Bond/PO, 3rd deg) filed 2026-02-12.</li>
+      <li>State attorney of record on 199-80977-2026 (Tamper Gov't Record, 2nd deg) filed 2026-02-26.</li>
+      <li>Line prosecutor handles day-to-day; Willis's office holds charging policy.</li>
+      <li>DA Records Correction Letter — recommended action to force office to update inaccurate public records on Kyle.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Draft DA Records Correction Letter — Collin</li>
+      <li>Send letter certified mail with return receipt</li>
+      <li>Log any response for DCM Appendix</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Collin County DA · 2100 Bloomdale Road Suite 100, McKinney TX 75071 · 972-548-4323</div>
+  <div class="status-line">STATUS — Active charging authority. Both Collin cases pending.</div>
+</section>
+
+<section class="actor" id="melissa-pd">
+  <h2><span class="priority hot">HOT</span> Melissa Police Department</h2>
+  <div class="role-line">NEW LEAD via Ben Willis (Portico/VLux) 2026-07-17: <strong>Melissa PD holds documents relevant to Kyle's file.</strong></div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we pull every document Melissa PD holds on Kyle, Bobbi Jo, Caitlyn, Gunner, and the VLux Stoneridge address — could contain incident reports, welfare checks, or evidence that supports Kyle's tampering-flip theory.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Lead came from Ben Willis (Portico) 2026-07-17.</li>
+      <li>VLux Stoneridge apartment is inside Melissa city limits.</li>
+      <li>Kyle's cohabitation with Caitlyn at 5900 County Road 277 #222 = Melissa PD service area.</li>
+      <li>No specific document identified yet — need Ben to clarify.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Recommended Actions</span>
+    <ul>
+      <li>Tex. Gov't Code Chapter 552 (Public Information Act) request — all reports, calls for service, incident reports at 5900 County Road 277 #222 or naming Kyle Harris / Bobbi Jo Rice / Caitlyn Grant / Gunner (dog).</li>
+      <li>Follow-up with Ben Willis for specific document identification.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Draft PIA request letter to Melissa PD</li>
+      <li>Reply to Ben Willis asking WHICH documents</li>
+      <li>Log response and route to DCM Appendix</li>
+    </ul>
+  </div>
+  <div class="status-line">STATUS — Open lead. Not yet pursued. High-value target because pre-arrest activity at cohabitation address could support tampering-flip.</div>
+</section>
+
+<!-- ============ WARM ACTORS ============ -->
+
+<section class="actor" id="courtney-schwartz">
+  <h2><span class="priority warm">WARM</span> Courtney Schwartz</h2>
+  <div class="role-line">Licensed Texas private investigator retained by Hines Ranc and Holub to investigate Kyle's case. Percipient witness AND document custodian.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we recover Schwartz's complete investigator work product AND secure her willingness to testify to the Bobbi Jo identity-denial encounter.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Engaged through Hines Ranc and Holub ~2025-11-17.</li>
+      <li>Physically visited Bobbi Jo's residence during investigation.</li>
+      <li>Reported <strong>identity-denial encounter</strong> — Bobbi Jo denied being who she was.</li>
+      <li>Beth Martin relayed encounter to Troy 2026-07-12 (second-hand).</li>
+      <li>Work product NOT transferred to Kyle or successor counsel.</li>
+      <li>File-return demand letter drafted KYLE_HARRIS_SIGN_06 — <strong>NOT YET MAILED</strong>.</li>
+      <li>Regulated by Tex. Dept. of Public Safety Private Security Program.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Recommended Actions</span>
+    <ul>
+      <li>MAIL SIGN_06 file-return demand.</li>
+      <li>Subpoena work product if demand refused.</li>
+      <li>Subpoena Schwartz for deposition-style pretrial statement on identity-denial encounter.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Deposition Questions</span>
+    <ol>
+      <li>Describe your engagement with Hines Ranc and Holub on the Kyle Harris matter.</li>
+      <li>Describe your visit to Bobbi Jo Rice's residence — date, time, address.</li>
+      <li>Describe her response when you identified yourself and asked for her.</li>
+      <li>Did she deny her identity? What exact words did she use?</li>
+      <li>What documents, notes, recordings, or work product do you have on this case?</li>
+      <li>Have you been contacted by the Travis DA about your work?</li>
+    </ol>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>MAIL the SIGN_06 file-return demand letter</li>
+      <li>Confirm receipt via tracked mail</li>
+      <li>Log her response</li>
+      <li>Preserve her contact and willingness to testify</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Courtney Schwartz · Mayer Consulting · Phone 917-686-2151 · Tex. Dept. of Public Safety Private Security Program licensed investigator</div>
+  <div class="status-line">STATUS — Work product not recovered. Percipient witness value HIGH. Approach via file-return demand only.</div>
+</section>
+
+<section class="actor" id="hines-iii">
+  <h2><span class="priority warm">WARM</span> William "Bill" M. Hines III</h2>
+  <div class="role-line">Firm partner at Hines Ranc and Holub — contextual involvement during Kyle's Travis representation window.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Hines returns any file he touched on Kyle's case + clears whether firm-level conflict or grievance is outstanding.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Kyle described him as "license-limited, cannot represent adversely" — public record does NOT support.</li>
+      <li>Actually holds <strong>ACTIVE board-certified specialist in criminal law</strong>.</li>
+      <li>Travis County Assistant District Attorney 1990–1998.</li>
+      <li>Past President Travis County Bar Assn Criminal Law Section.</li>
+      <li>Tex. Bar 09699300, licensed 1990-11-02.</li>
+      <li>Kyle's "license-limited" framing likely TBI/PTSD misread of former-prosecutor status.</li>
+      <li>File-return demand letter drafted (SIGN_05 packet) — <strong>NOT YET MAILED</strong>.</li>
+    </ul>
+  </div>
+  <div class="block" style="background:#3a1a1a;border-left:4px solid #ff6b6b;padding:8px 12px;margin-top:8px"><span class="label" style="color:#ff9e9e">KYLE INTEL 2026-07-19 (SMS, DIRECT ENCOUNTER)</span>
+    <ul>
+      <li>Kyle: "Mr Hines has told me his name is Bill Hines and I knew that was not true."</li>
+      <li>Kyle: "He was a prosecutor for Hays County. It is highly illegal to represent someone as a defense attorney" — Kyle asserts conflict of interest / dual-role violation, cites multiple encounters.</li>
+      <li>Verify: (a) Confirm Hines was <strong>Travis</strong> County ADA 1990–1998 vs <strong>Hays</strong> County — Kyle may be conflating counties. (b) Check Tex. Disciplinary Rule 1.09 (Conflict: Former Client) + Rule 1.10 (Successive Government/Private Employment) for any post-prosecution defense limitation. (c) Grievance material if identity misrepresentation confirmed.</li>
+      <li>Kyle also heard Hines may no longer be at Holub firm — unconfirmed.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Recommended Actions</span>
+    <ul>
+      <li>MAIL SIGN_05 file-return demand alongside Holub demand.</li>
+      <li>Query Tex. Chief Disciplinary Counsel portal for open grievances.</li>
+      <li>Confirm what work product he touched personally.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>MAIL SIGN_05 file-return demand</li>
+      <li>Query TCDC portal — any open grievance?</li>
+      <li>Log file returned or refusal</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Hines Ranc and Holub · 1307 Nueces St Suite 101, Austin TX 78701 · Phone 512-472-6565 · Tex. Bar 09699300</div>
+  <div class="status-line">STATUS — Firm partner during representation window. Kyle SMS 2026-07-19 alleges identity misrepresentation + Hays County prosecutor conflict. Verify + escalate. File-return demand drafted. Grievance status pending.</div>
+</section>
+
+<section class="actor" id="judge-tucker">
+  <h2><span class="priority warm">WARM</span> Judge Angela Tucker — 199th Collin District Court</h2>
+  <div class="role-line">Presiding judge on BOTH Collin felony cases against Kyle. Trial judge if either goes to jury.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> she rules favorably on (a) motion to set Collin bond, (b) motion to attack underlying PO, (c) discovery motions.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>199-80678-2026 (Violate Bond/PO, 3rd deg) — Kyle's court.</li>
+      <li>199-80977-2026 (Tamper Gov't Record, 2nd deg) — Kyle's court.</li>
+      <li>Both currently Inactive Pending (Kyle in Travis custody).</li>
+      <li>Ruled on Second Announcement 2026-05-22 + Announcement Last Pass 2026-06-19 on 199-80678-2026 — outcomes not yet captured.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Pull 2026-05-22 + 2026-06-19 announcement outcomes via Collin docket</li>
+      <li>Route findings to Setterberg</li>
+      <li>Prepare Collin bond motion for Setterberg to file</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Collin County Courthouse · 2100 Bloomdale Road, McKinney TX 75071</div>
+  <div class="status-line">STATUS — Active. Both cases Inactive Pending. Trial judge if any goes to jury.</div>
+</section>
+
+<section class="actor" id="judge-jill-willis">
+  <h2><span class="priority warm">WARM</span> Judge Jill Renfro Willis — 429th Collin District Court</h2>
+  <div class="role-line">Signed the Caitlyn Grant Ex Parte + permanent PO. Her rulings are the target of the PO-attack strategy.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> her PO rulings are found procedurally defective — service issues, insufficient ex parte affidavit — collapsing the foundation of Collin 199-80678-2026.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Ex Parte Temporary PO signed 2025-08-25.</li>
+      <li>Permanent PO hearing presided 2025-09-11.</li>
+      <li>PO is the seed document of Collin felony 199-80678-2026.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Pull complete 429-55152-2025 record</li>
+      <li>Analyze ex parte affidavit sufficiency (Tex. Fam. Code Ch. 82)</li>
+      <li>Analyze service perfection</li>
+      <li>Draft PO-attack brief for Setterberg</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Collin County Courthouse · 2100 Bloomdale Road, McKinney TX 75071</div>
+  <div class="status-line">STATUS — Case closed. Rulings on record — target of collateral attack.</div>
+</section>
+
+<section class="actor" id="judge-bronchetti">
+  <h2><span class="priority warm">WARM</span> Judge Lisa Bronchetti — Collin Magistration</h2>
+  <div class="role-line">Magistrated Kyle 2025-09-09 after arrest on Tampering. Set felony bond conditions + accepted indigency affidavit. <span class="verify">VERIFY — arresting agency (Kyle relay 2026-07-19 says Melissa PD; prior record said U.S. Marshal). Pull warrant + arrest report.</span></div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> her magistration record supports the discharge posture and clean bond compliance history.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Magistrated 2025-09-09 (case DCMAG-49928-2025).</li>
+      <li>Set felony bond conditions on record.</li>
+      <li>Accepted Kyle's Affidavit of Indigency.</li>
+      <li>Did NOT set bond amount — Sheriff approved bond 202515270 on 2025-09-12.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Pull full DCMAG-49928-2025 record</li>
+      <li>Confirm compliance history on pretrial conditions</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Collin County Detention Facility · 4300 Community Ave, McKinney TX 75071</div>
+  <div class="status-line">STATUS — Case closed. Rulings on record.</div>
+</section>
+
+<section class="actor" id="judge-davis">
+  <h2><span class="priority warm">WARM</span> Judge Davis — Collin Magistration</h2>
+  <div class="role-line">Magistrated Kyle 2025-11-03 on incoming Travis warrants. Set $250,000 cash-or-surety bond on Assault Strangulation FV.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we clarify (a) full first name and jurisdiction posture, and (b) whether the $250K bond survived transfer to Travis or was superseded.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Magistrated Kyle 2025-11-03 on incoming Travis warrants.</li>
+      <li>Set $250K cash-or-surety on Assault Strangulation FV out of Travis.</li>
+      <li>Ordered 500-ft stay-away from complaining witness residence + workplace.</li>
+      <li>Ruling most likely attaches to DCMAG-412017-2025 or DCMAG-412018-2025.</li>
+      <li>Full first name NOT captured — outstanding.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Pull DCMAG-412017-2025 + DCMAG-412018-2025 for Davis's full name</li>
+      <li>Confirm whether $250K bond survived transfer or was superseded by Travis-side bonds</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Collin County Detention Facility · 4300 Community Ave, McKinney TX 75071</div>
+  <div class="status-line">STATUS — Rulings on record. Full identification pending outstanding pull.</div>
+</section>
+
+<section class="actor" id="judge-raleeh">
+  <h2><span class="priority warm">WARM</span> Judge Paul M. Raleeh — Collin JP Precinct 1</h2>
+  <div class="role-line">Presided over VLux Stoneridge eviction. Signed Default Judgment + Writ of Possession while Kyle was in Travis custody.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we preserve grounds to set aside default (Kyle's non-appearance = jail) OR collaterally attack property disposition under Tex. Property Code Ch. 24.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Case 01-EV-25-02937 filed 2025-11-18 by VLux Stoneridge.</li>
+      <li>Default Judgment entered 2025-12-10.</li>
+      <li>Writ of Possession executed 2026-01-06.</li>
+      <li>Kyle's non-appearance = Travis custody, not fault.</li>
+      <li>Texas JP practice does NOT require court to verify non-appearance reason before default.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Preserve grounds for Bill of Review under Texas equitable doctrine</li>
+      <li>Coordinate with Ben Willis (Portico) on property + vehicle disposition</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 920 East Park Blvd Suite 100, Plano TX 75074</div>
+  <div class="status-line">STATUS — Case disposed. Rulings final absent collateral attack.</div>
+</section>
+
+<section class="actor" id="us-marshal">
+  <h2><span class="priority warm">WARM</span> Arresting Agency — <span style="color:#c62828">VERIFY</span> (Melissa PD vs U.S. Marshal)</h2>
+  <div class="role-line">Arresting agency on Tampering charge that became Collin 199-80977-2026. <strong>DISPUTED:</strong> Kyle jail-call relay 2026-07-19 says <strong>Melissa Police Department</strong> (Kyle knows several officers by name). Prior working record + one report referenced a Sheriff (Dallas or Austin area) in the warrant. Must reconcile.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we pull the underlying probable-cause affidavit + arrest report that name (a) the actual arresting agency, (b) the county sheriff on the warrant, and (c) any federal (U.S. Marshal) involvement — if any. Confirm WHAT record was allegedly tampered with.</div>
+  <div class="block"><span class="label">Certainty Status</span>
+    <ul>
+      <li><span class="verify">🔴 NEEDS VERIFY CERTAINTY — Arresting agency identity</span></li>
+      <li>Kyle (2026-07-19): "Melissa cops arrested me — I know several of them." → <strong>Kyle-direct = strongest signal</strong>.</li>
+      <li>Prior file record: U.S. Marshal (source now unverified — likely misread from warrant header).</li>
+      <li>Warrant execution: report referenced Sheriff near Dallas or Austin — verify Collin County Sheriff or Travis County Sheriff.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Arrested Kyle 2025-09-09 for Tampering with Governmental Record.</li>
+      <li>Filing agency of record: Texas Department of Public Safety.</li>
+      <li>Arresting agency: <strong>DISPUTED — see Certainty Status above.</strong></li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Verification Actions</span>
+    <ul class="checks">
+      <li>Pull Collin 199-80977-2026 probable-cause affidavit — name the affiant + agency</li>
+      <li>Pull arrest report from Melissa PD (Texas Public Information Act request)</li>
+      <li>Cross-check Collin County Sheriff warrant service log for 2025-09-09</li>
+      <li>Cross-check U.S. Marshal Northern District of Texas activity 2025-09-09 (only if warrant header suggests federal)</li>
+      <li>Kyle to name Melissa PD officers he knows (character reference potential)</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Pull probable-cause affidavit on 199-80977-2026</li>
+      <li>Confirm whether federal hold/warrant existed</li>
+      <li>File FOIA request to USMS for arrest records</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> USMS Eastern District of Texas · 101 East Pecan St, Sherman TX 75090 · 903-892-2500</div>
+  <div class="status-line">STATUS — Arrest complete. No further action after 2025-09-09 handoff.</div>
+</section>
+
+<section class="actor" id="collin-sheriff">
+  <h2><span class="priority warm">WARM</span> Collin County Sheriff's Office</h2>
+  <div class="role-line">Approved bail bond 202515270 (2025-09-12). Filing agency on Collin felony 199-80678-2026. Holds TWO active capias warrants against Kyle.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> capias warrants are cleared through Collin-side resolution (bond + procedural motions) so Kyle's Travis-to-Collin transfer becomes clean.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Approved bond 202515270 on 2025-09-12.</li>
+      <li>Filing agency on 199-80678-2026 (Violate Bond/PO).</li>
+      <li>Holds capias warrants on 199-80678-2026 + 199-80977-2026, both flagged "In Custody — Out of County."</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Confirm warrant status via Setterberg</li>
+      <li>Prep transfer protocol when Travis resolves</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 4300 Community Ave, McKinney TX 75071 · 972-547-5100</div>
+  <div class="status-line">STATUS — Active. Two live capias warrants pending Kyle's return.</div>
+</section>
+
+<section class="actor" id="travis-le">
+  <h2><span class="priority warm">WARM</span> Travis County Law Enforcement</h2>
+  <div class="role-line">Warrant-issuing authority on 2025-09-06 alleged incident. Specific arresting agency NOT YET captured — outstanding.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we identify the specific arresting/complaining agency, pull all reports, and expose any procedural defects in the warrant-issuance chain.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Issued warrants 2025-10-23 on Bobbi Jo Rice complaint.</li>
+      <li>Warrants served in Collin County 2025-11-03.</li>
+      <li>Kyle physically transferred to Travis Correctional Complex 2025-11-10.</li>
+      <li>Same day 2025-11-10 = Collin 199-80678-2026 alleges 2nd-or-more PO violation — <strong>unusual timing warrants defense scrutiny.</strong></li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Identify Austin arresting agency (APD? Sheriff? Constable?)</li>
+      <li>Pull all incident reports for 2025-09-06</li>
+      <li>Investigate 2025-11-10 timing anomaly with Collin</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Travis County Sheriff · 5555 Airport Blvd, Austin TX 78751 · 512-854-9770 · TCCC 3614 Bill Price Rd, Del Valle TX 78617</div>
+  <div class="status-line">STATUS — Active custody of Kyle. Operational center for pretrial detention.</div>
+</section>
+
+<section class="actor" id="travis-grand-jury">
+  <h2><span class="priority warm">WARM</span> Travis County Grand Jury</h2>
+  <div class="role-line">Returned felony indictment D-1-DC-25-303689 with Special Findings identifying deadly weapon as <strong>PILLOW</strong>. That single choice restricts probation eligibility.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we challenge grand jury proceedings for procedural defect OR attack the sufficiency of evidence supporting the pillow finding.</div>
+  <div class="block"><span class="label">Recommended Motions</span>
+    <ul>
+      <li><a href="motions.html#m9">Motion to Quash Indictment</a> — sufficiency of pillow as deadly weapon.</li>
+      <li><a href="motions.html#m10">Motion to Inspect Grand Jury Proceedings</a> — narrow procedural attack.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Indicted 2026-01-14 in cause D-1-DC-25-303689.</li>
+      <li>Count 1: Assault Impede Breath (FV) Tex. Pen. Code 22.01(b)(2)(B) — 3rd-deg felony.</li>
+      <li>Count 2: Aggravated Assault DW Tex. Pen. Code 22.02 — 2nd-deg felony.</li>
+      <li>Special Findings: DW = <strong>PILLOW</strong>.</li>
+      <li>Triggers Tex. CCP Art. 42A.054 — restricts probation on AA-DW count.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Research Texas case law: pillow as deadly weapon precedent</li>
+      <li>Draft <a href="motions.html#m9">Motion to Quash</a> for <a href="motions.html#m7">Faretta pro se</a> filing</li>
+    </ul>
+  </div>
+  <div class="status-line">STATUS — Indictment returned. Special Findings on record. Foundational for felony case.</div>
+</section>
+
+<!-- ============ COLD ACTORS ============ -->
+
+<section class="actor" id="beth-martin">
+  <h2><span class="priority cold">COLD</span> Beth Renee Martin (Kyle's Mother)</h2>
+  <div class="role-line">Kyle's mother. Bond cosigner + indemnitor on 202515270. DPOA + MPOA workflow subject. Minnesota-side anchor. NOT Troy's mother.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Beth stays operationally clean — no direct Caitlyn or Bobbi Jo contact, executes DPOA/MPOA paperwork, receives clear briefings, does not pay 1st Call.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Signed Dropbox Sign cosigner + indemnity packet 2025-09-10 — personal liability to bondsman IF Kyle failed to appear.</li>
+      <li>Bond discharged clean 2026-02-24 Tex. CCP Art. 17.16 — Beth does NOT owe $5,000 face.</li>
+      <li>803 Braunworth Ct, Chaska MN 55318 = address of record on nearly every Kyle document.</li>
+      <li>Current DPOA + MPOA workflow subject — Minnesota-side execution.</li>
+      <li>Employer: District 112 Chanhassen Elementary, 7600 Laredo Dr, Chanhassen MN.</li>
+      <li>Signed IP: 73.94.198.38.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Capability Assessment (Kyle relay 2026-07-19)</span>
+    <ul>
+      <li><strong>Kyle's direct read:</strong> Beth "really does not have the capability to follow along or help at all" on strategic case work.</li>
+      <li><strong>What she IS doing (contributions on record):</strong> sending images, emails, texts, and short statements as source material. Reactive, not proactive.</li>
+      <li><strong>Operating implication:</strong> Beth = signal-relay + document-executor. Not case strategist. Not primary decision node. Route her through short, single-action asks (sign this / mail this / forward this photo).</li>
+      <li><strong>Reciprocal duty:</strong> feed her clear, one-step-at-a-time instructions in plain language. Never load her with strategy she cannot carry.</li>
+    </ul>
+  </div>
+
+  <div class="block"><span class="label">Kyle-Side Family Rift (Kyle relay 2026-07-19) — MATERNAL SIDE HOSTILE TO MILITARY IDENTITY</span>
+    <ul>
+      <li><strong>Nearly all of Beth's mother + sisters + aunts DO NOT BELIEVE Kyle is a Marine.</strong> Deny his military service outright. Deny MARSOC / Raider status. Deny combat record.</li>
+      <li><strong>Threat vector:</strong> if any maternal-side family member is contacted by prosecution, defense counsel, media, or a background investigator, their default statement will contradict Kyle's Gunnery Sergeant + Marine Raider + Purple Heart + Silver Star record. Impeaches the veteran-status mitigation defense before it lands.</li>
+      <li><strong>Divorce origin — grandmother-driven:</strong> Beth's mother (Kyle's maternal grandmother) berated Scott (Kyle's father) in front of the children. That conduct led to Scott + Beth's divorce. Family-of-origin dysfunction runs through the maternal grandmother.</li>
+      <li><strong>Strategic posture:</strong> DO NOT SOURCE character or military-service witnesses from Beth's maternal-side family. Confine character + service evidence to (a) MARSOC command records, (b) DD-214, (c) unit-mate witnesses, (d) VA records, (e) Kyle's paternal side (Scott's line) if accessible.</li>
+      <li><strong>Watch item:</strong> if maternal-side aunts/grandmother volunteer to speak to media or DA, flag as ADVERSE WITNESS RISK — same class as Bobbi Jo or Caitlyn for containment purposes even though they are family.</li>
+    </ul>
+  </div>
+
+  <div class="block"><span class="label">Guardrails</span>
+    <ul>
+      <li>Do NOT return "Justice" call. Written contact only.</li>
+      <li>Do NOT contact Caitlyn or Bobbi Jo directly.</li>
+      <li>Do NOT route strategy or complex case decisions through Beth — signal-relay only, one-step tasks only.</li>
+      <li>Do NOT introduce maternal-side family members (Beth's mother, sisters, aunts) as character or military witnesses.</li>
+      <li>Minnesota-side operations only — all filings by mail/portal/notary.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Sign DPOA + MPOA at MN notary</li>
+      <li>Send SIGN packet materials as directed</li>
+      <li>Continue forwarding images / emails / texts / short statements as they arrive</li>
+      <li>Confirm which maternal-side relatives have contacted Kyle, media, DA, or LE (Kyle to name)</li>
+      <li>Do NOT return 1st Call call</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> DOB 1961-06-14 · 803 Braunworth Ct, Chaska MN 55318</div>
+  <div class="status-line">STATUS — Active. Full liability analysis on record. Minnesota-side conduit. Capability-limited — route single-action asks only.</div>
+</section>
+
+<section class="actor" id="lisa-harris">
+  <h2><span class="priority cold">COLD</span> Lisa Harris (Kyle's Daughter)</h2>
+  <div class="role-line">Paid the $500 non-refundable premium on bond 202515270. No ongoing liability. Support-network conduit.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Lisa is thanked, kept informed, and reimbursed if Kyle's estate resolves favorably. No further ask.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Paid $500 premium to 1st Call 2025-09-10.</li>
+      <li>Premium EARNED on bond post — non-refundable.</li>
+      <li>Named on packet — 1st Call has her contact.</li>
+      <li>No ongoing liability.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Keep informed on major case milestones</li>
+      <li>Log reimbursement obligation for future Kyle estate/settlement</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 7475 Flying Cloud Dr Apt 562, Eden Prairie MN 55344 · 612-723-6241</div>
+  <div class="status-line">STATUS — Payment complete. No ongoing liability.</div>
+</section>
+
+<section class="actor" id="paula-olson">
+  <h2><span class="priority cold">COLD</span> Paula Olson (Kyle's Sister)</h2>
+  <div class="role-line">Reference #1 on 1st Call cosigner packet. Not a signer, payer, or liable party. Family support-network entry only.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Paula stays in the support network, no direct case involvement required.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Listed as reference on bond packet — locator contact for bondsman.</li>
+      <li>Not a signer, not liable.</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Wildwood FL · 763-248-4705</div>
+  <div class="status-line">STATUS — Reference only. No liability.</div>
+</section>
+
+<section class="actor" id="dawn-bremer">
+  <h2><span class="priority cold">COLD</span> Dawn Bremer (Kyle's Sister)</h2>
+  <div class="role-line">Reference #2 on 1st Call cosigner packet. Same posture as Paula. Not a signer, payer, or liable party.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> Dawn stays in the support network, no direct case involvement required.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Listed as reference on bond packet.</li>
+      <li>Not a signer, not liable.</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 3915 N 85th St, Milwaukee WI 53222 · 952-201-4534</div>
+  <div class="status-line">STATUS — Reference only. No liability.</div>
+</section>
+
+<section class="actor" id="vlux-stoneridge">
+  <h2><span class="priority cold">COLD</span> VLux Stoneridge LP</h2>
+  <div class="role-line">Landlord plaintiff on eviction 01-EV-25-02937. Property management via Portico (Ben Willis contact).</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> we recover Kyle's personal property + vehicle from post-eviction disposition and preserve grounds for collateral attack on the default judgment.</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>Filed eviction 2025-11-18 while Kyle was in Travis custody.</li>
+      <li>Default Judgment 2025-12-10 (Judge Raleeh).</li>
+      <li>Writ of Possession executed 2026-01-06.</li>
+      <li>Property likely warehoused/disposed under Tex. Prop. Code Ch. 24.</li>
+      <li>Vehicle-tow correspondence with Ben Willis on file 2026-07-17.</li>
+    </ul>
+  </div>
+  <div class="block"><span class="label">Actions</span>
+    <ul class="checks">
+      <li>Vehicle recovery demand letter to Portico</li>
+      <li>Preserve grounds for Bill of Review</li>
+      <li>Coordinate with Ben Willis on property inventory</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> 2901 Dallas Parkway Suite 950, Plano TX 75093 · Portico Property Management</div>
+  <div class="status-line">STATUS — Eviction disposed. Vehicle-tow active.</div>
+</section>
+
+<section class="actor" id="amber-teal">
+  <h2><span class="priority cold">COLD</span> Amber Teal (2020 Credit Debt)</h2>
+  <div class="role-line">Old cold-file collections lawyer. Citibank v. Kyle 2020. Non-suit dismissed WITHOUT prejudice. Statute of limitations RUN.</div>
+  <div class="objective"><strong>OBJECTIVE — we win if:</strong> nothing — this is functionally irrelevant to criminal file. Included for completeness only (appears in Collin search results).</div>
+  <div class="block"><span class="label">Facts</span>
+    <ul>
+      <li>2020-01-23 sued Kyle for $3,420.75 Citibank credit debt.</li>
+      <li>2020-03-30 voluntarily dismissed without prejudice.</li>
+      <li>Texas 4-year statute of limitations on written contracts has RUN.</li>
+    </ul>
+  </div>
+  <div class="contact"><strong>Contact:</strong> Tex. Bar 24092918 · Moss Law Firm PC · PO Box 3340, Lubbock TX 79423</div>
+  <div class="status-line">STATUS — Cold. SOL run. No further action.</div>
+</section>
+
+<div class="toc-jump"><a href="index.html">← Back to Master TOC</a> · <a href="dcm.html">DCM →</a></div>
+
+<footer>
+  ksh.profitfuel.us/case/actors.html — 25 Actor Stations — S337 EXT7 — 2026-07-18<br>
+  Source: DOSSIER_KYLE_HARRIS_S337_EXT7_PLAYERS_AND_ACTORS_LIST_2026-07-18.rtf · Deposition-grade · Non-hearsay · Source-cited
+</footer>
+</main>
+
+<button class="export-btn" id="exportBtn">⬇ EXPORT ALL NOTES + CHECKLIST</button>
+
+<script>
+(function(){
+  var sections = document.querySelectorAll('section.actor');
+  sections.forEach(function(section){
+    var id = section.id || 'x';
+    var h2 = section.querySelector('h2');
+    var roleLine = section.querySelector('.role-line');
+    var objective = section.querySelector('.objective');
+    var anchor = objective || roleLine || h2;
+
+    // Move motion blocks to top (after objective if present, else after h2)
+    var blocks = Array.from(section.querySelectorAll('.block'));
+    var motionBlocks = blocks.filter(function(b){
+      var lbl = b.querySelector('.label');
+      return lbl && /motion/i.test(lbl.textContent);
+    });
+    motionBlocks.forEach(function(mb){
+      mb.classList.add('motions-top');
+      anchor.after(mb);
+      anchor = mb;
+    });
+
+    // Convert static check lists to live checkboxes
+    section.querySelectorAll('ul.checks').forEach(function(ul){
+      ul.classList.remove('checks');
+      ul.classList.add('live-check');
+      Array.from(ul.children).forEach(function(li, idx){
+        var key = 'ksh_chk_' + id + '_' + idx;
+        var input = document.createElement('input');
+        input.type = 'checkbox';
+        input.id = key;
+        input.dataset.key = key;
+        try { if (localStorage.getItem(key) === '1') input.checked = true; } catch(e){}
+        input.addEventListener('change', function(){
+          try { localStorage.setItem(key, input.checked ? '1' : '0'); } catch(e){}
+        });
+        var label = document.createElement('label');
+        label.htmlFor = key;
+        while (li.firstChild) label.appendChild(li.firstChild);
+        li.appendChild(input);
+        li.appendChild(label);
+      });
+    });
+
+    // Add Notes pad at bottom of station
+    var notesKey = 'ksh_notes_' + id;
+    var wrap = document.createElement('div');
+    wrap.className = 'block notes-pad-block';
+    wrap.innerHTML = '<span class="label">Notes — Private (this browser only)</span>' +
+      '<textarea class="notes-pad" placeholder="Type notes here. Autosaved."></textarea>' +
+      '<div class="notes-meta"><span class="notes-ts">not saved yet</span></div>';
+    section.appendChild(wrap);
+
+    var ta = wrap.querySelector('textarea');
+    var ts = wrap.querySelector('.notes-ts');
+    try {
+      var saved = localStorage.getItem(notesKey);
+      if (saved){
+        ta.value = saved;
+        var savedTs = localStorage.getItem(notesKey + '_ts');
+        if (savedTs) ts.textContent = 'saved ' + savedTs;
+      }
+    } catch(e){}
+
+    var deb;
+    ta.addEventListener('input', function(){
+      clearTimeout(deb);
+      deb = setTimeout(function(){
+        try {
+          localStorage.setItem(notesKey, ta.value);
+          var now = new Date().toLocaleString();
+          localStorage.setItem(notesKey + '_ts', now);
+          ts.textContent = 'saved ' + now;
+        } catch(e){}
+      }, 400);
+    });
+  });
+
+  // Export All button
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    var lines = ['KYLE SCOTT HARRIS — ACTOR STATIONS EXPORT',
+                 'Exported: ' + new Date().toLocaleString(),
+                 '=================================================================',
+                 ''];
+    document.querySelectorAll('section.actor').forEach(function(section){
+      var id = section.id;
+      var name = (section.querySelector('h2') || {textContent:id}).textContent.trim().replace(/\s+/g,' ');
+      lines.push('== ' + name + ' ==');
+      var checks = section.querySelectorAll('input[type="checkbox"][data-key]');
+      if (checks.length){
+        lines.push('Checklist:');
+        checks.forEach(function(cb){
+          var lbl = section.querySelector('label[for="' + cb.id + '"]');
+          var txt = lbl ? lbl.textContent.trim().replace(/\s+/g,' ') : '';
+          lines.push('  [' + (cb.checked ? 'x' : ' ') + '] ' + txt);
+        });
+      }
+      try {
+        var notesKey = 'ksh_notes_' + id;
+        var saved = localStorage.getItem(notesKey);
+        if (saved && saved.trim()){
+          lines.push('Notes:');
+          lines.push(saved);
+        }
+      } catch(e){}
+      lines.push('');
+    });
+    var blob = new Blob([lines.join('\n')], {type:'text/plain'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'ksh_actors_export_' + new Date().toISOString().slice(0,10) + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+})();
+</script>
+
+<div style="background:#0a1628;color:#f5f0e6;padding:20px 24px;text-align:center;border-top:4px solid #C8A84E;margin-top:32px;font-family:Cinzel,serif">
+  <div style="color:#C8A84E;font-size:10px;letter-spacing:4px;font-weight:800;margin-bottom:4px">TO YAHWEH THE GLORY &middot; יהוה</div>
+  <div style="color:#C8A84E;font-size:14px;letter-spacing:2px;font-weight:900;margin:2px 0">LETHAL &middot; LEVITY &middot; LEGACY</div>
+  <div style="color:#f5f0e6;font-size:11px;letter-spacing:1px;margin-top:6px;font-weight:700">ProphetFuel&trade; AiOS &middot; ZEROPOINT&trade; PureLogic&trade; Legal Defense dFactory&trade;</div>
+  <div style="color:#C8A84E;font-size:10px;letter-spacing:2px;margin-top:2px;font-style:italic">KYLE SCOTT HARRIS EDITION &middot; SEMPER FIDELIS</div>
+</div>
+
+</body>
+</html>

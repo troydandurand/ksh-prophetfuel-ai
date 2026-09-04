@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>INTERVIEW SCRIPTS — Kyle Harris Case Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0a1628;--gold:#C8A84E;--deep-gold:#8B7328;--ivory:#f5efe0;--red:#c62828;--green:#2e6b3d}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Cinzel',Georgia,serif;background:var(--ivory);color:var(--navy);line-height:1.65;font-size:16px}
+  a{color:var(--navy);text-decoration:none;border-bottom:1px dotted var(--gold)}
+  a:hover{text-decoration:underline}
+  .toolbar{position:sticky;top:0;background:var(--navy);color:var(--ivory);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid var(--gold);z-index:10;flex-wrap:wrap;gap:10px}
+  .toolbar .back{color:var(--gold);font-size:16px;font-weight:700;text-decoration:none}
+  .toolbar .nav-mid{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;flex:1}
+  .toolbar .nav-mid a{color:var(--gold);font-size:13px;border-bottom:1px dotted var(--gold);text-decoration:none;font-weight:600}
+  .toolbar .pdf-btn{background:var(--gold);color:var(--navy);border:none;padding:8px 18px;font-family:'Cinzel',serif;font-weight:900;font-size:14px;border-radius:5px;cursor:pointer;letter-spacing:1px}
+  header.doc-head{background:var(--navy);color:var(--ivory);padding:28px 24px;text-align:center;border-bottom:5px solid var(--gold)}
+  header.doc-head h1{color:var(--gold);font-size:30px;font-weight:900;letter-spacing:2px}
+  header.doc-head .greek{color:var(--ivory);font-style:italic;font-size:16px;display:block;margin:4px 0}
+  header.doc-head .sub{color:var(--ivory);font-size:13px;letter-spacing:2px;margin:6px 0}
+  main{max-width:940px;margin:0 auto;padding:32px 24px}
+  .intro-box{background:#fffbe6;border-left:6px solid var(--gold);padding:18px 22px;margin-bottom:24px;font-size:14px;line-height:1.6}
+  .intro-box strong{color:var(--deep-gold)}
+  .directive-box{background:var(--navy);color:var(--ivory);border:2px solid var(--gold);border-radius:8px;padding:22px 26px;margin-bottom:32px}
+  .directive-box h2{color:var(--gold);font-size:17px;letter-spacing:2px;margin-bottom:10px}
+  .directive-box .greek{color:var(--gold);font-style:italic;font-size:13px;margin-bottom:8px;display:block}
+  .directive-box p{font-size:14px;line-height:1.7;margin-bottom:6px}
+  .directive-box .lbl{color:var(--gold);font-weight:800;letter-spacing:1px;font-size:12px}
+  .pack{background:#fff;border:2px solid var(--gold);border-radius:8px;padding:26px 30px;margin-bottom:32px;box-shadow:0 3px 10px rgba(0,0,0,.07);page-break-inside:avoid}
+  .pack .kicker{color:var(--deep-gold);font-size:12px;letter-spacing:3px;font-weight:800;margin-bottom:8px}
+  .pack h2.title{color:var(--navy);font-size:26px;font-weight:900;margin-bottom:6px;letter-spacing:.5px}
+  .pack .greek-title{color:var(--deep-gold);font-style:italic;font-size:14px;margin-bottom:16px;padding-bottom:14px;border-bottom:2px solid var(--gold)}
+  .pack h3.section{color:var(--deep-gold);font-size:16px;font-weight:900;letter-spacing:1.5px;margin:18px 0 8px;text-transform:uppercase}
+  .pack .voice-block{background:#fffbe6;border-left:4px solid var(--deep-gold);padding:12px 16px;margin:10px 0 14px;font-size:14.5px;line-height:1.7;font-style:italic}
+  .pack .voice-block .speaker{color:var(--deep-gold);font-weight:900;font-style:normal;letter-spacing:1px;font-size:12px;display:block;margin-bottom:6px}
+  .pack .q-block{background:#f8f4e6;border-left:4px solid var(--red);padding:12px 16px;margin:12px 0}
+  .pack .q-block .q{color:var(--red);font-weight:900;font-size:13px;letter-spacing:1px;margin-bottom:4px}
+  .pack .q-block .q-text{color:var(--navy);font-size:14px;font-style:italic;margin-bottom:8px}
+  .pack .q-block .a{color:var(--green);font-weight:900;font-size:13px;letter-spacing:1px;margin-bottom:4px}
+  .pack .q-block .a-text{color:var(--navy);font-size:14px;line-height:1.65}
+  .pack ul{padding-left:20px;margin:10px 0}
+  .pack ul li{margin-bottom:6px;font-size:14.5px;line-height:1.6}
+  .pack .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;background:#fffbe6;border:1px solid var(--gold);border-radius:6px;padding:14px 18px;margin:14px 0;font-size:13px}
+  .pack .stat-row .stat b{color:var(--deep-gold);letter-spacing:1px}
+  .signature-strip{background:var(--navy);color:var(--ivory);padding:20px 24px;text-align:center;border-top:4px solid var(--gold);margin-top:32px}
+  .signature-strip .sig-glory{color:var(--gold);font-size:10px;letter-spacing:4px;font-weight:800;margin-bottom:4px}
+  .signature-strip .sig-triad{color:var(--gold);font-size:14px;letter-spacing:2px;font-weight:900;margin:2px 0}
+  .signature-strip .sig-mark{color:var(--ivory);font-size:11px;letter-spacing:1px;margin-top:6px;font-weight:700}
+  .signature-strip .sig-edition{color:var(--gold);font-size:10px;letter-spacing:2px;margin-top:2px;font-style:italic}
+  @media print{
+    body{background:#fff!important;color:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    *{color:#000!important;background:#fff!important;box-shadow:none!important;border-color:#000!important}
+    .toolbar,.pdf-btn{display:none!important}
+    a{color:#000!important;text-decoration:underline}
+    .pack{border:1px solid #000;padding:14pt;page-break-inside:avoid}
+    .directive-box{border:1px solid #000}
+    .voice-block,.q-block,.stat-row{border:1px solid #000;page-break-inside:avoid}
+  }
+</style>
+<script src="/case/print-shield.js" defer></script>
+</head>
+<body>
+<div class="toolbar">
+  <a href="../media.html" class="back">← MEDIA WARROOM</a>
+  <div class="nav-mid">
+    <a href="../index.html">TOC</a>
+    <a href="../dcm.html">DCM</a>
+    <a href="../motions.html">Motions</a>
+    <a href="../prayer.html">Prayer</a>
+    <a href="../media.html">Media</a>
+    <a href="journalists.html">Network</a>
+    <a href="headlines.html">Headlines</a>
+    <a href="story-feature.html">Feature</a>
+    <a href="protocol.html">Protocol</a>
+  </div>
+  <button class="pdf-btn" onclick="window.print()">⬇ PDF</button>
+</div>
+
+<header class="doc-head">
+  <h1>🎙 INTERVIEW SCRIPTS &mdash; VOICE PACKS</h1>
+  <span class="greek">ΦΩΝΑΙ ΤΡΕΙΣ [foh-NIE tres] &mdash; Three Voices</span>
+  <div class="sub">Layer 4 of Media Warroom &middot; On-the-Record Ready &middot; Hostile-Q Countered</div>
+</header>
+
+<main>
+
+<div class="intro-box">
+<strong>USE.</strong> Three voice packs. Kyle (jail-call, 15-minute cap). Beth Harris (mother, on-the-record). Troy DanDurand (Durable Power of Attorney [DPOA] agent, doctrinal spokesman). Each pack: opening statement, five talking points, ten hostile counter-questions with answers, close. Every quote is deposition-grade. Every citation is real. Nothing invented. Nothing hearsay.
+</div>
+
+<div class="directive-box">
+  <span class="lbl">MINT DIRECTIVE &middot; D-S337-EXT7-INTERVIEWS</span>
+  <h2>🎙 THREE-VOICE INTERVIEW MINT</h2>
+  <span class="greek">ΦΩΝΑΙ ΤΡΕΙΣ ΤΡΙΓΩΝΟΝ [foh-NIE tres tree-GO-none] &mdash; Three-Voice Triangle</span>
+  <p><span class="lbl">Mission:</span> Equip Kyle, Beth, and Troy with rehearsed, sourced, hostile-Q-counter-ready voice packs so any journalist interview lands on-record, on-doctrine, and on-mission the first take.</p>
+  <p><span class="lbl">Purpose:</span> Kill the "he said / she said / no comment" news frame before it forms. Every voice has receipts. Every answer has a citation. Every hostile question has a pre-loaded parry.</p>
+  <p><span class="lbl">Objective:</span> Ship each pack as portable printed card + digital brief. Kyle carries the jail-call script in his notebook. Beth carries hers in her purse. Troy carries his on the ProphetFuel™ AiOS.</p>
+</div>
+
+<!-- ============ VOICE PACK 1 — KYLE ============ -->
+<section class="pack">
+  <div class="kicker">VOICE PACK 1 &middot; JAIL-CALL &middot; 15-MINUTE CAP</div>
+  <h2 class="title">KYLE SCOTT HARRIS &mdash; Marine Raider, Detained</h2>
+  <div class="greek">Ο ΚΡΑΤΟΥΜΕΝΟΣ [ho krah-too-MEH-nos] &mdash; the Held One</div>
+
+  <h3 class="section">Position of the Voice</h3>
+  <ul>
+    <li>Speaking from Travis County Correctional Complex jail phone.</li>
+    <li>Call recorded by the facility. Every word becomes evidence.</li>
+    <li>Fifteen-minute automatic cutoff. Answer the question, land the point, next question.</li>
+    <li>No profanity. No name-attacks on the complainant. No details of pending charges.</li>
+    <li>Every answer is Kyle&rsquo;s own words. No coaching to fabricate. Rehearsal only.</li>
+  </ul>
+
+  <h3 class="section">Opening Statement (60 seconds)</h3>
+  <div class="voice-block">
+    <span class="speaker">KYLE</span>
+    &ldquo;Thanks for taking the call. I am United States Marine Corps Gunnery Sergeant Kyle Scott Harris. Marine Raider under Marine Corps Forces Special Operations Command. Scout Sniper. Purple Heart. Silver Star. I am being held pretrial at the Travis County Correctional Complex in Texas. I have not been to trial. I have never been convicted of the charges I am being held on. I have asked for my speedy-trial right under the Sixth Amendment and under Texas Code of Criminal Procedure Article 32A.01. I am asking for meaningful access to the courts under Bounds v. Smith. I am asking for the right to represent myself under Faretta v. California. That is what this call is about. Thank you.&rdquo;
+  </div>
+
+  <h3 class="section">Five Talking Points</h3>
+  <ul>
+    <li><b>1.</b> I served this country in combat. I hold the Purple Heart and the Silver Star. I earned the right to speak on the record.</li>
+    <li><b>2.</b> I have not been to trial. The complainant is my accuser. The star witness against me has now been credibly identified as the actual tamperer in this case. I have documentary proof.</li>
+    <li><b>3.</b> The judge denied the complainant her own protective order request. Read that again. The judge denied her.</li>
+    <li><b>4.</b> I am being held with a tablet that does not run desktop legal research and does not save my work session to session. That violates Bounds v. Smith.</li>
+    <li><b>5.</b> I want a trial. I have wanted a trial for more than a year. The record shows every speedy-trial demand I have filed.</li>
+  </ul>
+
+  <h3 class="section">Ten Hostile Counter-Questions</h3>
+
+  <div class="q-block">
+    <div class="q">Q1 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Isn&rsquo;t it true you are in jail because you did something violent?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">I am in jail because I was arrested and denied release. Arrest is not conviction. I have not been to trial. Under the Fifth and Fourteenth Amendments I am presumed innocent. The State has the burden. The State has not carried it.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q2 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Your accuser says you assaulted her. Why should anyone believe you?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">The record speaks. In her own writing to the District Attorney on November 8, 2025, she stated the incident &ldquo;never happened.&rdquo; On November 5, 2025 she asked the District Attorney to remove the protective order. She has now been credibly identified as the actual person tampering with a witness. Those are documents. Not my words. Her words.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q3 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;If you are so innocent, why did you refuse an attorney?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">I did not refuse an attorney. I invoked my constitutional right under Faretta v. California, 422 United States Reports 806 (1975), to represent myself. Shon Hopwood represented himself and other prisoners from Federal Correctional Institution Pekin and won a nine to zero Supreme Court reversal. Pro se is a right. Not an admission.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q4 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Aren&rsquo;t you just another veteran with post-traumatic stress disorder using his service as a shield?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">I am a service-connected disabled combat veteran rated one hundred percent by the Department of Veterans Affairs. My service is a fact. My combat wounds are a fact. The Silver Star and the Purple Heart are facts on a Department of Defense record. Nothing about that record is a shield. Every one of those pieces of paper was paid for with something I gave up in combat.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q5 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Aren&rsquo;t you the one tampering with witnesses right now, by giving this interview?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">Tampering under Texas Penal Code 36.05 is inducing a witness to lie, withhold, or absent themselves. I am speaking publicly about my case as a pretrial detainee, not contacting any witness. The First Amendment protects public speech by defendants. The Sixth Amendment guarantees a public trial. Speaking about my case on the record is the opposite of tampering.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q6 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Why did the judge issue the initial protective order if there was nothing to it?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">Protective orders at the ex parte stage are issued on the affidavit of the applicant alone, before the accused is heard. That is not a finding. When both sides came before the court and the record was tested, the judge denied the extension. That is the ruling that counts.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q7 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;How long have you been in jail?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">More than a year, pretrial. Barker v. Wingo, 407 United States Reports 514, is the Supreme Court speedy-trial test. Under any application of that test, my case is past the constitutional floor. I have filed the demand. The record shows the demand. The delay is not my delay.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q8 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Isn&rsquo;t it a stretch to compare yourself to Shon Hopwood?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">Shon Hopwood was in federal prison for bank robbery. He wrote a cert petition on a prison typewriter. The Supreme Court granted cert. Nine to zero reversal. Fellers v. United States, 540 United States Reports 519. He is now a Georgetown law professor. I am a Marine Raider with a Silver Star, a Purple Heart, and a jail tablet. If he could do it from Pekin, I can do it from Travis County.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q9 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;What do you want the public to do?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">Read the record. The record is public. The docket is public. My motions are public. Every citation I stand on is in the United States Reports. I am not asking anyone to take my word. I am asking every American who cares about the Sixth Amendment to open the docket and read.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q10 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Anything else, before we go?&rdquo;</div>
+    <div class="a">KYLE ANSWER</div>
+    <div class="a-text">Yes. Isaiah 54:17, A Faithful Version. &ldquo;No weapon that is formed against you shall prosper; and every tongue that shall rise against you in judgment you shall condemn.&rdquo; That is the inheritance of the servants of the LORD. I am one of His. Semper Fidelis. He is faithful to me.</div>
+  </div>
+
+  <h3 class="section">Close</h3>
+  <div class="voice-block">
+    <span class="speaker">KYLE &middot; SIGN-OFF</span>
+    &ldquo;Thank you for the call. The record is the record. Semper Fidelis. God bless.&rdquo;
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><b>Duration cap:</b> 15 minutes.</div>
+    <div class="stat"><b>Call recorded by:</b> Facility. Preserved.</div>
+    <div class="stat"><b>Legal privilege:</b> Waived on this call. Public.</div>
+    <div class="stat"><b>Prohibited topics:</b> Case detail, complainant name, evidence content.</div>
+  </div>
+</section>
+
+<!-- ============ VOICE PACK 2 — BETH ============ -->
+<section class="pack">
+  <div class="kicker">VOICE PACK 2 &middot; MOTHER OF THE ACCUSED</div>
+  <h2 class="title">BETH HARRIS &mdash; The Marine&rsquo;s Mother</h2>
+  <div class="greek">Η ΜΗΤΗΡ ΤΟΥ ΥΙΟΥ [hay MAY-ter too hwee-OO] &mdash; the Mother of the Son</div>
+
+  <h3 class="section">Position of the Voice</h3>
+  <ul>
+    <li>Speaking as a mother of record. Not as an attorney. Not as a witness to the incident.</li>
+    <li>Speaks to her son&rsquo;s character, service, medical history, and the family&rsquo;s efforts to secure counsel and relief.</li>
+    <li>Refers all evidence questions to the Durable Power of Attorney agent.</li>
+    <li>Located in Minnesota. Ready to travel for hearings.</li>
+    <li>On-the-record with any journalist who requests. Ready for print, audio, or broadcast.</li>
+  </ul>
+
+  <h3 class="section">Opening Statement (90 seconds)</h3>
+  <div class="voice-block">
+    <span class="speaker">BETH</span>
+    &ldquo;My name is Beth Harris. I am the mother of United States Marine Corps Gunnery Sergeant Kyle Scott Harris. My son is a Marine Raider under Marine Corps Forces Special Operations Command. Scout Sniper. Purple Heart. Silver Star. He has been detained more than one year in Travis County, Texas, without trial. I am speaking today because my son cannot appear in front of a camera and this country does not know his name yet. He should not be forgotten. The record supports him. His accuser wrote to the District Attorney that this &lsquo;never happened.&rsquo; The judge denied her request for a protective order. And still my son sits. I am asking every journalist and every American to read the record. That is all I am asking.&rdquo;
+  </div>
+
+  <h3 class="section">Five Talking Points</h3>
+  <ul>
+    <li><b>1.</b> Kyle is a decorated combat Marine Raider. Silver Star. Purple Heart. Two facts of federal record.</li>
+    <li><b>2.</b> Kyle is service-connected disabled at one hundred percent by the Department of Veterans Affairs. Traumatic brain injury. Post-traumatic stress. All documented.</li>
+    <li><b>3.</b> He has been held pretrial more than one year. Barker v. Wingo speedy-trial standard on the wrong side.</li>
+    <li><b>4.</b> The bail bond was already discharged and the warrant already recalled on the Collin County case. Public court record.</li>
+    <li><b>5.</b> The family has fought every step. Every certified letter, every records request, every legal-mail envelope is preserved.</li>
+  </ul>
+
+  <h3 class="section">Ten Hostile Counter-Questions</h3>
+
+  <div class="q-block">
+    <div class="q">Q1 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Aren&rsquo;t you just protecting your son?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">I am doing what any mother does. I am also stating facts on the public record. The docket does not lie. The bail bond is discharged. The warrant is recalled. The complainant asked for the protective order removed. Those are court entries. Not maternal opinion.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q2 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;What if he did it?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">Then the State should prove it at trial. That is what trials are for. My son has been asking for a trial for more than a year. If the State has proof, take it to twelve jurors. Instead the State is holding him without letting a jury hear the evidence. That is my complaint.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q3 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Do you have Marine Raider records to prove your claims about his service?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">Yes. DD Form 214. Silver Star citation. Purple Heart citation. Department of Veterans Affairs rating. All preserved. All producible on request from the Durable Power of Attorney agent. Anyone questioning his service can request the paperwork through the normal channel.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q4 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Isn&rsquo;t traumatic brain injury a defense some veterans use to avoid consequences?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">Traumatic brain injury is a Department of Veterans Affairs diagnosis, not a courtroom shield. In this case it triggers Section 504 of the Rehabilitation Act and the Americans with Disabilities Act Title Two, which require the jail to give my son meaningful access to a computer with a physical keyboard for legal research. That is a civil-rights fact, not a defense to charges.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q5 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Why is he not just accepting an appointed attorney?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">He has the right under the Sixth Amendment and Faretta v. California to represent himself. He chose that right. That is a constitutional decision, not a stubborn one. Many innocent people have been convicted by overworked appointed counsel. My son is choosing to hold his own pen.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q6 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Have you spoken to the complainant?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">Yes. Extensively. In writing. Preserved. She told me the incident &ldquo;never happened.&rdquo; She asked the District Attorney to drop the protective order. She said she would testify to my son&rsquo;s innocence. Those are her words in her own writing. I have the messages.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q7 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Are you a lawyer?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">No. I am a mother. That is why my son executed a Durable Power of Attorney under Texas Estates Code Chapter 752, so that a trained agent could act on his behalf on documents and research while he sits in a cell. All legal questions are referred to the Durable Power of Attorney agent.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q8 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;What is your reaction to reports that your son&rsquo;s dog was seized?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">Gunner is my son&rsquo;s service-connected German Shepherd. Confirmed at Collin County Animal Services on December 1, 2025. The shelter offered pickup with proof of ownership. My son has executed a service-animal rider to his Durable Power of Attorney authorizing recovery. That is on paper. That is being executed.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q9 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Are you looking for donations?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">No. This family is asking for one thing. Read the record. If the record moves you, contact the Travis County District Attorney and the presiding court. Ask why a Silver Star Marine Raider has been held more than one year without trial. That is the ask.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q10 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Anything else, ma&rsquo;am?&rdquo;</div>
+    <div class="a">BETH ANSWER</div>
+    <div class="a-text">Yes. My son is not a case number. He is my son. He served this country in combat and came home wounded. He is entitled to the same Constitution as anyone else in this jail. He is entitled to a trial. Give him a trial. Thank you.</div>
+  </div>
+
+  <h3 class="section">Close</h3>
+  <div class="voice-block">
+    <span class="speaker">BETH &middot; SIGN-OFF</span>
+    &ldquo;Thank you for hearing me. Please read the record. My son is Gunnery Sergeant Kyle Scott Harris. Semper Fidelis.&rdquo;
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><b>Availability:</b> Print, audio, broadcast, Zoom.</div>
+    <div class="stat"><b>Location:</b> Minnesota. Ready to travel.</div>
+    <div class="stat"><b>Attorney channel:</b> All legal Q referred to DPOA agent.</div>
+    <div class="stat"><b>Rehearsal:</b> Read aloud daily until muscle memory.</div>
+  </div>
+</section>
+
+<!-- ============ VOICE PACK 3 — TROY ============ -->
+<section class="pack">
+  <div class="kicker">VOICE PACK 3 &middot; DPOA AGENT &middot; DOCTRINAL SPOKESMAN</div>
+  <h2 class="title">TROY DANDURAND &mdash; Durable Power of Attorney Agent</h2>
+  <div class="greek">Ο ΠΛΗΡΕΞΟΥΣΙΟΣ [ho play-rex-oo-SEE-os] &mdash; the Full-Authority Agent</div>
+
+  <h3 class="section">Position of the Voice</h3>
+  <ul>
+    <li>Speaks on the paper record, the statutory framework, and the doctrinal architecture.</li>
+    <li>Does not practice law. Does not represent the defendant in court. Executes documents and research as authorized under Texas Estates Code Chapter 752.</li>
+    <li>Fluent in the constitutional citations, the Texas Code of Criminal Procedure, the federal case law, and the ProphetFuel&trade; AiOS defense architecture.</li>
+    <li>Does not comment on evidence he has not personally reviewed. Does not speculate on the complainant&rsquo;s motives.</li>
+    <li>Ready for interviews on Legal Open Source doctrine, Bounds v. Smith access to courts, Faretta pro se representation, the Hopwood pattern, and the Marine Raider justice frame.</li>
+  </ul>
+
+  <h3 class="section">Opening Statement (90 seconds)</h3>
+  <div class="voice-block">
+    <span class="speaker">TROY</span>
+    &ldquo;My name is Troy DanDurand. I am the Durable Power of Attorney agent for United States Marine Corps Gunnery Sergeant Kyle Scott Harris under Texas Estates Code Chapter 752. My authority is documentary. My job is paper, research, and coordination. Not courtroom advocacy. I am here to answer questions about the record. Kyle has been held pretrial more than one year. His speedy-trial demand is on file. His self-representation invocation under Faretta v. California is on file. His Bounds v. Smith motion for meaningful access to legal resources is on file. The complainant&rsquo;s own writing to the District Attorney stated the incident never happened. The judge denied the complainant&rsquo;s request for a protective order. Bail bond on the Collin County case was discharged on February 24, 2026, and the warrant recalled on March 16, 2026. Public record. Ask me anything about the paper.&rdquo;
+  </div>
+
+  <h3 class="section">Five Talking Points</h3>
+  <ul>
+    <li><b>1.</b> Bounds v. Smith, 430 United States Reports 817, is the constitutional floor for jail law-library access. A tablet that cannot save a session is not adequate. Period.</li>
+    <li><b>2.</b> Faretta v. California, 422 United States Reports 806, gives Kyle the Sixth Amendment right to represent himself. That right has been invoked and preserved.</li>
+    <li><b>3.</b> Franks v. Delaware, 438 United States Reports 154, permits a hearing on whether the arrest affidavit contained material falsehoods. That motion is drafted.</li>
+    <li><b>4.</b> Barker v. Wingo, 407 United States Reports 514, is the speedy-trial balancing test. Length of delay, reason, defendant&rsquo;s assertion, prejudice. All four factors run against the State here.</li>
+    <li><b>5.</b> Legal Open Source is the doctrine we are launching. Vetted contributors. Theory and judicial-process libraries. Free to every pretrial detainee who wants to hold his own pen.</li>
+  </ul>
+
+  <h3 class="section">Ten Hostile Counter-Questions</h3>
+
+  <div class="q-block">
+    <div class="q">Q1 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Are you a licensed attorney?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">No. I am the Durable Power of Attorney agent. Chapter 752 of the Texas Estates Code authorizes me to act on paperwork, research, and coordination on behalf of a principal. I do not appear in court. I do not represent Kyle in front of a judge. He represents himself under Faretta. My role is documentary and research support, protected as work product under the federal work product doctrine and Texas Rule of Civil Procedure 192.5.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q2 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Isn&rsquo;t this unauthorized practice of law?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">No. The Texas Supreme Court has long recognized paralegal, research, and Durable Power of Attorney functions as distinct from the practice of law. I do not give legal advice to Kyle. I do research at his direction. He decides what to file, what to sign, what to invoke. Every motion carries his signature. Faretta protects that. So does Texas Estates Code 751.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q3 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Why should we believe your account of the complainant&rsquo;s writing?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">Do not believe my account. Look at the writing. The messages are preserved. The dates are stamped. The screenshots are in the vault. Every reporter who wants the exhibit can request it under the Texas Public Information Act or through the Durable Power of Attorney agent under authenticated defense chain of custody. Nothing hearsay. Nothing invented.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q4 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Are you profiting from this case?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">No. I am not billing Kyle. I am not billing his family. The ProphetFuel&trade; AiOS is my own build. The Legal Open Source doctrine is a public-benefit project. Kyle&rsquo;s case is the first live application. There is no fee arrangement. There is no retainer. There is a Durable Power of Attorney.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q5 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Isn&rsquo;t Legal Open Source going to get shut down as unauthorized practice?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">Legal Open Source distributes public-domain doctrine, case law, and drafting templates. Every state bar in the country permits self-representation. Every jail law library is required to give the same materials under Bounds v. Smith. What Legal Open Source does is make those materials portable, searchable, and doctrinally organized. That is publication and research. Both are First Amendment protected.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q6 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;What is the Marine Raider frame? Isn&rsquo;t it just marketing?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">Kyle is a Marine Raider under Marine Corps Forces Special Operations Command. That is his identity of service. It is not marketing. It is federal record. The frame matters because a decorated combat veteran being held pretrial more than a year without trial is a story every American should be able to weigh. Silver Star holders do not surrender the Sixth Amendment at the county jail door.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q7 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;What is your evidence the star witness is the actual tamperer?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">Documentary. Kyle holds the proof. The proof is being preserved and will be filed with the appropriate court under the appropriate seal and exhibit protocol. I am not going to publicize a specific piece of evidence outside the defense chain of custody. What I can say is that the record supports the claim and the record has been preserved from the day the alleged tampering began.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q8 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Isn&rsquo;t this all just religious rhetoric dressed up as legal doctrine?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">The citations are federal case law. Bounds v. Smith. Faretta v. California. Franks v. Delaware. Barker v. Wingo. Wolff v. McDonnell. Turner v. Safley. Rothgery v. Gillespie County. Ex parte Hull. Brady v. Maryland. Massiah v. United States. Every one of those is a Supreme Court decision. The faith is Kyle&rsquo;s and mine. The law is on the record. Do not conflate the two.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q9 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;Are you saying Travis County is corrupt?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">I am saying Travis County has held a decorated combat Marine Raider more than one year pretrial without trial, that the tablet program in that jail does not comply with Bounds v. Smith, and that public records requests under the Texas Public Information Act should be answered. Draw your own conclusions after you read the record. That is journalism. That is what we invite.</div>
+  </div>
+
+  <div class="q-block">
+    <div class="q">Q10 &mdash; HOSTILE</div>
+    <div class="q-text">&ldquo;What do you want us to do?&rdquo;</div>
+    <div class="a">TROY ANSWER</div>
+    <div class="a-text">Read the docket. Call the Travis County District Attorney. Call the Travis County Sheriff. Ask why a Silver Star Marine Raider has been held pretrial more than one year. If you want the sourced brief, we will send it. If you want the exhibit set, we will send it. If you want Kyle on the jail phone, we will schedule it. The record does the arguing.</div>
+  </div>
+
+  <h3 class="section">Close</h3>
+  <div class="voice-block">
+    <span class="speaker">TROY &middot; SIGN-OFF</span>
+    &ldquo;The record is the record. Read it. Print it. File it. Publish it. TO YAHWEH THE GLORY. Lethal. Levity. Legacy. Semper Fidelis.&rdquo;
+  </div>
+
+  <div class="stat-row">
+    <div class="stat"><b>Availability:</b> Print, audio, broadcast, Zoom. 24/7.</div>
+    <div class="stat"><b>Location:</b> Saint Cloud, Minnesota.</div>
+    <div class="stat"><b>Contact:</b> troy@drrealty.us · ProphetFuel&trade; AiOS.</div>
+    <div class="stat"><b>DPOA scope:</b> Documentary + research + coordination. Not courtroom counsel.</div>
+  </div>
+</section>
+
+<div class="signature-strip">
+  <div class="sig-glory">TO YAHWEH THE GLORY &middot; יהוה</div>
+  <div class="sig-triad">LETHAL &middot; LEVITY &middot; LEGACY</div>
+  <div class="sig-mark">ProphetFuel&trade; AiOS &middot; ZEROPOINT&trade; PureLogic&trade; Legal Defense dFactory&trade;</div>
+  <div class="sig-edition">KYLE SCOTT HARRIS EDITION &middot; SEMPER FIDELIS</div>
+</div>
+
+</main>
+
+<script>
+  if (sessionStorage.getItem('ksh_in_v2') !== '1') {
+    window.location.href = '../../index.html';
+  }
+</script>
+</body>
+</html>

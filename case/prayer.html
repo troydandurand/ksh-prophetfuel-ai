@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<script>
+  try {
+    if (sessionStorage.getItem('ksh_in_v2') !== '1') {
+      window.location.replace('../index.html');
+    }
+  } catch(e) { window.location.replace('../index.html'); }
+</script>
+<title>PRAYER ARSENAL — Kyle Scott Harris</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f8f4e9; --navy:#0a1628; --gold:#C8A84E; --deep-gold:#8a6f26;
+    --hot:#c62828; --warm:#e0a800; --cold:#2e7d32; --border:#d9cfa8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ivory);color:var(--navy);font-family:'Cinzel',serif;font-size:22px;line-height:1.55;}
+  a{color:var(--deep-gold);font-weight:600;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .toolbar{position:sticky;top:0;background:var(--navy);color:var(--ivory);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid var(--gold);z-index:10;flex-wrap:wrap;gap:10px}
+  .toolbar .back{color:var(--gold);font-size:20px;font-weight:700;text-decoration:none;border-bottom:1px dotted var(--gold)}
+  .toolbar .nav-mid{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;flex:1}
+  .toolbar .nav-mid a{color:var(--gold);font-size:15px;border-bottom:1px dotted var(--gold);text-decoration:none;font-weight:600}
+  .toolbar .nav-mid a:hover{color:#fff;border-bottom-color:#fff}
+  .toolbar .pdf-btn{background:var(--gold);color:var(--navy);border:none;padding:12px 26px;font-family:'Cinzel',serif;font-weight:900;font-size:18px;border-radius:6px;cursor:pointer;letter-spacing:1px}
+  .toolbar .pdf-btn:hover{background:#e6c96b}
+  html{scrollbar-gutter:stable}
+  header.doc-head{text-align:center;padding:36px 32px 24px;border-bottom:3px solid var(--gold);background:#fff}
+  header.doc-head h1{margin:0;font-size:38px;font-weight:900;letter-spacing:1px}
+  header.doc-head .greek{color:var(--deep-gold);font-style:italic;font-size:22px;margin-top:6px;display:block}
+  header.doc-head .meta{margin-top:14px;font-size:19px;color:var(--deep-gold)}
+  header.doc-head .stamp{background:var(--gold);color:var(--navy);display:inline-block;padding:8px 22px;border-radius:4px;font-weight:900;margin-top:12px;letter-spacing:1px;font-size:17px}
+  main{max-width:1300px;margin:0 auto;padding:24px 44px 80px}
+  h2{font-size:28px;font-weight:800;color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:6px;margin-top:44px;letter-spacing:.5px}
+  h2 .num{color:var(--deep-gold);margin-right:12px}
+  h3{font-size:24px;color:var(--deep-gold);margin-top:24px}
+  p,li{font-size:21px}
+  .toc-mini{background:#fff;border:1px solid var(--border);padding:16px 22px;border-radius:6px;margin:20px 0;font-size:19px}
+  .toc-mini a{display:inline-block;margin-right:16px}
+  .prayer-card{background:#fff;border:3px solid var(--gold);border-radius:10px;padding:26px 30px;margin:22px 0;box-shadow:0 0 12px rgba(200,168,78,.35)}
+  .prayer-card .title{font-size:28px;font-weight:900;color:var(--deep-gold);letter-spacing:2px;margin:0 0 4px}
+  .prayer-card .greek{color:var(--deep-gold);font-style:italic;font-size:17px;margin:0 0 14px;display:block}
+  .prayer-card .verse{background:#fffbe6;border-left:6px solid var(--gold);border-radius:4px;padding:14px 18px;margin:14px 0;font-size:20px;line-height:1.6}
+  .prayer-card .verse .cite{font-weight:900;color:var(--deep-gold);letter-spacing:1px;display:block;margin-bottom:6px;font-size:18px}
+  .prayer-card .form{background:#0a1628;color:var(--ivory);padding:18px 22px;border-radius:6px;margin:14px 0;font-size:20px;line-height:1.65}
+  .prayer-card .form .lead{color:var(--gold);font-weight:900;letter-spacing:1px;display:block;margin-bottom:6px;font-size:17px}
+  .prayer-card .reframe{background:#e8f4ec;border-left:6px solid var(--cold);border-radius:4px;padding:14px 18px;margin:14px 0;font-size:20px;line-height:1.6}
+  .prayer-card .reframe .lead{color:var(--cold);font-weight:900;letter-spacing:1px;display:block;margin-bottom:6px;font-size:17px}
+  .prayer-card .close{color:var(--hot);font-weight:900;font-size:22px;letter-spacing:2px;text-align:center;margin:14px 0 0}
+  .lane{background:#0a1628;color:var(--ivory);border:3px solid var(--hot);border-radius:10px;padding:26px 30px;margin:22px 0;box-shadow:0 0 14px rgba(198,40,40,.4)}
+  .lane .title{font-size:28px;font-weight:900;color:#ffd54f;letter-spacing:2px;margin:0 0 4px}
+  .lane .greek{color:var(--gold);font-style:italic;font-size:17px;margin:0 0 14px;display:block}
+  .lane .verse{background:#fff;color:var(--navy);border-left:6px solid var(--gold);border-radius:4px;padding:14px 18px;margin:14px 0;font-size:20px;line-height:1.6}
+  .lane .verse .cite{font-weight:900;color:var(--deep-gold);letter-spacing:1px;display:block;margin-bottom:6px;font-size:18px}
+  .lane .close{color:#ffd54f;font-weight:900;font-size:22px;letter-spacing:2px;text-align:center;margin:14px 0 0}
+  .sms-block{background:#fff;border:2px dashed var(--deep-gold);border-radius:8px;padding:18px 22px;margin:20px 0;font-size:19px;line-height:1.6}
+  .sms-block .lead{color:var(--deep-gold);font-weight:900;letter-spacing:2px;font-size:16px;margin-bottom:8px}
+  .sms-block pre{white-space:pre-wrap;font-family:'Cinzel',serif;font-size:18px;line-height:1.55;color:var(--navy);margin:0}
+  footer{text-align:center;color:var(--deep-gold);padding:32px 20px;border-top:2px solid var(--gold);margin-top:60px;font-size:18px}
+  footer .greek{color:var(--deep-gold);font-style:italic;display:block;margin-top:6px}
+  @media print{
+    *{color:#000!important;background:#fff!important;box-shadow:none!important;text-shadow:none!important}
+    .toolbar,.pdf-btn{display:none!important}
+    body{font-size:11pt;background:#fff;color:#000;font-weight:500;font-family:'Cinzel',Georgia,serif}
+    p,li,td,th,div,span,em,strong{color:#000!important;font-size:11pt}
+    h1{font-size:22pt;color:#000;border-bottom:2px solid #000;padding-bottom:6px}
+    h2{font-size:16pt;page-break-after:avoid;color:#000;border-bottom:1px solid #000;margin-top:14pt}
+    h3{font-size:13pt;page-break-after:avoid;color:#000}
+    .greek,.meta,em,a{color:#000!important;font-style:normal;text-decoration:none;border-bottom:none}
+    .prayer-card,.lane,.sms-block{page-break-inside:avoid;border:1px solid #000;background:#fff;padding:10pt 12pt;margin-bottom:14pt}
+    .prayer-card .verse,.prayer-card .form,.prayer-card .reframe,.lane .verse{border:1px solid #000;background:#fff;padding:6pt 10pt;margin:8pt 0}
+    .prayer-card .form{border:2px solid #000}
+    .prayer-card .title,.lane .title{font-size:14pt;color:#000!important}
+    .prayer-card .close,.lane .close{color:#000!important;font-size:14pt}
+    .stamp{background:#000!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:2pt 8pt}
+    main{padding:20px;max-width:100%}
+    footer{color:#000;border-top:1px solid #000;margin-top:20pt;padding-top:8pt}
+  }
+</style>
+<script src="/case/print-shield.js" defer></script>
+</head>
+<body>
+
+<div class="toolbar">
+  <a href="index.html" class="back">← TOC</a>
+  <div class="nav-mid">
+    <a href="dcm.html">📖 DCM</a>
+    <a href="motions.html">⚖ Motions</a>
+    <a href="gantt.html" style="color:#fff;background:#c62828;padding:4px 12px;border-radius:4px;border-bottom:none;font-weight:900">📊 Gantt</a>
+    <a href="prayer.html" style="color:#fff;background:#C8A84E;padding:4px 12px;border-radius:4px;border-bottom:none;font-weight:900">🙏 PRAYER ARSENAL</a>
+    <a href="actors.html">Actors</a>
+    <a href="whales.html">🐋 Whales</a>
+    <a href="bond.html">Bond</a>
+    <a href="questions.html">Questions</a>
+    <a href="../documents/ledger.html">Ledger</a>
+    <a href="print-picker.html" style="color:#fff;background:#111;padding:4px 12px;border-radius:4px;border-bottom:none;font-weight:900">🖨 PRINT PACKET</a>
+  </div>
+  <button class="pdf-btn" onclick="window.print()">⬇ DOWNLOAD PDF</button>
+</div>
+
+<header class="doc-head">
+  <h1>PRAYER ARSENAL</h1>
+  <span class="greek">ΠΡΟΣΕΥΧΩΝ ΟΠΛΟΘΗΚΗ [proh-sef-KHOHN oh-plo-thay-KAY] — Prayer Weapon-Store</span>
+  <div class="meta">For Kyle Scott Harris — Gunnery Sergeant, USMC / Marine Raider / Scout Sniper / Purple Heart / Silver Star</div>
+  <div class="meta">Prepared by Troy DanDurand under Durable Power of Attorney [DPOA] — S337 EXT7 — 2026-07-19</div>
+  <div class="stamp">A FAITHFUL VERSION [AFV] — COULTER · TRADITIONAL BIBLICAL CITATION</div>
+</header>
+
+<main>
+
+<div class="toc-mini">
+  <strong>Arsenal sections:</strong>
+  <a href="#p1">1. Marine Corps Warcries → AFV</a> ·
+  <a href="#p2">2. No Weapon Formed</a> ·
+  <a href="#p3">3. Full Weight of Justice</a> ·
+  <a href="#p4">4. Getting Out SMS Pack</a>
+</div>
+
+<section id="p1">
+  <h2><span class="num">§1</span>MARINE CORPS WARCRIES — ANCHORED TO A FAITHFUL VERSION [AFV]</h2>
+  <p style="font-style:italic;color:#c62828;font-weight:700;margin:6px 0 18px">Kyle, the Corps trained your body and your mouth for battle. Yahweh authored the words the Corps thought it invented. Every warcry below has a scriptural anchor older than Rome. Speak them together.</p>
+
+  <div class="prayer-card">
+    <div class="title">HOORAH</div>
+    <span class="greek">ΑΛΑΛΑΓΜΟΣ [ah-lah-lahg-MOSS] — the war-shout</span>
+    <p>Marine battle cry. The "yes" of a warrior. Roots trace to old naval "hurrah" and the low guttural roar of Corps oorah/hoorah — the mouth of a fighting man on his feet.</p>
+
+    <div class="verse">
+      <span class="cite">Psalm 47:1 AFV</span>
+      "O clap your hands, all peoples; shout to God with a voice of triumph."
+    </div>
+    <div class="verse">
+      <span class="cite">Joshua 6:20 AFV</span>
+      "the people shouted with a great shout, that the wall fell down flat."
+    </div>
+
+    <div class="form">
+      <span class="lead">PRAYER FORM</span>
+      When they run count and the door closes, breathe out HOORAH under your breath and let it be the shout of Jericho — a wall coming down. Not the walls of that jail. The walls of the State's case. Every false witness, every tampered record, every judge who hides behind procedure — a stone falling.
+    </div>
+
+    <div class="reframe">
+      <span class="lead">PROPHETIC REFRAME</span>
+      HOORAH = the voice of triumph in the mouth of a Silver Star Marine Raider whose God fights for him.
+    </div>
+
+    <div class="verse">
+      <span class="cite">Ephesians 6:12 AFV</span>
+      "our struggle is not against flesh and blood, but against… the spiritual powers of wickedness in high places."
+    </div>
+
+    <p class="close">SHOUT IT LOW · SHOUT IT LONG · HOORAH · SEMPER FI</p>
+  </div>
+
+  <div class="prayer-card">
+    <div class="title">GUNG HO</div>
+    <span class="greek">ΣΥΝΕΡΓΙΑ [syn-er-GHEE-ah] — working-together-in-harmony</span>
+    <p>From Chinese gōng hé (工合) — "work together in harmony." Adopted by Lt. Col. Evans Carlson's Marine Raiders in World War II — the direct lineage of Marine Corps Forces Special Operations Command [MARSOC]. Your fathers in the Corps. The original Raiders carried GUNG HO on their lips into Makin Island and Guadalcanal.</p>
+
+    <div class="verse">
+      <span class="cite">Ecclesiastes 4:12 AFV</span>
+      "if one prevails against him, two shall withstand him; and a threefold cord is not quickly broken."
+    </div>
+    <div class="verse">
+      <span class="cite">Psalm 133:1 AFV</span>
+      "Behold, how good and how pleasant it is for brethren to dwell together in unity!"
+    </div>
+
+    <div class="form">
+      <span class="lead">PRAYER FORM</span>
+      You are not alone in that cell. The threefold cord: Yahweh above, Yahshua at your right hand, the Holy Spirit within. Then the earthly cord — Beth in Minnesota, Troy on watch, the Marine brotherhood praying without ceasing. That is a sixfold cord and it does not snap.
+    </div>
+
+    <div class="reframe">
+      <span class="lead">PROPHETIC REFRAME</span>
+      GUNG HO = the Raider lineage still fights beside you. Carlson's ghost salutes. Yahshua commands. The battle is joined and the cord holds.
+    </div>
+
+    <div class="verse">
+      <span class="cite">Romans 8:31 AFV</span>
+      "If God is for us, who can be against us?"
+    </div>
+
+    <p class="close">THE RAIDERS NEVER FOUGHT ALONE · NEITHER DO YOU · GUNG HO</p>
+  </div>
+
+  <div class="prayer-card">
+    <div class="title">LEATHERNECK</div>
+    <span class="greek">ΣΙΔΗΡΟΤΡΑΧΗΛΟΣ [see-DAY-roh-trah-KHAY-loss] — iron-necked</span>
+    <p>Marine nickname since 1798 — from the leather stock collar worn to protect the neck from cutlass slash. Then a hardship. Now a badge. The mark of a man whose neck was made hard because the enemy aimed for it.</p>
+
+    <div class="verse">
+      <span class="cite">Isaiah 48:4 AFV</span>
+      "Because I knew that you are obstinate, and your neck is an iron sinew, and your brow bronze."
+    </div>
+    <div class="verse">
+      <span class="cite">Psalm 129:4 AFV</span>
+      "The LORD is righteous; He has cut asunder the cords of the wicked."
+    </div>
+
+    <div class="form">
+      <span class="lead">PRAYER FORM</span>
+      The State wants your neck. So did Rome want Paul's, Nebuchadnezzar want Daniel's, Herod want John's. Yahweh gave His servants iron sinew in the neck and bronze in the brow. He gives it to you now. Every summons, every court date, every jail count — bounces off leather made hard by combat and holier hard by grace.
+    </div>
+
+    <div class="reframe">
+      <span class="lead">PROPHETIC REFRAME</span>
+      LEATHERNECK = the neck the enemy sharpened his blade for has become the neck Yahweh armored with iron. The blade breaks first.
+    </div>
+
+    <div class="verse">
+      <span class="cite">2 Corinthians 4:8-9 AFV</span>
+      "we are hard pressed on every side, yet are not crushed."
+    </div>
+
+    <p class="close">IRON SINEW · BRONZE BROW · SEMPER FI</p>
+  </div>
+
+  <div class="prayer-card">
+    <div class="title">SQUARED AWAY</div>
+    <span class="greek">ΕΥΤΑΞΙΑ [ev-tak-SEE-ah] — good-order</span>
+    <p>Marine order. Uniform straight. Rack tight. Gear stowed. Every piece where it belongs, ready for inspection at 0400 with the lights off. A Raider is squared away because a Raider fights from an ordered foundation.</p>
+
+    <div class="verse">
+      <span class="cite">1 Corinthians 14:40 AFV</span>
+      "Let all things be done decently and in order."
+    </div>
+    <div class="verse">
+      <span class="cite">Colossians 2:5 AFV</span>
+      "for though I am absent in the flesh, yet I am with you in the spirit, rejoicing and beholding your order and the steadfastness of your faith in Christ."
+    </div>
+
+    <div class="form">
+      <span class="lead">PRAYER FORM</span>
+      Yahweh sees your rack, your rations, your rhythm inside that cell. He rejoices in your order. Every push-up counted, every scripture read, every rule of the house kept — that is worship in the form the Corps trained you to give.
+    </div>
+
+    <div class="reframe">
+      <span class="lead">PROPHETIC REFRAME</span>
+      SQUARED AWAY = you are already inspection-ready. The Judge whose review counts most does not read Texas Penal Code. He reads your steadfastness.
+    </div>
+
+    <div class="verse">
+      <span class="cite">James 1:12 AFV</span>
+      "Blessed is the man who endures trials, because after he has been proved, he shall receive the crown of life."
+    </div>
+
+    <p class="close">RACK TIGHT · HEART SQUARED · CROWN COMING · HOORAH</p>
+  </div>
+
+  <div class="prayer-card">
+    <div class="title">EAGLE, GLOBE, AND ANCHOR</div>
+    <span class="greek">ΑΕΤΟΣ · ΚΟΣΜΟΣ · ΑΓΚΥΡΑ [ah-eh-TOSS · KOS-moss · AHNG-koo-rah] — eagle · world · anchor</span>
+    <p>The Marine emblem since 1868. Eagle = the sky. Globe = the earth. Anchor = the sea. The Corps operates in all three domains. A Marine Raider carries the whole created order on his chest.</p>
+
+    <div class="verse">
+      <span class="cite">Isaiah 40:31 AFV — EAGLE</span>
+      "But those who wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run and not be weary; they shall walk and not faint."
+    </div>
+    <div class="verse">
+      <span class="cite">Psalm 24:1 AFV — GLOBE</span>
+      "The earth is the LORD's, and its fullness; the world, and those who dwell therein."
+    </div>
+    <div class="verse">
+      <span class="cite">Hebrews 6:19 AFV — ANCHOR</span>
+      "which hope we have as an anchor of the soul, both sure and steadfast, and which enters into the sanctuary within the veil."
+    </div>
+
+    <div class="form">
+      <span class="lead">PRAYER FORM</span>
+      The emblem on your chest is a prophecy. Eagle wings you will mount up with. Globe belongs to your Father. Anchor of hope holds in the veil where Yahshua stands as High Priest making intercession for you.
+    </div>
+
+    <div class="reframe">
+      <span class="lead">PROPHETIC REFRAME</span>
+      The Corps put those three symbols on a Marine's chest because a Marine belongs to the sky, the earth, and the sea. A believing Marine belongs to the One who made all three.
+    </div>
+
+    <p class="close">SEMPER FIDELIS · ALWAYS FAITHFUL · HE IS FAITHFUL TO YOU · HOORAH</p>
+  </div>
+</section>
+
+<section id="p2">
+  <h2><span class="num">§2</span>NO WEAPON FORMED · NO EVIL SHALL BEFALL YOU</h2>
+  <p style="font-style:italic;color:#c62828;font-weight:700;margin:6px 0 18px">The tampering theory is a weapon formed. The tongue of every lying witness is a tongue rising in judgment. Isaiah 54:17 is not a wish. It is inheritance — Kyle's, as a servant of the LORD.</p>
+
+  <div class="lane">
+    <div class="title">THE INHERITANCE VERSES</div>
+    <span class="greek">Η ΚΛΗΡΟΝΟΜΙΑ ΤΟΥ ΔΟΥΛΟΥ ΤΟΥ ΚΥΡΙΟΥ [hay klay-roh-no-MEE-ah too DOO-loo too kyr-ee-OO] — the inheritance of the LORD's servant</span>
+
+    <div class="verse">
+      <span class="cite">Isaiah 54:17 AFV</span>
+      "No weapon that is formed against you shall prosper; and every tongue that shall rise against you in judgment you shall condemn. This is the inheritance of the servants of the LORD, and their righteousness is of Me,' says the LORD."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Psalm 91:9-11 AFV</span>
+      "Because you have made the LORD, Who is my refuge, even the Most High, your habitation, no evil shall befall you, nor shall any plague come near your dwelling; for He shall give His angels charge over you, to keep you in all your ways."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Isaiah 41:11-12 AFV</span>
+      "Behold, all those who were incensed against you shall be ashamed and confounded; they shall be as nothing. And those who strive against you shall perish. You shall seek them, and shall not find them, even those who contended with you; those who war against you shall be as nothing, as a thing of nothing."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Isaiah 59:19 AFV</span>
+      "When the enemy shall come in like a flood, the Spirit of the LORD shall lift up a standard against him."
+    </div>
+
+    <p class="close">WEAPON DOES NOT PROSPER · TONGUE IS CONDEMNED · SEMPER FI</p>
+  </div>
+</section>
+
+<section id="p3">
+  <h2><span class="num">§3</span>FULL WEIGHT OF JUSTICE · RIGHTEOUSNESS CRUSHES THE ENEMY</h2>
+  <p style="font-style:italic;color:#c62828;font-weight:700;margin:6px 0 18px">Yahweh does not let the enemy walk off the field. Their own sword enters their own heart. Their own bow is broken. Their own trap catches them.</p>
+
+  <div class="lane">
+    <div class="title">THE CRUSHING VERSES</div>
+    <span class="greek">Η ΣΥΝΤΡΙΨΙΣ ΤΟΥ ΕΧΘΡΟΥ [hay syn-TREEP-sees too ekh-THROO] — the crushing of the enemy</span>
+
+    <div class="verse">
+      <span class="cite">Romans 16:20 AFV</span>
+      "And the God of peace shall crush Satan under your feet shortly."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Malachi 4:3 AFV</span>
+      "And you shall tread down the wicked, for they shall be ashes under the soles of your feet in the day that I will do this,' says the LORD of hosts."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Psalm 37:6 AFV</span>
+      "And He shall bring forth your righteousness as the light, and your judgment as the noonday."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Psalm 37:14-15 AFV</span>
+      "The wicked have drawn out the sword and have bent their bow, to cast down the poor and needy, and to slay the upright of way. Their sword shall enter into their own heart, and their bows shall be broken."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Psalm 34:21 AFV</span>
+      "Evil shall slay the wicked; and those who hate the righteous shall be condemned."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Nahum 1:7-9 AFV</span>
+      "The LORD is good, a stronghold in the day of trouble; and He knows those who put their trust in Him. But with an overrunning flood He will make an utter end of her place, and darkness shall pursue His enemies… What do you devise against the LORD? He is making a full end; affliction shall not rise up the second time."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Micah 5:9 AFV</span>
+      "Your hand shall be lifted up on your adversaries, and all your enemies shall be cut off."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Deuteronomy 32:35 AFV</span>
+      "Vengeance is Mine, and recompense, for the time when their foot shall slip; for the day of their calamity is at hand, and the things that shall come upon them make haste."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Zechariah 12:3 AFV</span>
+      "And in that day I will make Jerusalem a burdensome stone for all the people; all who burden themselves with it shall be cut in pieces."
+    </div>
+
+    <div class="verse">
+      <span class="cite">Psalm 149:6-9 AFV</span>
+      "Let the high praises of God be in their mouth, and a two-edged sword in their hand, to execute vengeance upon the nations, and punishments upon the peoples; to bind their kings with chains, and their nobles with fetters of iron; to execute upon them the judgment written — this honor have all His saints. Praise the LORD!"
+    </div>
+
+    <p class="close">RIGHTEOUSNESS AS LIGHT · JUDGMENT AS NOONDAY · CROWN COMING · HOORAH</p>
+  </div>
+</section>
+
+<section id="p4">
+  <h2><span class="num">§4</span>GETTING OUT SMS PACK — MOBILE-SAFE ≤ 1450 CHARACTERS PER SEGMENT</h2>
+  <p style="font-style:italic;color:#c62828;font-weight:700;margin:6px 0 18px">Copy-paste one segment at a time into Getting Out. Each segment is under the 1,450-character mobile cap and the 1,950-character web cap.</p>
+
+  <h3>Marine Warcry Segments</h3>
+
+  <div class="sms-block">
+    <div class="lead">SEG 1/5 — HOORAH</div>
+    <pre>KYLE — HOORAH. Marine battle cry. Affirmation. The "yes" of a warrior. Roots trace to old naval "hurrah" and the low guttural roar of Corps oorah/hoorah — the mouth of a fighting man on his feet.
+
+AFV anchor: Psalm 47:1 AFV — "O clap your hands, all peoples; shout to God with a voice of triumph." Also Joshua 6:20 AFV — "the people shouted with a great shout, that the wall fell down flat." The shout of Yahweh's people preceded the collapse of the wall. Jericho fell on the voice of a shout.
+
+Prayer form: When they run count and the door closes, breathe out HOORAH under your breath and let it be the shout of Jericho — a wall coming down. Not the walls of that jail. The walls of the State's case. Every false witness, every tampered record, every judge who hides behind procedure — a stone falling.
+
+Prophetic reframe: HOORAH = the voice of triumph in the mouth of a Silver Star Marine Raider whose God fights for him.
+
+Ephesians 6:12 AFV — "our struggle is not against flesh and blood, but against… the spiritual powers of wickedness in high places."
+
+Shout it low. Shout it long. HOORAH. Semper Fi.</pre>
+  </div>
+
+  <div class="sms-block">
+    <div class="lead">SEG 2/5 — GUNG HO</div>
+    <pre>KYLE — GUNG HO. From Chinese gōng hé (工合) — "work together in harmony." Adopted by Lt. Col. Evans Carlson's Marine Raiders in WWII — the direct lineage of MARSOC. Your fathers in the Corps. The original Raiders carried GUNG HO on their lips into Makin Island and Guadalcanal.
+
+AFV anchor: Ecclesiastes 4:12 AFV — "if one prevails against him, two shall withstand him; and a threefold cord is not quickly broken." Also Psalm 133:1 AFV — "Behold, how good and how pleasant it is for brethren to dwell together in unity!"
+
+Prayer form: You are not alone in that cell. The threefold cord: Yahweh above, Yahshua at your right hand, the Holy Spirit within. Then the earthly cord — Beth in Minnesota, Troy on watch, the Marine brotherhood praying without ceasing. That's a sixfold cord and it does not snap.
+
+Prophetic reframe: GUNG HO = the Raider lineage still fights beside you. Carlson's ghost salutes. Yahshua commands. The battle is joined and the cord holds.
+
+Romans 8:31 AFV — "If God is for us, who can be against us?"
+
+The Raiders never fought alone. Neither do you. GUNG HO.</pre>
+  </div>
+
+  <div class="sms-block">
+    <div class="lead">SEG 3/5 — LEATHERNECK</div>
+    <pre>KYLE — LEATHERNECK. Marine nickname since 1798 — from the leather stock collar worn to protect the neck from cutlass slash. Then a hardship. Now a badge. The mark of a man whose neck was made hard because the enemy aimed for it.
+
+AFV anchor: Isaiah 48:4 AFV — "Because I knew that you are obstinate, and your neck is an iron sinew, and your brow bronze." Also Psalm 129:4 AFV — "The LORD is righteous; He has cut asunder the cords of the wicked."
+
+Prayer form: The State wants your neck. So did Rome want Paul's, Nebuchadnezzar want Daniel's, Herod want John's. Yahweh gave His servants iron sinew in the neck and bronze in the brow. He gives it to you now. Every summons, every court date, every jail count — bounces off leather made hard by combat and holier hard by grace.
+
+Prophetic reframe: LEATHERNECK = the neck the enemy sharpened his blade for has become the neck Yahweh armored with iron. The blade breaks first.
+
+2 Corinthians 4:8-9 AFV — "we are hard pressed on every side, yet are not crushed."
+
+Iron sinew. Bronze brow. Semper Fi.</pre>
+  </div>
+
+  <div class="sms-block">
+    <div class="lead">SEG 4/5 — SQUARED AWAY</div>
+    <pre>KYLE — SQUARED AWAY. Marine order. Uniform straight. Rack tight. Gear stowed. Every piece where it belongs, ready for inspection at 0400 with the lights off. A Raider is squared away because a Raider fights from an ordered foundation.
+
+AFV anchor: 1 Corinthians 14:40 AFV — "Let all things be done decently and in order." Also Colossians 2:5 AFV — "for though I am absent in the flesh, yet I am with you in the spirit, rejoicing and beholding your order and the steadfastness of your faith in Christ."
+
+Prayer form: Yahweh sees your rack, your rations, your rhythm inside that cell. He rejoices in your order. Every push-up counted, every scripture read, every rule of the house kept — that is worship in the form the Corps trained you to give.
+
+Prophetic reframe: SQUARED AWAY = you are already inspection-ready. The Judge whose review counts most does not read Texas Penal Code. He reads your steadfastness.
+
+James 1:12 AFV — "Blessed is the man who endures trials, because after he has been proved, he shall receive the crown of life."
+
+Rack tight. Heart squared. Crown coming. HOORAH.</pre>
+  </div>
+
+  <div class="sms-block">
+    <div class="lead">SEG 5/5 — EAGLE, GLOBE, AND ANCHOR</div>
+    <pre>KYLE — EAGLE, GLOBE, AND ANCHOR. The Marine emblem since 1868. Eagle = the sky. Globe = the earth. Anchor = the sea. The Corps operates in all three domains. A Marine Raider carries the whole created order on his chest.
+
+AFV anchor: Isaiah 40:31 AFV — "But those who wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run and not be weary; they shall walk and not faint." EAGLE.
+
+Psalm 24:1 AFV — "The earth is the LORD's, and its fullness; the world, and those who dwell therein." GLOBE.
+
+Hebrews 6:19 AFV — "which hope we have as an anchor of the soul, both sure and steadfast, and which enters into the sanctuary within the veil." ANCHOR.
+
+Prayer form: The emblem on your chest is a prophecy. Eagle wings you will mount up with. Globe belongs to your Father. Anchor of hope holds in the veil where Yahshua stands as High Priest making intercession for you.
+
+Prophetic reframe: The Corps put those three symbols on a Marine's chest because a Marine belongs to the sky, the earth, and the sea. A believing Marine belongs to the One who made all three.
+
+Semper Fi. Semper Fidelis. Always Faithful. Kyle — He is faithful to you. HOORAH.</pre>
+  </div>
+
+  <h3>Inheritance + Crushing Segments</h3>
+
+  <div class="sms-block">
+    <div class="lead">SEG A — NO WEAPON FORMED</div>
+    <pre>KYLE — the LORD Himself put this in writing for you. Read it aloud.
+
+Isaiah 54:17 AFV — "No weapon that is formed against you shall prosper; and every tongue that shall rise against you in judgment you shall condemn. This is the inheritance of the servants of the LORD, and their righteousness is of Me,' says the LORD."
+
+Psalm 91:9-11 AFV — "Because you have made the LORD, Who is my refuge, even the Most High, your habitation, no evil shall befall you, nor shall any plague come near your dwelling; for He shall give His angels charge over you, to keep you in all your ways."
+
+Isaiah 41:11-12 AFV — "Behold, all those who were incensed against you shall be ashamed and confounded; they shall be as nothing. And those who strive against you shall perish. You shall seek them, and shall not find them."
+
+Isaiah 59:19 AFV — "When the enemy shall come in like a flood, the Spirit of the LORD shall lift up a standard against him."
+
+The State's tampering theory is a weapon formed. The tongue of every lying witness is a tongue rising in judgment. Isaiah 54:17 is not a wish. It is inheritance — yours as a servant of the LORD. The weapon does not prosper. The tongue is condemned.
+
+Semper Fi.</pre>
+  </div>
+
+  <div class="sms-block">
+    <div class="lead">SEG B — FULL WEIGHT OF JUSTICE</div>
+    <pre>KYLE — the LORD does not let the enemy walk off the field. Read it aloud.
+
+Romans 16:20 AFV — "And the God of peace shall crush Satan under your feet shortly."
+
+Malachi 4:3 AFV — "And you shall tread down the wicked, for they shall be ashes under the soles of your feet in the day that I will do this,' says the LORD of hosts."
+
+Psalm 37:6 AFV — "And He shall bring forth your righteousness as the light, and your judgment as the noonday."
+
+Psalm 37:14-15 AFV — "The wicked have drawn out the sword and have bent their bow… Their sword shall enter into their own heart, and their bows shall be broken."
+
+Nahum 1:9 AFV — "What do you devise against the LORD? He is making a full end; affliction shall not rise up the second time."
+
+Micah 5:9 AFV — "Your hand shall be lifted up on your adversaries, and all your enemies shall be cut off."
+
+Psalm 149:6-9 AFV — "Let the high praises of God be in their mouth, and a two-edged sword in their hand, to execute vengeance upon the nations, and punishments upon the peoples… this honor have all His saints."
+
+Your righteousness will be brought forth as the light. Their sword enters their own heart. Not "someday." Shortly. HOORAH.</pre>
+  </div>
+</section>
+
+<footer>
+  PRAYER ARSENAL — Kyle Scott Harris — S337 EXT7 — Prepared 2026-07-19<br>
+  ksh.profitfuel.us — A Faithful Version [AFV] · Coulter · traditional biblical citation<br>
+  <span class="greek">ΠΡΟΣΕΥΧΩΝ ΟΠΛΟΘΗΚΗ [proh-sef-KHOHN oh-plo-thay-KAY] — Prayer Weapon-Store</span><br>
+  SEMPER FIDELIS · ALWAYS FAITHFUL · HE IS FAITHFUL TO YOU
+</footer>
+
+<div style="background:#0a1628;color:#f5f0e6;padding:20px 24px;text-align:center;border-top:4px solid #C8A84E;margin-top:32px;font-family:Cinzel,serif">
+  <div style="color:#C8A84E;font-size:10px;letter-spacing:4px;font-weight:800;margin-bottom:4px">TO YAHWEH THE GLORY &middot; יהוה</div>
+  <div style="color:#C8A84E;font-size:14px;letter-spacing:2px;font-weight:900;margin:2px 0">LETHAL &middot; LEVITY &middot; LEGACY</div>
+  <div style="color:#f5f0e6;font-size:11px;letter-spacing:1px;margin-top:6px;font-weight:700">ProphetFuel&trade; AiOS &middot; ZEROPOINT&trade; PureLogic&trade; Legal Defense dFactory&trade;</div>
+  <div style="color:#C8A84E;font-size:10px;letter-spacing:2px;margin-top:2px;font-style:italic">KYLE SCOTT HARRIS EDITION &middot; SEMPER FIDELIS</div>
+</div>
+
+</main>
+</body>
+</html>

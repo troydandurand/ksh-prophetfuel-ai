@@ -1,0 +1,171 @@
+/* SHARED MOTION STYLESHEET — ksh.profitfuel.us / case / motions
+   Fluorescent gold + dark black + neon accents on screen.
+   Force pure black-on-white on print. Legal / deposition grade.
+   Per D-S337-EXT7 palette lock — printable without faded font. */
+
+:root {
+  --navy: #0a1628;
+  --black: #000000;
+  --green: #33e612;
+  --gold: #FFDF00;
+  --gold-soft: #C8A84E;
+  --orange: #FF6B00;
+  --red: #ff2d2d;
+  --pink: #ff2dcf;
+  --blue: #00c8ff;
+  --cyan: #00e5ff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--green);
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 500;
+  line-height: 1.7;
+  font-size: 17px;
+  min-height: 100vh;
+  padding: 32px 20px 64px;
+  text-shadow: 0 0 1px rgba(51,230,18,0.35);
+  scrollbar-gutter: stable;
+}
+
+.wrap { max-width: 900px; margin: 0 auto; }
+
+.topnav {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(200,168,78,0.35);
+  padding: 12px 0 14px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.topnav a {
+  color: var(--gold); text-decoration: none;
+  border: 1px solid var(--gold);
+  padding: 5px 11px; margin: 3px;
+  display: inline-block;
+  font-size: 11px; letter-spacing: 2px; font-weight: 700;
+}
+.topnav a.hot { color: var(--red); border-color: var(--red); }
+.topnav a.warm { color: var(--orange); border-color: var(--orange); }
+.topnav a.cool { color: var(--blue); border-color: var(--blue); }
+.topnav a:hover { background: rgba(255,223,0,0.15); }
+
+/* CAPTION — court + parties + cause # header */
+#caption {
+  border: 2px solid var(--gold);
+  padding: 22px 26px;
+  margin: 20px 0 24px;
+  background: rgba(255,223,0,0.04);
+}
+#caption .court { color: var(--gold); font-size: 15px; letter-spacing: 3px; text-align: center; font-weight: 800; margin-bottom: 8px; }
+#caption .county { color: var(--gold); font-size: 12px; letter-spacing: 2px; text-align: center; margin-bottom: 14px; opacity: 0.9; }
+#caption .parties { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 12px; font-size: 14px; }
+#caption .parties .left, #caption .parties .right { flex: 1; }
+#caption .parties .center { flex: 0 0 22%; text-align: center; color: var(--gold); font-size: 11px; letter-spacing: 2px; padding: 0 12px; }
+#caption .cause { color: var(--gold); font-weight: 700; }
+#caption .title-bar { text-align: center; margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(255,223,0,0.35); }
+#caption h1 { color: var(--gold); font-size: 20px; letter-spacing: 3px; font-weight: 800; }
+
+/* SECTION HEADINGS */
+h2 { color: var(--gold); font-size: 16px; letter-spacing: 2.5px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,223,0,0.35); font-weight: 800; }
+h3 { color: var(--orange); font-size: 14px; letter-spacing: 2px; margin: 22px 0 10px; font-weight: 700; }
+
+p { margin-bottom: 12px; font-size: 15px; color: var(--green); }
+strong { color: var(--gold); font-weight: 700; }
+em { color: var(--gold); font-style: italic; }
+
+ol, ul { margin: 8px 0 14px 26px; }
+li { margin-bottom: 8px; font-size: 15px; color: var(--green); }
+
+/* HYPERLINKS — visible URL on print */
+a { color: var(--blue); text-decoration: underline; }
+a:visited { color: var(--pink); }
+a:hover { color: var(--gold); }
+
+/* WORKING THEORY prefix — never bare assertions */
+.wt {
+  display: inline-block;
+  background: rgba(255,45,45,0.12);
+  color: var(--red);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 1px 8px;
+  border: 1px solid var(--red);
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+/* AUTHORITY BLOCK */
+#authority { border-left: 3px solid var(--gold); padding: 14px 20px; margin: 20px 0; background: rgba(255,223,0,0.04); }
+#authority ul { margin-left: 20px; }
+#authority li { font-size: 14px; }
+
+/* PRAYER BLOCK */
+#prayer { border: 2px solid var(--orange); padding: 20px 24px; margin: 28px 0; background: rgba(255,107,0,0.06); }
+#prayer h2 { color: var(--orange); border-bottom-color: rgba(255,107,0,0.4); margin-top: 0; }
+#prayer ol { margin: 12px 0 8px 26px; }
+#prayer li { color: var(--green); font-size: 15px; margin-bottom: 12px; }
+#prayer li strong { color: var(--orange); }
+
+/* SIGNATURE BLOCK */
+#signature {
+  border-top: 2px solid var(--gold);
+  padding-top: 22px;
+  margin-top: 32px;
+}
+#signature .sig-line { border-bottom: 1px solid var(--gold); height: 40px; margin: 12px 0 4px; }
+#signature .sig-label { color: var(--gold); font-size: 12px; letter-spacing: 2px; }
+#signature .cos { margin-top: 28px; padding: 16px 20px; border: 1px solid var(--gold); background: rgba(255,223,0,0.03); font-size: 14px; }
+
+/* CALLOUT BLOCKS */
+.callout { border: 2px solid var(--red); padding: 16px 20px; margin: 20px 0; background: rgba(255,45,45,0.06); color: var(--red); }
+.callout .ct { color: var(--red); font-weight: 800; letter-spacing: 2px; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; }
+
+.note-orange { border: 2px solid var(--orange); padding: 14px 18px; margin: 18px 0; background: rgba(255,107,0,0.05); color: var(--orange); font-size: 14px; }
+.note-blue { border: 2px solid var(--blue); padding: 14px 18px; margin: 18px 0; background: rgba(0,200,255,0.05); color: var(--blue); font-size: 14px; }
+.note-pink { border: 2px solid var(--pink); padding: 14px 18px; margin: 18px 0; background: rgba(255,45,207,0.05); color: var(--pink); font-size: 14px; }
+
+/* FOOTER */
+footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(200,168,78,0.3); text-align: center; font-size: 11px; letter-spacing: 2px; color: var(--gold-soft); }
+
+/* NOTES PAD — per-motion autosave */
+.notes-pad { background:#1a0000; border:3px solid #ff2d2d; box-shadow:0 0 12px #ff2d2d,0 0 24px rgba(255,45,45,.5); margin:28px 0; padding:20px 22px; }
+.notes-pad h3 { color:#ff2d2d; text-shadow:0 0 6px #ff2d2d; margin:0 0 10px; font-size:15px; letter-spacing:2px; }
+.notes-pad textarea { width:100%; min-height:160px; background:#0a0000; color:#fff; border:2px solid #ff2d2d; padding:12px; font-family:'Cinzel',Georgia,serif; font-size:14px; line-height:1.55; box-sizing:border-box; }
+
+/* ============================================================
+   PRINT DISCIPLINE — legal filing grade
+   All text force-black on force-white. Every URL visible.
+   ============================================================ */
+@media print {
+  * { color: #000 !important; background: #fff !important; text-shadow: none !important; box-shadow: none !important; }
+  body { padding: 0; font-size: 12pt; line-height: 1.5; font-family: 'Cinzel', Georgia, 'Times New Roman', serif; }
+  .topnav, .notes-pad, footer { display: none !important; }
+  #caption { border: 2px solid #000; padding: 14pt 16pt; }
+  #caption .court, #caption .county, #caption .parties .center, #caption .cause, #caption h1 { color: #000 !important; }
+  h1, h2, h3, strong, em, .wt { color: #000 !important; }
+  h2 { border-bottom: 1px solid #000; page-break-after: avoid; }
+  h3 { page-break-after: avoid; }
+  #authority, #prayer, .callout, .note-orange, .note-blue, .note-pink { border: 1px solid #000; padding: 10pt 14pt; page-break-inside: avoid; }
+  #signature { border-top: 2px solid #000; page-break-inside: avoid; }
+  #signature .sig-line { border-bottom: 1px solid #000; }
+  #signature .cos { border: 1px solid #000; }
+  ol, ul { page-break-inside: avoid; }
+  li { page-break-inside: avoid; }
+  a { color: #000 !important; text-decoration: underline; }
+  /* Show URL on print — legal paper carries the address trail */
+  a[href^="http"]::after,
+  a[href^="tel"]::after {
+    content: " [" attr(href) "]";
+    font-size: 90%;
+    color: #000 !important;
+  }
+  /* But not for internal anchors */
+  a[href^="#"]::after, a[href^="/"]::after { content: ""; }
+  .wt { border: 1px solid #000; padding: 0 4pt; }
+}

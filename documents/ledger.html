@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style id="font-size-blade">html{zoom:1.25;}</style>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<script>
+  // Session guard — kick back to gate if passcode not entered this session
+  try {
+    if (sessionStorage.getItem('ksh_in_v2') !== '1') {
+      window.location.replace('../index.html');
+    }
+  } catch(e) { window.location.replace('../index.html'); }
+</script>
+<title>Kyle Harris — Consolidated Case Ledger</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* EpiGeneticsUSA palette — 200% baseline (operator +4 sizes) */
+  /* stripped by FONT SIZE BLADE 2026-07-12: html { font-size: 200%; } */
+  body {
+    font-family: 'Cinzel', Georgia, serif;
+    background: #0a1628;         /* navy */
+    color: #33e612;              /* neon fluorescent green */
+    max-width: 1600px;
+    margin: 40px auto;
+    padding: 40px;
+    line-height: 1.55;
+    font-size: 19px;
+    text-shadow: 0 0 1px rgba(51,230,18,0.35);
+  }
+  h1 {
+    font-size: 34px;
+    text-align: center;
+    color: #C8A84E;              /* gold */
+    border-bottom: 3px double #C8A84E;
+    padding-bottom: 14px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px rgba(200,168,78,0.5);
+  }
+  h2 {
+    font-size: 24px;
+    margin-top: 40px;
+    padding-bottom: 8px;
+    color: #C8A84E;
+    border-bottom: 1px solid #33e612;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 3px rgba(200,168,78,0.4);
+  }
+  h3 {
+    font-size: 20px;
+    margin-top: 28px;
+    color: #33e612;
+    letter-spacing: 0.2px;
+    font-weight: 700;
+  }
+  p, li { font-size: 19px; color: #33e612; }
+  strong { color: #C8A84E; font-weight: 700; }
+  em { color: #33e612; opacity: 0.85; }
+  a { color: #C8A84E; text-decoration: none; border-bottom: 1px dotted #C8A84E; }
+  a:hover { color: #ff2d2d; border-bottom-color: #ff2d2d; }
+  .meta {
+    text-align: center;
+    color: #33e612;
+    opacity: 0.85;
+    font-size: 17px;
+    margin-bottom: 30px;
+  }
+  .meta div { margin: 3px 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 18px 0 28px 0;
+    font-size: 17px;
+  }
+  th, td {
+    border: 1px solid #2a5a3f;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+    color: #33e612;
+  }
+  th {
+    background: #0f2540;
+    color: #C8A84E;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 2px rgba(200,168,78,0.4);
+  }
+  tr:nth-child(even) td { background: #0d1c33; }
+  tr:nth-child(odd) td  { background: #0a1628; }
+  .anchor td {
+    background: #2a1a0a !important;
+    color: #ff2d2d !important;
+    font-weight: 700;
+    text-shadow: 0 0 4px rgba(255,45,45,0.6);
+  }
+  .anchor td strong { color: #ff2d2d; }
+  .withdrawn {
+    color: #666;
+    text-decoration: line-through;
+    opacity: 0.55;
+  }
+  .callout {
+    background: #0f2540;
+    border-left: 5px solid #C8A84E;
+    padding: 18px 24px;
+    margin: 24px 0;
+    font-size: 18px;
+    color: #33e612;
+    box-shadow: 0 0 8px rgba(200,168,78,0.15);
+  }
+  .callout strong { color: #C8A84E; }
+  .warn {
+    background: #2a0d0d;
+    border-left: 5px solid #ff2d2d;
+    padding: 18px 24px;
+    margin: 24px 0;
+    font-size: 19px;
+    color: #ff2d2d;
+    font-weight: 700;
+    text-shadow: 0 0 4px rgba(255,45,45,0.55);
+    box-shadow: 0 0 8px rgba(255,45,45,0.25);
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #C8A84E;
+    margin: 30px 0;
+    opacity: 0.6;
+  }
+  ul, ol { padding-left: 26px; }
+  li { margin: 5px 0; }
+  li::marker { color: #C8A84E; }
+  .ignition {
+    list-style: disc;
+    padding-left: 32px;
+  }
+  .ignition li {
+    margin: 12px 0;
+    padding-left: 6px;
+  }
+  .ignition li::marker { color: #C8A84E; font-size: 22px; }
+  code {
+    font-family: Menlo, Monaco, monospace;
+    font-size: 17px;
+    background: #0f2540;
+    color: #C8A84E;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid #2a5a3f;
+  }
+  .footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #C8A84E;
+    font-size: 16px;
+    color: #33e612;
+    opacity: 0.75;
+    text-align: center;
+  }
+  .footer strong { color: #C8A84E; }
+  @media print {
+    html { font-size: 100%; }
+    body {
+      background: #ffffff;
+      color: #111;
+      text-shadow: none;
+      margin: 0;
+      padding: 20px;
+      font-size: 12px;
+    }
+    h1, h2, h3 { color: #111; text-shadow: none; }
+    strong { color: #111; }
+    th { background: #eee; color: #111; text-shadow: none; }
+    tr:nth-child(even) td, tr:nth-child(odd) td { background: #fff; color: #111; }
+    .anchor td { background: #fff8e0 !important; color: #111 !important; text-shadow: none; }
+    .callout, .warn { background: #f7f2e6; color: #111; text-shadow: none; }
+    a { color: #111; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div style="text-align:center;margin:12px 0 8px;font-family:'Cinzel',serif;color:#C8A84E;font-size:13px;letter-spacing:4px;font-weight:700;">▼ COUNSEL FAST ACCESS ▼</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;max-width:1200px;margin:0 auto 12px;">
+  <a href="../case/dcm.html" style="display:block;text-align:center;background:#2a1a0a;color:#C8A84E;font-family:'Cinzel',serif;font-weight:900;letter-spacing:2px;padding:14px 18px;text-decoration:none;border-radius:4px;font-size:13px;border:2px solid #C8A84E;line-height:1.35;">📕 DEFENSE CASE<br>MEMORANDUM</a>
+  <a href="../case/bond.html" style="display:block;text-align:center;background:#2a1a0a;color:#C8A84E;font-family:'Cinzel',serif;font-weight:900;letter-spacing:2px;padding:14px 18px;text-decoration:none;border-radius:4px;font-size:13px;border:2px solid #C8A84E;line-height:1.35;">💰 BOND<br>QUICK ANSWER</a>
+  <a href="../case/questions.html" style="display:block;text-align:center;background:#2a1a0a;color:#C8A84E;font-family:'Cinzel',serif;font-weight:900;letter-spacing:2px;padding:14px 18px;text-decoration:none;border-radius:4px;font-size:13px;border:2px solid #C8A84E;line-height:1.35;">❓ QUESTIONS<br>FOR KYLE</a>
+  <a href="mobile.html" style="display:block;text-align:center;background:#C8A84E;color:#0a1628;font-family:'Cinzel',serif;font-weight:900;letter-spacing:2px;padding:14px 18px;text-decoration:none;border-radius:4px;font-size:13px;border:2px solid #C8A84E;line-height:1.35;">📱 MOBILE CALL SHEET<br>42 BLOCKS</a>
+</div>
+<div style="text-align:center;margin:0 0 20px;font-family:'Cinzel',serif;color:#33e612;font-size:12px;opacity:0.7;letter-spacing:1px;">Case File · v1 · <a href="../case/index.html" style="color:#C8A84E;border-bottom:1px dotted #C8A84E;">Full Case TOC →</a></div>
+
+<h1>KYLE HARRIS — CONSOLIDATED CASE LEDGER</h1>
+
+<div class="meta">
+  <div>Case Ledger &middot; Locked 2026-07-10 &middot; Refreshed 2026-07-12</div>
+  <div>Advocate: Troy DanDurand</div>
+  <div>Family contacts: Beth Martin (mother), Scott Harris (father)</div>
+</div>
+
+<div style="border: 3px solid #C8A84E; background: rgba(200,168,78,0.08); padding: 22px 26px; margin: 24px 0 32px; text-align: left;">
+  <div style="color: #C8A84E; font-size: 18px; letter-spacing: 3px; font-weight: 700; margin-bottom: 8px; text-align: center;">PUBLIC BRIEF &amp; DOSSIER</div>
+  <div style="color: #33e612; font-size: 15px; letter-spacing: 2px; text-align: center; margin-bottom: 16px;">For Retained Defense Counsel &middot; Veteran Non-Profit Resource Coordination Teams &middot; Congressional and Senatorial Constituent Services Staff</div>
+  <div style="color: #33e612; font-size: 15px; line-height: 1.6;">This document is the outward-facing consolidated brief on the matter of <em>State of Texas v. Kyle Harris</em>, Travis County Cause Number D1DC25303689, and the collateral Collin County anchor warrant #199806782026. It contains the case posture, custody status, statutory levers, twelve lethal polemic legal theories, verified contact ledger for Special Operations Forces non-profits and Judge-Advocate-General retired defense counsel, and Congressional / Senatorial leverage points. It is <strong>not attorney-client privileged</strong>; it is prepared for distribution to counsel and to nonprofit resource coordinators authorized to help Kyle. Operator-facing intake material has been consolidated into the working portal at <code>ksh-exp.profitfuel.us</code> (Master Data Worksheet, Blocks A through L) and is not repeated here.</div>
+</div>
+
+<div style="border-top: 3px solid #ff2d2d; border-bottom: 3px solid #ff2d2d; background: rgba(255,45,45,0.05); padding: 22px 26px; margin: 24px 0 32px;">
+  <div style="color: #ff2d2d; font-size: 20px; letter-spacing: 3px; font-weight: 700; text-align: center; margin-bottom: 4px; text-shadow: 0 0 6px rgba(255,45,45,0.5);">IMMEDIATE RELEASE BRIEF</div>
+  <div style="color: #C8A84E; font-size: 15px; letter-spacing: 2px; text-align: center; margin-bottom: 20px;">Memorandum of Law &middot; Four Independent Grounds &middot; Any One Releases Mr. Harris</div>
+
+  <div style="color: #33e612; font-size: 15px; line-height: 1.7; margin-bottom: 16px;"><strong>Short answer.</strong> Kyle Harris is entitled to immediate pretrial release on any one of four independent grounds. The Court&rsquo;s duty on Ground I is <strong>ministerial, not discretionary</strong>. Grounds II, III, and IV are alternative and cumulative. Any single grant releases the client.</div>
+
+  <div style="border-left: 4px solid #ff2d2d; padding: 10px 16px; margin: 14px 0; background: rgba(255,45,45,0.06);">
+    <div style="color: #ff2d2d; font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GROUND I &middot; TEXAS CODE OF CRIMINAL PROCEDURE ARTICLE 17.151 &middot; MANDATORY RELEASE</div>
+    <div style="color: #33e612; font-size: 14px; line-height: 1.6;">Article 17.151, Section 1(1): a felony defendant &ldquo;<strong>must be released</strong> either on personal bond or by reducing the amount of bail required&rdquo; if the State is not ready for trial within 90 days of the commencement of detention. Mr. Harris has been detained approximately <strong>245 days</strong> as of 2026-07-12. The 90-day trigger passed on or about 2026-02-03 &mdash; roughly 155 days ago. The State has not announced ready within the window. Duty is ministerial. <em>Rowe v. State</em>, 853 S.W.2d 581, 583 (Tex. Crim. App. 1993). Burden shifts to State on defense filing. <em>Ex parte Craft</em>, 301 S.W.3d 447 (Tex. App.&mdash;Fort Worth 2009). Post-90-day announcement of readiness does not cure. <em>Behrend v. State</em>, 729 S.W.2d 717 (Tex. Crim. App. 1987). Filed by pretrial application for writ of habeas corpus under Article 11.24.</div>
+  </div>
+
+  <div style="border-left: 4px solid #FF6B00; padding: 10px 16px; margin: 14px 0; background: rgba(255,107,0,0.06);">
+    <div style="color: #FF6B00; font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GROUND II &middot; FRANKS V. DELAWARE &middot; PROBABLE-CAUSE AFFIDAVIT ATTACK</div>
+    <div style="color: #33e612; font-size: 14px; line-height: 1.6;"><em>Franks v. Delaware</em>, 438 U.S. 154 (1978) permits a defendant to attack the truthfulness of the probable-cause affidavit. Where the affidavit contains material false statements made knowingly, intentionally, or with reckless disregard for the truth, and where the remaining truthful content is insufficient to establish probable cause, the arrest and detention violate the Fourth Amendment. Complainant Bobbi jo Rice&rsquo;s documented recantations dated 2025-11-08, 2025-11-22 through 2025-11-26, and 2025-11-26 (evening) &mdash; including a written email to the Travis County District Attorney stating &ldquo;this never happened,&rdquo; text-message declaration of intent to testify to innocence, and request to remove the Protective Order &mdash; are already in the State&rsquo;s file. If the probable-cause affidavit omits or misrepresents these facts, the affidavit fails Franks scrutiny and the detention is unlawful.</div>
+  </div>
+
+  <div style="border-left: 4px solid #FFDF00; padding: 10px 16px; margin: 14px 0; background: rgba(255,223,0,0.06);">
+    <div style="color: #FFDF00; font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GROUND III &middot; ANCHOR WARRANT #199806782026 &middot; STATUTE-OF-LIMITATIONS COLLATERAL ATTACK</div>
+    <div style="color: #33e612; font-size: 14px; line-height: 1.6;">The out-of-Travis-County anchor warrant carries a numeric prefix &ldquo;1998&rdquo; consistent with a very old indictment (probable venue: Collin County or Dallas County). Texas Code of Criminal Procedure Article 27.03 permits a motion to set aside an indictment. Article 12 sets the applicable statute-of-limitations bar. For most non-homicide, non-sex offenses in Texas, the limitations period ranges from three to ten years. A 1998-indexed anchor warrant on such a charge is, on its face, time-barred for prosecution absent a statutory tolling exception. Motion to quash warrant + motion to dismiss for limitations, together, remove the $100,000 anchor bond and unblock release on the Travis County matter.</div>
+  </div>
+
+  <div style="border-left: 4px solid #33e612; padding: 10px 16px; margin: 14px 0; background: rgba(51,230,18,0.06);">
+    <div style="color: #33e612; font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px;">GROUND IV &middot; EIGHTH AMENDMENT &plus; TEXAS CONSTITUTION ARTICLE I &sect;&sect; 11 AND 13 &middot; EXCESSIVE BAIL</div>
+    <div style="color: #33e612; font-size: 14px; line-height: 1.6;">Aggregate bail on a decorated combat veteran with 100% service-connected disability, documented complainant recantation, no prior violent felony conviction, verifiable community ties, and 245 days of served pretrial time exceeds constitutional limits. Texas Code of Criminal Procedure Article 17.15 factors, applied honestly, mandate reduction. Texas Code of Criminal Procedure Article 17.032 provides a veteran-preferred bond framework with mental-health treatment conditions. Texas Government Code Chapter 124 opens Travis County Veterans Treatment Court diversion. Any of these tracks lands release with appropriate supervision.</div>
+  </div>
+
+  <div style="color: #C8A84E; font-size: 14px; letter-spacing: 1px; padding-top: 12px; border-top: 1px solid rgba(200,168,78,0.4); margin-top: 16px;"><strong>Full brief:</strong> <code>KYLE_HARRIS_S337_EXT6_LEGAL_BRIEF_IMMEDIATE_RELEASE_ART_17_151.md</code> &middot; Attorney-Client Privileged Work Product &middot; Prepared in Anticipation of Litigation &middot; Distribution: retained counsel plus Combat Warrior Support, Veterans Legal Institute, Texas Lawyers for Texas Veterans, Texas Veterans Commission ombudsman, Beth Martin. See also Section 16 below for the twelve lethal polemic legal theories that back and expand these four grounds.</div>
+</div>
+
+<h2>1. PRINCIPAL</h2>
+<table>
+  <tr><th>Field</th><th>Data</th></tr>
+  <tr><td>Name</td><td>Kyle Harris</td></tr>
+  <tr><td>Date of birth</td><td>1988-07-17 &mdash; turns 38 on 2026-07-17 (6 days from today)</td></tr>
+  <tr><td>United States Marine Corps</td><td>Scout Sniper &middot; Marine Corps Special Operations Command (MARSOC brand) combat veteran</td></tr>
+  <tr><td>Awards</td><td>Purple Heart + Silver Star</td></tr>
+  <tr><td>Gunshot wounds</td><td>Shot twice</td></tr>
+  <tr><td>Department of Veterans Affairs rating</td><td>100% service-connected (per Kyle jail call)</td></tr>
+  <tr><td>Residence</td><td>Melissa, Texas (Collin County, north of Dallas-Fort Worth)</td></tr>
+  <tr><td>Prior education</td><td>Approximately two years of law school (partial Juris Doctor)</td></tr>
+  <tr><td>Prior employment</td><td>Self-employed, has clients, travels for work</td></tr>
+</table>
+
+<h2>2. CUSTODY</h2>
+<table>
+  <tr><th>Field</th><th>Data</th></tr>
+  <tr><td>Arrested</td><td>2025-10-26 at Kyle's Melissa, Texas home (on warrants)</td></tr>
+  <tr><td>Booked into Travis County Sheriff's Office custody</td><td>2025-11-10 at 3:40 PM &mdash; 15-day gap between arrest and booking is unusual</td></tr>
+  <tr><td>Booking number</td><td><strong>2530151</strong></td></tr>
+  <tr><td>Facility</td><td>Travis County Correctional Complex</td></tr>
+  <tr><td>Address</td><td>3614 Bill Price Road, Del Valle, Texas 78617</td></tr>
+  <tr><td>Days in custody (as of 2026-07-11)</td><td>243 days (approximately 8 months)</td></tr>
+  <tr><td>Total active bond</td><td>$120,000</td></tr>
+  <tr><td>Bond offered</td><td>Yes, with ankle monitor + curfew. <strong>Kyle refused the conditions and chose custody.</strong></td></tr>
+</table>
+
+<h2>3. CHARGE STACK (7 total)</h2>
+
+<h3>Travis County domestic violence cluster (girlfriend as complainant, high confidence)</h3>
+<table>
+  <tr>
+    <th>#</th><th>Charge</th><th>Class</th><th>Cause number</th>
+    <th>Bond</th><th>Status</th><th>Plain-English description</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Assault Family / Household Member &mdash; Impede Breath / Circulation (strangulation)</td>
+    <td>Felony 3&deg;</td>
+    <td><strong>D1DC25303689</strong></td>
+    <td>$10,000</td>
+    <td>ACTIVE (District Court)</td>
+    <td>
+      <ul>
+        <li>Prosecution alleges Kyle put a hand, arm, or object against the girlfriend's neck &mdash; or covered her mouth or nose &mdash; in a way that impeded breathing or blood flow.</li>
+        <li>Statute: Texas Penal Code 22.01(b)(2)(B). Even brief pressure qualifies.</li>
+        <li>Typical evidence: bruising, petechiae, hoarseness, difficulty swallowing.</li>
+        <li><strong>This is the anchor of the Travis stack.</strong></li>
+        <li>Felony 3rd degree range: 2 to 10 years Texas Department of Criminal Justice + $10,000 fine.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Terroristic Threat of Family / Household Member</td>
+    <td>Misdemeanor A</td>
+    <td>C1CR25502783</td>
+    <td>$5,000</td>
+    <td>ACTIVE (County Court)</td>
+    <td>The prosecution alleges Kyle made a threat of violence to the girlfriend intending to place her in fear of imminent serious bodily injury. Texas Penal Code 22.07. Words alone can qualify; no physical act required. Because complainant is a dating partner (family / household), it charges up from Class B to Class A. Up to 1 year county jail + $4,000 fine.</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Unlawful Restraint</td>
+    <td>Misdemeanor A</td>
+    <td>C1CR25502784</td>
+    <td>$5,000</td>
+    <td>ACTIVE (County Court)</td>
+    <td>The prosecution alleges Kyle intentionally or knowingly restricted the girlfriend's movements without consent, substantially interfering with her liberty, by moving her from one place to another or by confining her. Texas Penal Code 20.02. Even a locked door or blocked exit can qualify. Because complainant is family or household, Class A. Up to 1 year + $4,000.</td>
+  </tr>
+</table>
+
+<h3>Out-of-County holds (not girlfriend, separate jurisdictions)</h3>
+<table>
+  <tr>
+    <th>#</th><th>Charge</th><th>Cause number</th>
+    <th>Bond</th><th>Status</th><th>Plain-English description</th>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td class="withdrawn">Out-of-County Felony (unspecified)</td>
+    <td>&mdash;</td>
+    <td>$5,000</td>
+    <td><strong>WITHDRAWN 2026-04-01</strong></td>
+    <td>Out-of-Travis-County felony warrant. Withdrawn, meaning the issuing county dropped the hold. Kyle is no longer detained on this. Charge nature not on the Travis County Sheriff's Office record; needs out-of-county decode.</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td class="withdrawn">Out-of-County Felony (unspecified)</td>
+    <td>W202515270</td>
+    <td>$5,000</td>
+    <td><strong>WITHDRAWN 2026-03-11</strong></td>
+    <td>Second out-of-county felony warrant. Withdrawn six weeks before number 4 was withdrawn. Same posture. Hold gone, underlying facts unknown until we decode the issuing county.</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Out-of-County Felony (unspecified)</td>
+    <td>&mdash;</td>
+    <td>$0</td>
+    <td>ACTIVE hold</td>
+    <td>Third out-of-county felony. Zero bond means the issuing county is holding him with no release option regardless of Travis action. Nature unknown pending out-of-county decode.</td>
+  </tr>
+  <tr class="anchor">
+    <td>7</td>
+    <td>Out-of-County Felony &mdash; THE ANCHOR</td>
+    <td><strong>199806782026</strong></td>
+    <td><strong>$100,000</strong></td>
+    <td>ACTIVE hold</td>
+    <td>The blocker. Six-digit cause number pattern (19980678 prefix + 2026 suffix) suggests either (a) very old Collin or Dallas area indictment reopened, or (b) non-Travis county format Ai has not yet matched. $100,000 bond suggests felony 2nd or 1st degree range. Until this is decoded and defeated, Kyle cannot walk out of Travis County Sheriff's Office custody even if all six other charges vanish. Priority body-action: call Travis County Sheriff's Office Records at 512-854-4180 with booking number 2530151, identify issuing county, engage local counsel.</td>
+  </tr>
+</table>
+
+<h2>4. PRIOR COUNSEL &mdash; FIRED BY KYLE, REPORTED TO STATE BAR + ATTORNEY GENERAL</h2>
+<table>
+  <tr><th>Attorney</th><th>Firm</th><th>Kyle's complaint</th><th>Public record</th></tr>
+  <tr>
+    <td><strong>William "Bill" M. Hines III</strong> (also known as William Monroe Hines)</td>
+    <td><strong>HINES RANC &amp; HOLUB</strong><br>1307 Nueces Street Suite 101<br>Austin, Texas 78701<br>hrh-law.com (redirects to h2hlaw.com)</td>
+    <td>"License-limited, can't represent adversely"</td>
+    <td>Bar number 09699300 &middot; Texas licensed 1990-11-02 &middot; ACTIVE &middot; Board-certified criminal law specialist &middot; Former Travis County Assistant District Attorney 1990-1998 &middot; Past President Travis County Bar Association Criminal Law Section</td>
+  </tr>
+  <tr>
+    <td><strong>Christopher William Holub</strong></td>
+    <td>Same firm &mdash; law partner of Hines</td>
+    <td>"Assigned, not doing work, delegating to associates. Sham/scam."</td>
+    <td>Texas licensed 1996 &middot; 29 years experience &middot; Texas Criminal Defense Lawyers Association + Austin Criminal Defense Lawyers Association member</td>
+  </tr>
+</table>
+
+<p><strong>Firm specialty match:</strong> Assault Family Violence &middot; Sexual Assault &middot; Driving While Intoxicated. Exactly Kyle's charges.</p>
+
+<p><strong>Kyle actions:</strong> Reported both to (a) Texas Chief Disciplinary Counsel (State Bar), and (b) Texas Attorney General.</p>
+
+<div class="callout">
+<strong>Cross-check finding:</strong>
+<ul>
+  <li>Kyle's "sham/scam" framing does not fully match public record.</li>
+  <li>Hines has an ACTIVE board-certified license.</li>
+  <li>Kyle's specific claim ("license-limited, can't represent adversely") likely reflects Traumatic-Brain-Injury and Post-Traumatic-Stress-Disorder-filtered interpretation of former-prosecutor status, not an actual license restriction.</li>
+  <li>Verify via:
+    <ul>
+      <li>Direct call to Chief Disciplinary Counsel regarding Hines and Holub open grievances.</li>
+      <li>Odyssey lookup on cause D1DC25303689 for actual withdrawal versus discharge basis.</li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+<h2>5. PRIVATE INVESTIGATOR</h2>
+<ul>
+  <li>Female (per Kyle jail call)</li>
+  <li>Worked case BEFORE Kyle fired the lawyer, so under Hines-Holub firm's employ</li>
+  <li>Reached out to girlfriend &mdash; girlfriend responded ("received a talk")</li>
+  <li><strong>Name unknown &mdash; ASK BETH</strong></li>
+</ul>
+
+<h2>6. COMPLAINANT (girlfriend) &mdash; per Kyle</h2>
+<ul>
+  <li>Started dating August 2025, approximately two months before arrest</li>
+  <li>Kyle characterized her as "bipolar or ghetto" &mdash; high-volatility, contradictory</li>
+  <li>Blackmail threats reported by Kyle:
+    <ul>
+      <li>Demanded necklace; when Kyle refused, threats followed</li>
+      <li>"I can have you locked up. You don't have to do anything. I'm a woman."</li>
+      <li>"I'm going to get you fired."</li>
+      <li>"Fuck you Kyle. I hope you die."</li>
+    </ul>
+  </li>
+  <li>Kyle says girlfriend "contradicts herself so many times, even to my mother"</li>
+  <li><strong>Beth allegedly recorded a conversation</strong> between herself and girlfriend where girlfriend stated "this never happened" and got caught in lies</li>
+  <li>Girlfriend has not appeared at Kyle's court dates (per Kyle: "my woman doesn't show, she's not there")</li>
+  <li>Judge allegedly told Kyle in open court: prosecutors "don't have that. We don't got that." (regarding discovery / evidence)</li>
+</ul>
+
+<h2>7. JUDGE</h2>
+<ul>
+  <li>Kyle said "Needles" &mdash; likely mishearing. Travis County criminal District Court judges include:
+    <ul>
+      <li>460th &mdash; Selena Alvarenga (since 2021)</li>
+      <li>331st &mdash; Chantal Eldridge (since 2019)</li>
+      <li>390th &mdash; Julie Kocurek (since 1999)</li>
+      <li>403rd &mdash; Karen Sage</li>
+    </ul>
+  </li>
+  <li>Cause D1DC25303689 court assignment: verify via Odyssey portal or District Clerk call</li>
+  <li><strong>Body-action:</strong> Troy calls Travis County District Clerk at 512-854-9457 with cause number to confirm judge</li>
+</ul>
+
+<h2>8. STATUTORY LEVERS AVAILABLE</h2>
+<table>
+  <tr><th>Lever</th><th>Citation</th><th>Trigger</th><th>Effect</th></tr>
+  <tr>
+    <td>Speedy Trial</td>
+    <td>Texas Code of Criminal Procedure Article 32A &middot; Sixth Amendment &middot; Texas Constitution Article I Section 10</td>
+    <td>Eight-plus months without trial + Kyle repeatedly demanding jury</td>
+    <td>Motion to dismiss for speedy-trial violation</td>
+  </tr>
+  <tr>
+    <td>90-day rule</td>
+    <td>Texas Code of Criminal Procedure Article 17.151</td>
+    <td>State not ready 90 days after commencement of detention on felony</td>
+    <td>Mandatory release on Personal Recognizance bond or reduced bail &mdash; but blocked by out-of-county holds</td>
+  </tr>
+  <tr>
+    <td>Veteran mitigation</td>
+    <td>Texas Code of Criminal Procedure Article 42A.052(a)</td>
+    <td>Court MUST consider military service at sentencing</td>
+    <td>Sentencing mitigation</td>
+  </tr>
+  <tr>
+    <td>Veterans Treatment Court</td>
+    <td>Texas Government Code Section 124</td>
+    <td>Combat veteran + service-connected condition</td>
+    <td>Diversion pathway &mdash; Jolene Grajczyk (512-854-3856) confirms Felony 3 strangulation eligibility</td>
+  </tr>
+  <tr>
+    <td>Domestic Violence expert testimony (defense side)</td>
+    <td>Texas Code of Criminal Procedure Article 38.371(b)</td>
+    <td>Family violence case</td>
+    <td>Expert can explain recantation dynamics both ways &mdash; cuts against and for defense</td>
+  </tr>
+  <tr>
+    <td>Prosecutor duty</td>
+    <td>Texas Code of Criminal Procedure Article 2.01</td>
+    <td>Duty is justice, not conviction</td>
+    <td>Kyle already citing this &mdash; Brady / discovery violations</td>
+  </tr>
+</table>
+
+<h2>9. TWO-FRONT WAR (Kyle currently thinks it is one)</h2>
+<table>
+  <tr><th>Front</th><th>Target</th><th>Move</th></tr>
+  <tr>
+    <td><strong>Travis Domestic Violence cluster (charges 1-3)</strong></td>
+    <td>Prosecutor / Judge / girlfriend as witness</td>
+    <td>Bond reduction &middot; speedy-trial &middot; witness-recantation evidence &middot; Article 38.371 defense counter-application</td>
+  </tr>
+  <tr>
+    <td><strong>Out-of-County anchor (charge 7) $100,000</strong></td>
+    <td>Unknown issuing county</td>
+    <td>Identify county &rarr; engage local counsel &rarr; attack that warrant separately</td>
+  </tr>
+</table>
+
+<div class="warn">
+<strong>Kyle cannot walk out of Travis County Sheriff's Office custody by winning either front alone. Both fronts must resolve.</strong>
+</div>
+
+<h2>10. LIVE FETCH&trade; CONTACT LEDGER (verified 2026-07-10)</h2>
+
+<h3>Custody + court</h3>
+<table>
+  <tr><th>Contact</th><th>Phone</th><th>Notes</th></tr>
+  <tr><td>Travis County Sheriff's Office Inmate Info</td><td><strong>512-854-9770</strong> (Monday-Friday 8-5)</td><td>Better than 4180</td></tr>
+  <tr><td>Travis County Sheriff's Office 24/7 Dispatch</td><td><strong>512-974-0845</strong></td><td>After hours</td></tr>
+  <tr><td>Travis County Sheriff's Office Records / hold questions</td><td><strong>512-854-4180</strong></td><td>For Out-of-County hold decode</td></tr>
+  <tr><td>Travis County District Clerk (Velva Price)</td><td><strong>512-854-9457</strong></td><td>1000 Guadalupe, Room 103 &mdash; for cause D1DC25303689</td></tr>
+  <tr><td>Travis County County Clerk</td><td><strong>512-854-9188</strong></td><td>For Misdemeanor A causes C1CR25502783 + C1CR25502784</td></tr>
+  <tr><td>Travis County Veterans Treatment Court Administrator &mdash; Jolene Grajczyk</td><td><strong>512-854-3856</strong></td><td>jolene.grajczyk@traviscountytx.gov &middot; 509 W 11th Street Suite 3.308</td></tr>
+  <tr><td>Travis County Veteran Services</td><td><strong>512-854-9340</strong></td><td>PO Box 1748, Austin, Texas 78767</td></tr>
+  <tr><td>Veterans Justice Outreach &mdash; Central Texas Department of Veterans Affairs (Stacey Adams)</td><td><strong>210-243-1752</strong></td><td>CTXSWSVJO@va.gov</td></tr>
+  <tr><td>Austin Department of Veterans Affairs Outpatient Clinic</td><td><strong>512-823-4000</strong></td><td>&mdash;</td></tr>
+</table>
+
+<h3>Collin County (Kyle's residence &mdash; check for anchor warrant)</h3>
+<table>
+  <tr><th>Contact</th><th>Phone</th><th>Notes</th></tr>
+  <tr><td>Collin County Sheriff Support Services (warrants)</td><td><strong>972-547-5537</strong></td><td>Ask about cause 199806782026</td></tr>
+  <tr><td>Collin County District Clerk (felonies)</td><td><strong>972-548-4320</strong></td><td>For Out-of-County felony lookup</td></tr>
+  <tr><td>Collin County Detention Bookings</td><td><strong>972-547-5200</strong></td><td>&mdash;</td></tr>
+  <tr><td>Collin County Courthouse</td><td><strong>972-548-4100</strong></td><td>2100 Bloomdale Road, McKinney, Texas 75071</td></tr>
+  <tr><td>Collin County Judicial Online Search</td><td>&mdash;</td><td>apps2.collincountytx.gov/JudicialRecords/Inmate/SearchResult</td></tr>
+  <tr><td>Collin County Case Search</td><td>&mdash;</td><td>cijspub.co.collin.tx.us</td></tr>
+</table>
+
+<h3>Special Operations Forces non-profits (call in this order)</h3>
+<table>
+  <tr><th>Organization</th><th>Phone</th><th>Email</th><th>Notes</th></tr>
+  <tr>
+    <td><strong>MARSOC Foundation</strong> (Marine Raider Foundation)</td>
+    <td><strong>951-551-9309</strong></td>
+    <td>info@marineraiderfoundation.org</td>
+    <td>Kyle's community. Call FIRST. PO Box 977, Fishers, Indiana 46038</td>
+  </tr>
+  <tr>
+    <td><strong>Task Force Dagger Special Operations Forces Foundation</strong></td>
+    <td><strong>813-995-8275</strong> &middot; 858-281-5064</td>
+    <td>info@taskforcedagger.org &middot; admin@taskforcedagger.org</td>
+    <td>Immediate Needs intake: form.jotform.com/TFdagger/TFD-Imm-Needs-Enrollment</td>
+  </tr>
+  <tr>
+    <td><strong>Green Beret Foundation</strong></td>
+    <td><strong>844-287-7133</strong></td>
+    <td>info@greenberetfoundation.org</td>
+    <td>Cross-Special-Operations-Forces</td>
+  </tr>
+  <tr>
+    <td><strong>Semper Fi &amp; America's Fund</strong></td>
+    <td><strong>760-725-3680</strong></td>
+    <td>via thefund.org/contact-us</td>
+    <td>24-48 hour emergency response</td>
+  </tr>
+</table>
+
+<h3>Legal (national)</h3>
+<table>
+  <tr><th>Organization</th><th>Phone</th><th>Notes</th></tr>
+  <tr><td>Texas Lawyers for Texas Veterans hotline</td><td><strong>800-622-2520</strong></td><td>via txltxv.org</td></tr>
+  <tr><td>Austin Bar Veteran Legal (Doug Lawrence)</td><td><strong>512-472-0279 x110</strong></td><td>DeLaine Ward Executive Director</td></tr>
+  <tr><td>National Association of Criminal Defense Lawyers Main</td><td><strong>202-872-8600</strong></td><td>memberservices@nacdl.org</td></tr>
+  <tr><td>National Veterans Legal Services Program</td><td><strong>202-265-8305</strong></td><td>info@nvlsp.org</td></tr>
+  <tr><td>Military Order of Purple Heart (Kyle qualifies)</td><td>via purpleheart.org</td><td>Communications@purpleheart.org</td></tr>
+  <tr><td>Texas Chief Disciplinary Counsel</td><td>via cdc.texasbar.com portal &middot; fax 512-427-4169</td><td>Verify Kyle's Hines / Holub complaint status</td></tr>
+</table>
+
+<h3>Judge Advocate General (retired-Judge-Advocate-General civilian defense counsel &mdash; Texas-licensed)</h3>
+<p class="small"><em>Active-duty Judge Advocate General officers cannot represent Kyle in Texas state court. Value is retired-Judge-Advocate-General officers who have gone into civilian criminal defense practice, are licensed in Texas, and understand both the Uniform Code of Military Justice framing (for character battalion + mitigation) and Texas Code of Criminal Procedure. Combat-veteran credibility + Texas courtroom competence is the target combination.</em></p>
+<table>
+  <tr><th>Contact</th><th>Phone / Email</th><th>Notes</th></tr>
+  <tr><td><strong>State Bar of Texas Military and Veterans Law Section</strong></td><td><strong>800-204-2222</strong> &middot; via texasbar.com/military</td><td>Directory of Texas-licensed attorneys, including retired-Judge-Advocate-General officers, who serve military and veteran clients. Ask for section chair + section administrator direct line.</td></tr>
+  <tr><td><strong>Judge Advocates Association &mdash; Texas Chapter</strong></td><td>via jaa.org</td><td>National association of Judge Advocate General officers (active + retired + reserve). Referral pathway to Texas members in criminal-defense practice.</td></tr>
+  <tr><td><strong>National Institute of Military Justice</strong></td><td>via nimj.org</td><td>Non-profit; referral network for civilian counsel with military-justice depth. Board includes retired-Judge-Advocate-General flag officers.</td></tr>
+  <tr><td><strong>Puckett &amp; Faraj Public Charitable Trust</strong> (Neal Puckett + Haytham Faraj)</td><td>via puckettfaraj.com</td><td>Career military-justice defense firm. Handled Marine Corps war-crimes cases. Confirm current Texas associate + intake path via Live Fetch.</td></tr>
+  <tr><td><strong>Bilecki Law Group</strong> (Timothy J. Bilecki)</td><td>via bileckilaw.com</td><td>Military court-martial defense &mdash; also handles character-battalion assembly. Confirm Texas footprint + fee posture via Live Fetch.</td></tr>
+  <tr><td><strong>Fort Cavazos Client Services Legal Assistance</strong></td><td>via home.army.mil/cavazos &mdash; legal assistance office</td><td>Active-duty Judge Advocate General office at nearest major Texas Army installation (Fort Cavazos, formerly Fort Hood). Not a defense channel, but a referral pathway + will vouch that the request is legitimate.</td></tr>
+  <tr><td><strong>Marine Corps Community Services Legal Assistance</strong></td><td>via marines.mil &mdash; legal assistance</td><td>Marine Corps side. For a Marine Corps Special Operations Command veteran, this is the parent-service legal-assistance office &mdash; can advise on the Uniform Code of Military Justice implications of a state-court conviction on retirement + benefits.</td></tr>
+</table>
+
+<h3>Crisis + Bail</h3>
+<table>
+  <tr><th>Organization</th><th>Phone</th><th>Notes</th></tr>
+  <tr><td>Veterans Crisis Line</td><td><strong>988, press 1</strong></td><td>24/7</td></tr>
+  <tr><td>The Bail Project (Texas active)</td><td>via bailproject.org</td><td>Pretrial bond assistance</td></tr>
+</table>
+
+<!-- Section 11 (Troy Ignition Sequence) and Section 12 (Beth Ask-List) removed 2026-07-12 —
+     both were operator-facing intake and workflow, not outward-facing brief material.
+     Beth Ask-List consolidated into kyle-worksheet.html Block L (fields 109-114) at ksh-exp.profitfuel.us.
+     Troy Ignition Sequence lives in the internal S337 EXT6 mission-execution file. -->
+
+<h2>11. CONSOLIDATED OPERATOR WORKFLOW &mdash; MOVED</h2>
+<p>Prior Sections 11 (Troy Ignition Sequence &mdash; 60-minute block) and 12 (Beth Martin Ask-List) were operator-facing execution and intake material. Both have been moved off the outward brief so this document reads clean for counsel and nonprofit resource coordinators.</p>
+<ul>
+  <li><strong>Troy Ignition Sequence</strong> &mdash; lives in the internal mission-execution file: <code>KYLE_HARRIS_S337_EXT6_INDEX.md</code></li>
+  <li><strong>Beth Ask-List</strong> &mdash; consolidated into the Master Data Worksheet at <code>ksh-exp.profitfuel.us/documents/kyle-worksheet.html</code>, Block L (Fields 109 through 114). Beth captures answers there; export feeds back to Troy through the working portal.</li>
+</ul>
+
+<h2>13. CROSS-CHECK: Kyle's narrative versus public record</h2>
+<table>
+  <tr><th>#</th><th>Kyle claim</th><th>Public record</th><th>Verdict</th></tr>
+  <tr>
+    <td>A</td>
+    <td>"Not charged"</td>
+    <td>7 charges on booking sheet including Felony 3 strangulation</td>
+    <td>Precision-correction: Kyle means "no discovery + no jury set" &mdash; CORRECT on that framing</td>
+  </tr>
+  <tr>
+    <td>B</td>
+    <td>"William Hines is license-limited, can't represent adversely"</td>
+    <td>Bar number 09699300 active + board-certified + former Assistant District Attorney</td>
+    <td>Kyle likely misreading former-prosecutor status. NO visible license restriction.</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>"Both attorneys are sham/scam"</td>
+    <td>Both are law partners at Hines Ranc &amp; Holub, 30-year firm, family-violence specialty</td>
+    <td>Performance grievance is legit but "sham" is overstated</td>
+  </tr>
+  <tr>
+    <td>D</td>
+    <td>"Held without bond"</td>
+    <td>Bond exists &mdash; Kyle REFUSED ankle-monitor / curfew conditions</td>
+    <td>Kyle is choosing custody over conditions</td>
+  </tr>
+  <tr>
+    <td>E</td>
+    <td>"Article 2A &sect;101 due process argument"</td>
+    <td>Texas Code of Criminal Procedure Article 2.01 &mdash; valid citation but standalone won't win</td>
+    <td>Kyle self-representation frame limited</td>
+  </tr>
+</table>
+
+<div class="callout">
+<strong>Handling doctrine:</strong>
+<ul>
+  <li>Loyalty is NOT agreement.</li>
+  <li>Truth-first delivery to Kyle and Beth.</li>
+  <li>Kyle is not lying &mdash; but his framing is filtered by:
+    <ul>
+      <li>Traumatic Brain Injury and Post-Traumatic Stress Disorder</li>
+      <li>Two years of law school (partial Juris Doctor)</li>
+      <li>Eight months in solitary</li>
+      <li>Self-representation legal theorizing</li>
+    </ul>
+  </li>
+  <li>Advocate's job = translate Kyle-precision-corrected into court-ready facts.</li>
+</ul>
+</div>
+
+<h2>15. CHAIN OF COMMAND CHARACTER BATTALION</h2>
+
+<p class="small"><em>The single most under-utilized asset for a Marine Corps Special Operations Command veteran in state-court trouble is his own chain of command. Every Marine Corps Special Operations Command Marine has a documented chain up to Colonel (Marine Corps Special Operations Command Regimental Commander), Sergeant Major (senior enlisted advisor), plus the officers who wrote his Silver Star + Purple Heart citations. Those citations were signed by specific commanders whose names are on the paper. Every one of them can write a character-witness letter that lands on the desk of the Travis County District Attorney, the Travis County Veterans Treatment Court coordinator, and the judge assigned to cause D1DC25303689.</em></p>
+
+<div class="callout">
+<strong>Rambo doctrine.</strong> In <em>First Blood</em>, John Rambo's Special Forces Colonel &mdash; Sam Trautman &mdash; walks into the Washington State jurisdiction and speaks on his behalf with the moral authority only a former commanding officer carries. Kyle has that same asset. We just have to identify him and reach him.
+</div>
+
+<h3>Chain-of-command roster to build (Beth ask &middot; Kyle jail-line ask)</h3>
+<table>
+  <tr><th>Billet</th><th>Typical rank</th><th>What we need</th></tr>
+  <tr><td>Team Leader</td><td>Staff Sergeant / Gunnery Sergeant (Enlisted-Pay-Grade-6 / Enlisted-Pay-Grade-7)</td><td>Name + last known contact. Peer-level witness to Kyle in combat.</td></tr>
+  <tr><td>Team Chief / Team Sergeant</td><td>Master Sergeant (Enlisted-Pay-Grade-8)</td><td>Name + contact. Senior-enlisted character voice.</td></tr>
+  <tr><td>Company Commander</td><td>Captain (Officer-Pay-Grade-3)</td><td>Name + last known unit. Officer-level character letter.</td></tr>
+  <tr><td>Battalion Commander</td><td>Lieutenant Colonel (Officer-Pay-Grade-5)</td><td>Name + last known unit. Field-grade officer character letter carries weight with judges.</td></tr>
+  <tr><td>Marine Corps Special Operations Command Regimental / Group Commander</td><td>Colonel (Officer-Pay-Grade-6)</td><td>Name + last known unit. Colonel-level letter is the Trautman-tier asset.</td></tr>
+  <tr><td>Senior Enlisted Advisor (Sergeant Major)</td><td>Sergeant Major (Enlisted-Pay-Grade-9)</td><td>Name + last known unit. Sergeant-Major voice speaks for the enlisted community.</td></tr>
+  <tr><td>Silver Star citation writer + endorser</td><td>Whoever signed the citation</td><td>Names are on the citation paper. Get the paper &rarr; get the names.</td></tr>
+  <tr><td>Purple Heart citation officer</td><td>Whoever signed</td><td>Same.</td></tr>
+  <tr><td>Marine Corps Special Operations Command teammates (Marine Raiders who served with Kyle)</td><td>Any rank</td><td>Peer testimony. Even one or two by name unlocks the Marine Raider Foundation intake.</td></tr>
+  <tr><td>Combat-medic / hospital-corpsman who treated Kyle</td><td>Petty-Officer-First-Class or higher</td><td>Trauma-witness. Ties Kyle's current post-combat condition to specific incident of record.</td></tr>
+</table>
+
+<h3>Where the names live</h3>
+<ul>
+  <li><strong>Department of Defense Form 214</strong> (discharge paper) &mdash; unit assignments + dates. Beth may have a copy in the home / storage (see email question 20).</li>
+  <li><strong>Silver Star + Purple Heart citations</strong> &mdash; officer signatures are on the citation. Beth or Kyle likely has copies.</li>
+  <li><strong>Kyle himself</strong> &mdash; jail phone. He knows every name. Ask on the next call, one billet at a time.</li>
+  <li><strong>Marine Raider Foundation (Marine Corps Special Operations Command Foundation)</strong> &mdash; 951-551-9309. They can help reach Kyle's specific unit chain via the Marine Corps Special Operations Command community.</li>
+  <li><strong>Marine Corps Community Services alumni network</strong> &mdash; if we know battalion + years, we can find officer contacts.</li>
+  <li><strong>National Personnel Records Center (Saint Louis, Missouri)</strong> &mdash; 314-801-0800 &mdash; official service records. Slower path, but authoritative.</li>
+</ul>
+
+<h3>Character-letter template intent</h3>
+<p>Each letter, on official-looking letterhead or personal stationery, addressed to the Travis County District Attorney + the presiding judge on cause D1DC25303689 + the Travis County Veterans Treatment Court coordinator Jolene Grajczyk. Three paragraphs:</p>
+<ol>
+  <li><strong>Who I am</strong> &mdash; rank, billet held over Kyle, dates of shared service.</li>
+  <li><strong>What I saw Kyle do</strong> &mdash; combat performance, character under fire, protective actions toward his team, moral conduct.</li>
+  <li><strong>What I want the court to know</strong> &mdash; Kyle's post-combat wounds are real, treatable, and not disqualifying. He belongs in Veterans Treatment Court, not the Texas Department of Criminal Justice.</li>
+</ol>
+
+<h2>16. LETHAL POLEMIC LEGAL THEORIES &mdash; MIND MAP OF THE JUDICIAL PROCESS</h2>
+
+<p class="small"><em>None of this is legal advice. This is the theory-of-attack menu the right defense counsel &mdash; ideally a retired-Judge-Advocate-General officer with Texas criminal bar &mdash; can select from and weaponize. Objective: close to no record as possible. Several of these, if the facts support them, force dismissal as a matter of law &mdash; the judge has no discretion once the violation is proven.</em></p>
+
+<p class="small"><em>This section is the MIND MAP of the entire Judicial Process. It is the operating spine of the PRO SE DOSSIER Troy DanDurand is delivering to Kyle at the Travis County Jail via notary drop-off. Every theory below is written in the LETHAL POLEMIC FULL SPINE format: (1) Rule stack, (2) Kyle's stated fact, (3) Trigger, (4) Effect &mdash; multi-front, (5) Companion move, (6) Siege Broadcast Read (verbatim jail-call script Beth reads aloud on a recorded line), (7) Things to listen for, (8) Specific verbiage Kyle can say pro se on the record.</em></p>
+
+<p class="small"><em><strong>LETHAL POLEMIC DECEPTION &mdash; AENEAS-ONASANDER PROTOCOL (LPD-AO) / THE SIEGE BROADCAST.</strong> The jail-call line is recorded by the Travis County Sheriff's Office. The recording is not a leak. It is the channel. Aeneas Tacticus (Poliorketika, fourth century Before Christ) taught defensive information warfare by feeding true intelligence through channels the enemy believes are compromised. Onasander (Strategikos, first century Anno Domini) taught that the appearance of preparation defeats the enemy before contact. Sun Tzu (Art of War) called the supreme excellence winning without fighting. Every Siege Broadcast Read below is a legally true statement of theory-of-attack, spoken openly on a channel we know the Assistant District Attorney's office reviews. Discipline: no factual admissions to elements of the charged offenses; no speaking TO the complainant; no threats to any named prosecutor, judge, officer, or public defender; no third-party coordination instructions on the call; the channel is named at the top of every read; every legal citation is real.</em></p>
+
+<h3>Theory 1 &mdash; Riverside / Article 15.17 magistration timeliness (Fourth Amendment)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>County of Riverside v. McLaughlin</em>, 500 United States 44 (1991) &mdash; the Supreme Court case that says a person arrested without a warrant must be brought before a neutral magistrate for a probable-cause determination within 48 hours.</li>
+  <li><em>Texas Code of Criminal Procedure Article 15.17</em> &mdash; the Texas statute that codifies the same 48-hour rule: "without unnecessary delay, but not later than 48 hours."</li>
+  <li><em>Fourth Amendment to the United States Constitution</em> &mdash; guarantees against unreasonable seizure; a magistration delay beyond 48 hours is presumptively unreasonable.</li>
+  <li><em>Texas Code of Criminal Procedure Article 38.23</em> &mdash; evidence obtained in violation of state or federal law is inadmissible in a Texas criminal trial.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle states he was held on scene, then transported, then booked, then held before seeing any magistrate.</li>
+  <li>Kyle has not received any documentation from the magistration itself &mdash; no signed magistrate's warnings sheet, no timestamp record.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Michael Morton Act discovery request under <em>Texas Code of Criminal Procedure Article 39.14</em> for (a) the arrest time-stamp from the arresting officer's incident report, (b) the booking time-stamp from Travis County Sheriff's Office intake log, (c) the magistrate's warnings-and-rights form signed and time-stamped by the magistrate, and (d) any video recording of the magistration.</li>
+  <li>Texas Public Information Act request under <em>Texas Government Code Chapter 552</em> to the Travis County Sheriff's Office for the same four document classes plus the jail intake video for the 48-hour window post-arrest.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Suppression front.</strong> Statements made during the delay are excluded under Texas Code of Criminal Procedure Article 38.23.</li>
+  <li><strong>Habeas front.</strong> Petition for writ of habeas corpus attacking the entire pre-magistration hold.</li>
+  <li><strong>Section 1983 front.</strong> Title 42 United States Code Section 1983 civil rights damages claim against Travis County for the constitutional violation; individual officer qualified immunity is broken where the 48-hour rule is clearly established.</li>
+  <li><strong>Bond leverage front.</strong> A Riverside violation stains the entire Travis County prosecution; the Assistant District Attorney will bargain hard to keep it out of the record.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Beth records Kyle stating on the next call the sequence: arrested at [time], transported at [time], booked at [time], saw magistrate at [time]. Timestamped audio hardens the record before any officer memory-refresh at a later suppression hearing.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are preserving the timeline of the first forty-eight hours after your arrest.<br>
+Under <em>County of Riverside v. McLaughlin</em>, five hundred United States forty-four, decided nineteen ninety-one, and under Texas Code of Criminal Procedure Article fifteen point seventeen, you were entitled to see a neutral magistrate within forty-eight hours.<br>
+We are filing a Michael Morton Act discovery demand under Texas Code of Criminal Procedure Article thirty-nine point fourteen for the arrest time-stamp, the booking time-stamp, and the magistrate's warnings sheet.<br>
+We are filing a parallel Texas Public Information Act request under Texas Government Code Chapter five hundred fifty-two to the Travis County Sheriff's Office for the intake video across those forty-eight hours.<br>
+Any statements you made during that window are subject to suppression under Texas Code of Criminal Procedure Article thirty-eight point twenty-three.<br>
+The Section 1983 civil rights preservation posture is being maintained under Title Forty-Two United States Code Section 1983.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Prosecutor or judge saying "the magistrate paperwork is in the file" &mdash; that means the timestamp is discoverable now; press for the document today.</li>
+  <li>Any officer statement that the magistration was "delayed due to workload" &mdash; that is a Riverside admission on the record.</li>
+  <li>Jail intake staff avoiding the question of when the magistration occurred &mdash; concealment posture.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I invoke <em>County of Riverside v. McLaughlin</em>, five hundred United States forty-four."</li>
+  <li>"I demand the arrest time-stamp, the booking time-stamp, and the magistrate's warnings sheet, all signed and time-stamped, under Texas Code of Criminal Procedure Article thirty-nine point fourteen."</li>
+  <li>"I move to suppress under Texas Code of Criminal Procedure Article thirty-eight point twenty-three all statements obtained during any magistration delay."</li>
+  <li>"I preserve my Section 1983 claim under Title Forty-Two United States Code Section 1983."</li>
+</ul>
+
+<h3>Theory 2 &mdash; Franks v. Delaware warrant-affidavit challenge</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Franks v. Delaware</em>, 438 United States 154 (1978) &mdash; the Supreme Court case that lets a defendant challenge the truthfulness of statements in the affidavit that produced the warrant.</li>
+  <li><em>Fourth Amendment to the United States Constitution</em> &mdash; a warrant issued on a false or reckless affidavit is not a valid warrant; any seizure under it is unreasonable.</li>
+  <li><em>Texas Code of Criminal Procedure Article 38.23</em> &mdash; the Texas exclusionary rule; evidence obtained in violation of the constitution is inadmissible.</li>
+  <li><em>Texas Code of Criminal Procedure Article 39.14</em> &mdash; the Michael Morton Act; the defense is entitled to the warrant, the supporting affidavit, and every witness statement the state has.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle states the events described in the affidavit did not happen as described.</li>
+  <li>The complainant has since recanted; Beth has a recorded conversation containing the recantation.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Michael Morton Act request under Texas Code of Criminal Procedure Article 39.14 for the warrant, the supporting affidavit, the complainant's original statement, and any officer supplemental reports.</li>
+  <li>Preserve Beth's recantation recording with a written declaration under penalty of perjury describing when, where, and how it was recorded.</li>
+  <li>Motion for Franks hearing on the affidavit once produced.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Warrant-voiding front.</strong> If the affidavit contains a material false statement or reckless omission, the warrant is voided.</li>
+  <li><strong>Fruit-of-the-poisonous-tree front.</strong> Every downstream piece of evidence collapses as fruit of an unlawful seizure.</li>
+  <li><strong>Charge-collapse front.</strong> Charges dependent on the voided-warrant evidence are dismissed.</li>
+  <li><strong>Impeachment front.</strong> The officer who signed the affidavit becomes impeachable at any future proceeding.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Chain of custody log for Beth's recantation recording: device, date, time, location, both voices identified, no editing, original file preserved.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the Franks track on the warrant affidavit.<br>
+Under <em>Franks v. Delaware</em>, four hundred thirty-eight United States one hundred fifty-four, decided nineteen seventy-eight, if the affidavit that produced the warrant contains a material false statement or a reckless omission, the warrant is voided.<br>
+We are filing a Michael Morton Act demand under Texas Code of Criminal Procedure Article thirty-nine point fourteen for the warrant, the supporting affidavit, and every witness statement the state has.<br>
+The recantation recording is preserved with chain of custody.<br>
+Every downstream piece of evidence traces back to that affidavit, so if the affidavit falls, the evidence falls as fruit of the poisonous tree.<br>
+Suppression under Texas Code of Criminal Procedure Article thirty-eight point twenty-three follows automatically.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any Assistant District Attorney statement that "the affidavit stands on the officer's word" &mdash; that is a concession the affidavit is the load-bearing document.</li>
+  <li>Officer testimony that "the complainant told me exactly what is in the affidavit" &mdash; that locks the officer into the recanted statement.</li>
+  <li>Any refusal to produce the affidavit in Michael Morton Act discovery &mdash; that is a Brady violation stacked on top of the Franks issue.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I demand production of the warrant and the supporting affidavit under Texas Code of Criminal Procedure Article thirty-nine point fourteen."</li>
+  <li>"I request a Franks hearing under <em>Franks v. Delaware</em>, four hundred thirty-eight United States one hundred fifty-four."</li>
+  <li>"I move to suppress under Texas Code of Criminal Procedure Article thirty-eight point twenty-three all evidence obtained under a warrant supported by a false or reckless affidavit."</li>
+  <li>"I preserve every derivative-evidence objection as fruit of the poisonous tree."</li>
+</ul>
+
+<h3>Theory 3 &mdash; Brady / Michael Morton Act discovery violation (Texas Code of Criminal Procedure Article 39.14)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Brady v. Maryland</em>, 373 United States 83 (1963) &mdash; the Supreme Court case that says the prosecution must disclose evidence favorable to the accused; suppression is a due-process violation.</li>
+  <li><em>Giglio v. United States</em>, 405 United States 150 (1972) &mdash; extends Brady to impeachment material about state witnesses.</li>
+  <li><em>Texas Code of Criminal Procedure Article 39.14</em> (Michael Morton Act) &mdash; the Texas statute that requires ongoing, affirmative disclosure of police reports, witness statements, and any exculpatory material.</li>
+  <li><em>Texas Disciplinary Rules of Professional Conduct 3.09(d)</em> &mdash; the ethics rule imposing an independent disclosure duty on the prosecutor.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle states no discovery has been provided to him.</li>
+  <li>Kyle has not seen the offense report, the affidavit, the complainant's statement, any officer body-worn-camera footage, or any recorded interview.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Written Michael Morton Act demand under Texas Code of Criminal Procedure Article 39.14 for the complete state file: offense report, all supplements, all witness statements, all body-worn-camera and in-car video, all recorded interviews, all 911 audio, all dispatch logs, all prior-false-report history on the complainant.</li>
+  <li>Written Brady demand for every item of exculpatory or impeaching evidence known to any state actor.</li>
+  <li>If refused or ignored, motion to compel with sanctions request.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Dismissal front.</strong> Willful Brady / Michael Morton violation supports dismissal with prejudice.</li>
+  <li><strong>Sanctions front.</strong> Judicial sanctions against the individual Assistant District Attorney.</li>
+  <li><strong>Bar-complaint front.</strong> State Bar of Texas grievance under Rule 3.09(d).</li>
+  <li><strong>Appellate front.</strong> Preserved Brady violation is a reversal issue at every level.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Written log of every discovery request date, mode of service, and the Assistant District Attorney's response or non-response. Silence becomes exhibit.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the Brady and Michael Morton Act discovery track.<br>
+Under <em>Brady v. Maryland</em>, three hundred seventy-three United States eighty-three, decided nineteen sixty-three, the prosecution has an affirmative duty to disclose favorable evidence.<br>
+Under <em>Giglio v. United States</em>, four hundred five United States one hundred fifty, decided nineteen seventy-two, that duty extends to every piece of impeachment material about a state witness.<br>
+Under Texas Code of Criminal Procedure Article thirty-nine point fourteen &mdash; the Michael Morton Act &mdash; the state must produce the offense report, every witness statement, every body-worn-camera file, every recorded interview, and every prior-false-report record on the complainant.<br>
+We are filing the written demand today; every non-response is being logged.<br>
+Willful violation supports dismissal with prejudice, judicial sanctions against the individual Assistant District Attorney, and a State Bar of Texas grievance under Rule three point zero nine sub d.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>"The file is open, come look at it" &mdash; that is not compliance; Michael Morton requires production, not inspection.</li>
+  <li>"We will get to it before trial" &mdash; that is not compliance; the duty is ongoing.</li>
+  <li>Any statement that the officer or complainant is "unavailable" &mdash; that hints at recantation or witness collapse.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I demand production, not inspection, of the complete state file under Texas Code of Criminal Procedure Article thirty-nine point fourteen."</li>
+  <li>"I demand every item of exculpatory or impeaching evidence known to any state actor under <em>Brady v. Maryland</em> and <em>Giglio v. United States</em>."</li>
+  <li>"I move to compel with sanctions."</li>
+  <li>"I preserve the record for dismissal with prejudice and for a State Bar of Texas grievance under Rule three point zero nine sub d."</li>
+</ul>
+
+<h3>Theory 4 &mdash; Speedy Trial (Sixth Amendment + Texas Constitution Article I Section 10)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Sixth Amendment to the United States Constitution</em> &mdash; guarantees the right to a speedy and public trial.</li>
+  <li><em>Texas Constitution Article I Section 10</em> &mdash; the Texas parallel guarantee.</li>
+  <li><em>Barker v. Wingo</em>, 407 United States 514 (1972) &mdash; the Supreme Court case that establishes the four-factor test: length of delay, reason for delay, defendant's assertion of the right, prejudice to the defendant.</li>
+  <li><em>Doggett v. United States</em>, 505 United States 647 (1992) &mdash; the Supreme Court case that establishes presumptive prejudice from lengthy pre-trial delay.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle has been in pre-trial detention since approximately 2025-11-13 &mdash; approaching 243 days as of 2026-07-12.</li>
+  <li>Kyle has repeatedly demanded a jury trial.</li>
+  <li>Kyle has suffered concrete prejudice: loss of counsel of choice, deterioration of witness memory, loss of employment, out-of-county anchor keeping him held.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Written demand for speedy trial filed with the court and served on the Assistant District Attorney.</li>
+  <li>Motion to dismiss for speedy-trial violation on the Barker four-factor test.</li>
+  <li>Preserve the record of every prior demand and every state-caused continuance.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Dismissal front.</strong> Granted speedy-trial motion is dismissal with prejudice; the case cannot be refiled.</li>
+  <li><strong>Bond leverage front.</strong> Pending speedy-trial motion pressures the state toward bond reduction or diversion offer.</li>
+  <li><strong>Trial-preparation front.</strong> Every continuance the state asks for now cuts against the state on the Barker factors.</li>
+  <li><strong>Section 1983 front.</strong> Extended pre-trial detention without prosecution supports federal civil rights claim under Title 42 United States Code Section 1983.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Beth records Kyle stating on every call: "I demand a speedy trial. I do not consent to further delay." Date-stamped audio hardens the assertion-of-right Barker factor.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are on the speedy-trial track.<br>
+Under the Sixth Amendment to the United States Constitution and Texas Constitution Article One Section Ten you have the right to a speedy trial.<br>
+Under <em>Barker v. Wingo</em>, four hundred seven United States five hundred fourteen, decided nineteen seventy-two, the court weighs length of delay, reason for delay, your assertion of the right, and prejudice to you.<br>
+You have been held approximately two hundred forty-three days pre-trial as of today, July twelfth, two thousand twenty-six.<br>
+Under <em>Doggett v. United States</em>, five hundred five United States six hundred forty-seven, decided nineteen ninety-two, delay of this length is presumptively prejudicial.<br>
+You have repeatedly demanded a jury trial; you have lost counsel of choice, witness memory has deteriorated, and the out-of-county anchor is keeping you held.<br>
+The written speedy-trial demand and motion to dismiss for speedy-trial violation are being filed.<br>
+Granted motion equals dismissal with prejudice.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any court statement about "docket congestion" or "case backlog" &mdash; that is a Barker factor against the state.</li>
+  <li>Prosecutor asking for another continuance &mdash; log it; every one favors the defense.</li>
+  <li>Any suggestion Kyle "waived" speedy trial by requesting new counsel &mdash; that argument fails; a Sixth Amendment right cannot be waived by exercising another Sixth Amendment right.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I demand a speedy trial under the Sixth Amendment and Texas Constitution Article One Section Ten."</li>
+  <li>"I do not consent to any further continuance."</li>
+  <li>"I invoke <em>Barker v. Wingo</em>, four hundred seven United States five hundred fourteen, and <em>Doggett v. United States</em>, five hundred five United States six hundred forty-seven."</li>
+  <li>"I move to dismiss with prejudice for speedy-trial violation."</li>
+</ul>
+
+<h3>Theory 5 &mdash; Article 17.151 mandatory release (Texas Code of Criminal Procedure)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 17.151</em> &mdash; the Texas statute that says if the state is not ready for trial within 90 days of commencement of felony detention, the accused must be released on personal-recognizance bond or reduced bail.</li>
+  <li><em>Ex parte Gill</em>, 413 Southwestern 2d 425 (Texas Court of Criminal Appeals 2013) &mdash; the Texas high-court case that reinforces the mandatory nature of the 90-day rule.</li>
+  <li><em>Rowe v. State</em>, 853 Southwestern 2d 581 (Texas Court of Criminal Appeals 1993) &mdash; the case that clarifies "ready for trial" means the state has a witness available and a case ready to prove, not just a file open.</li>
+  <li><em>Texas Constitution Article I Section 11</em> &mdash; the Texas parallel right to bail.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle has been held on a Felony Three strangulation charge since approximately 2025-11-13.</li>
+  <li>Kyle has never received notice that the state announced ready within the first 90 days of detention.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Motion for release under Texas Code of Criminal Procedure Article 17.151 supported by the docket sheet showing no state announcement of ready within 90 days.</li>
+  <li>If the state now claims retroactive readiness, cross-examine on <em>Rowe v. State</em> &mdash; readiness is not clerical; it requires the actual complainant available.</li>
+  <li>Combine with Theory 6 (out-of-county anchor collateral attack) &mdash; Article 17.151 alone does not clear the anchor.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Release front.</strong> Mandatory personal-recognizance bond or reduced bail on the Travis County Felony 3.</li>
+  <li><strong>Readiness-cross front.</strong> Forces the state to declare whether the complainant is actually available or has recanted.</li>
+  <li><strong>Anchor-clearance combination front.</strong> Combined with Theory 6 (attack the out-of-county anchor), Article 17.151 becomes an actual release, not just a paper release.</li>
+  <li><strong>Record-preservation front.</strong> Every day past the 90-day trigger is a preserved damages count under Section 1983.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Docket-sheet pull &mdash; certified copy of every entry from arrest through the 90-day mark showing no state announcement of ready.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the Article seventeen point one five one mandatory-release track.<br>
+Under Texas Code of Criminal Procedure Article seventeen point one five one, if the state is not ready for trial within ninety days of commencement of felony detention, release on personal recognizance or reduced bail is mandatory.<br>
+Under <em>Rowe v. State</em>, eight hundred fifty-three Southwestern Second five hundred eighty-one, decided nineteen ninety-three, ready means an actual available complainant and a case ready to prove, not a file open.<br>
+The certified docket sheet is being pulled today to prove no state announcement of ready within that ninety-day window.<br>
+Combined with the Theory Six attack on the out-of-county anchor warrant, this becomes an actual release, not a paper release.<br>
+Every day of detention past the ninety-day trigger is preserved as a Section 1983 damages count under Title Forty-Two United States Code Section 1983.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any belated state announcement of ready &mdash; the announcement must have been made timely; retroactive readiness fails under <em>Rowe</em>.</li>
+  <li>Any suggestion the complainant is "unavailable" or "not cooperating" &mdash; that is a readiness failure and a Franks-adjacent admission.</li>
+  <li>Court asking whether Kyle wants a reduced bond instead of release &mdash; Article 17.151 provides both options; ask for personal recognizance.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I move for release under Texas Code of Criminal Procedure Article seventeen point one five one."</li>
+  <li>"I demand the state prove readiness with an actual available complainant, not a docket entry, under <em>Rowe v. State</em>, eight hundred fifty-three Southwestern Second five hundred eighty-one."</li>
+  <li>"I request personal-recognizance bond, alternatively reduced bail."</li>
+  <li>"I preserve every day of over-detention as a Section 1983 damages count."</li>
+</ul>
+
+<h3>Theory 6 &mdash; Out-of-County anchor warrant collateral attack</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 11.01 and Article 11.05</em> &mdash; habeas corpus jurisdiction; a Texas court can inquire into the legality of any restraint under any warrant.</li>
+  <li><em>Texas Code of Criminal Procedure Article 15.03</em> &mdash; the requisites of a valid warrant.</li>
+  <li><em>Fourth Amendment to the United States Constitution</em> &mdash; a warrant lacking probable cause on its face is void.</li>
+  <li><em>Texas Code of Criminal Procedure Article 12.01 &mdash; 12.05</em> &mdash; the statutes of limitation on Texas offenses.</li>
+  <li><em>Texas Government Code Chapter 552</em> &mdash; Texas Public Information Act; used to compel production of the warrant and the affidavit from the issuing county.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle has an out-of-county anchor warrant with a listed bond of $100,000 tied to cause number 199806782026.</li>
+  <li>Kyle has not been shown the warrant, has not been shown the supporting affidavit, and has not been told the issuing county in writing.</li>
+  <li>The face of the cause number contains "1998" &mdash; suggesting an underlying offense date potentially outside multiple statutes of limitation.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Texas Public Information Act request under Texas Government Code Chapter 552 to the Travis County Sheriff's Office for the copy of the anchor warrant, the transmittal cover, and the issuing-county detainer.</li>
+  <li>Once issuing county identified, Texas Public Information Act request to that county's clerk for the warrant, affidavit, and case history.</li>
+  <li>Habeas corpus petition in the issuing county attacking staleness, defective probable cause, statute-of-limitations bar, or facial invalidity.</li>
+  <li>Parallel motion in Travis County to quash the detainer if the underlying warrant is void.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Anchor-drop front.</strong> If the anchor warrant is quashed, the $100,000 anchor drops; Kyle becomes releasable on Travis County matters alone.</li>
+  <li><strong>Cross-suppression front.</strong> A void anchor voids any downstream evidence transferred to Travis County under it.</li>
+  <li><strong>Limitations front.</strong> A 1998-era cause number implicates statute-of-limitations bars on many Texas offenses.</li>
+  <li><strong>Section 1983 front.</strong> Detention under a facially void warrant strips qualified immunity.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Written log of every attempt to identify the issuing county and every response or non-response from Travis County Sheriff's Office intake and records.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the out-of-county anchor warrant collateral attack.<br>
+The anchor warrant carries a listed bond of one hundred thousand dollars against cause number one nine nine eight zero six seven eight two zero two six.<br>
+Under Texas Code of Criminal Procedure Articles eleven point zero one and eleven point zero five, a Texas court has habeas jurisdiction over any restraint under any warrant.<br>
+Under Texas Government Code Chapter five hundred fifty-two, we are demanding the anchor warrant, the transmittal cover, and the issuing-county detainer from the Travis County Sheriff's Office.<br>
+Once the issuing county is identified, we file a Texas Public Information Act request there for the warrant and the affidavit.<br>
+Under Texas Code of Criminal Procedure Article fifteen point zero three, a warrant must be facially valid.<br>
+Under Texas Code of Criminal Procedure Articles twelve point zero one through twelve point zero five, a nineteen-ninety-eight-era cause number implicates statute-of-limitations bars.<br>
+Habeas corpus in the issuing county attacks staleness, defective probable cause, limitations bar, or facial invalidity.<br>
+If the anchor falls, the one-hundred-thousand-dollar hold falls and Travis County release opens.<br>
+Section 1983 preservation is maintained under Title Forty-Two United States Code Section 1983.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any Travis County staff statement that "we don't have the warrant, the other county does" &mdash; that is the concession that grounds the Public Information Act request.</li>
+  <li>Any reference to a specific county name in connection with cause 199806782026 &mdash; log the date, source, and any documentation.</li>
+  <li>Any suggestion the anchor is "just a hold, not a case" &mdash; that is a facial-invalidity flag.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I demand production of the anchor warrant and the supporting affidavit under Texas Government Code Chapter five hundred fifty-two."</li>
+  <li>"I demand identification of the issuing county for cause one nine nine eight zero six seven eight two zero two six."</li>
+  <li>"I preserve my habeas corpus challenge under Texas Code of Criminal Procedure Articles eleven point zero one and eleven point zero five in the issuing county."</li>
+  <li>"I move to quash the detainer in Travis County if the underlying warrant is void."</li>
+</ul>
+
+<h3>Theory 7 &mdash; Article 17.032 bond conditions for veterans (Texas Code of Criminal Procedure)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 17.032</em> &mdash; the Texas statute that requires the magistrate to consider veteran status, combat service, and service-connected Traumatic Brain Injury or Post-Traumatic Stress Disorder when setting bond conditions.</li>
+  <li><em>Texas Constitution Article I Section 11 and Section 11a</em> &mdash; the Texas parallel bail guarantee; excessive bail is prohibited.</li>
+  <li><em>Eighth Amendment to the United States Constitution</em> &mdash; the federal excessive-bail prohibition.</li>
+  <li><em>Texas Code of Criminal Procedure Article 17.15</em> &mdash; bail cannot be used as an instrument of oppression; the ability to make bond is a factor.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle is a Marine Corps Special Operations Command combat veteran.</li>
+  <li>Kyle holds a Silver Star and a Purple Heart.</li>
+  <li>Kyle is 100 percent Department of Veterans Affairs service-connected.</li>
+  <li>Kyle carries service-connected Traumatic Brain Injury and Post-Traumatic Stress Disorder diagnoses.</li>
+  <li>The bond-setting record does not reflect any consideration of these facts.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Motion for bond reduction and modification of conditions under Texas Code of Criminal Procedure Article 17.032.</li>
+  <li>Supporting exhibits: Department of Veterans Affairs disability rating letter, Silver Star citation, Purple Heart citation, Marine Corps Special Operations Command service record, treatment records.</li>
+  <li>Request for evidentiary hearing with the Travis County Veterans Treatment Court coordinator (Jolene Grajczyk) available to testify to program suitability.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Bond-drop front.</strong> Reduction of the Travis stack toward personal recognizance with veteran-specific conditions instead of an ankle monitor.</li>
+  <li><strong>Diversion-pipeline front.</strong> Sets the table for Theory 8 (Veterans Treatment Court) &mdash; the same evidentiary record supports both.</li>
+  <li><strong>Public-record front.</strong> A veteran-status bond hearing is media-relevant and puts every actor on notice.</li>
+  <li><strong>Reversible-error front.</strong> If the original bond record ignored Article 17.032, that is preserved appellate error.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Character-battalion letters from Chain of Command per §15 delivered as attachments to the Article 17.032 motion.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are on the Article seventeen point zero three two veteran bond track.<br>
+Under Texas Code of Criminal Procedure Article seventeen point zero three two the magistrate must consider your Marine Corps Special Operations Command combat service, your Silver Star, your Purple Heart, your one hundred percent Department of Veterans Affairs service-connected posture, and your service-connected Traumatic Brain Injury and Post-Traumatic Stress Disorder diagnoses when setting bond conditions.<br>
+Under the Eighth Amendment to the United States Constitution, Texas Constitution Article One Section Eleven, and Texas Code of Criminal Procedure Article seventeen point fifteen, bail cannot be excessive and cannot be used as an instrument of oppression.<br>
+Your Department of Veterans Affairs disability letter, Silver Star citation, Purple Heart citation, and Marine Corps Special Operations Command service record are being filed as exhibits.<br>
+Jolene Grajczyk from the Travis County Veterans Treatment Court is being asked to testify at the evidentiary hearing.<br>
+The requested outcome is personal recognizance with veteran-specific conditions instead of an ankle monitor.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any court comment that "we don't reduce felony bonds this high" &mdash; that ignores Article 17.032; press with the statute in hand.</li>
+  <li>Any suggestion an ankle monitor is required &mdash; propose veteran-specific conditions in the alternative (Veterans Affairs mental health check-ins, Veterans Treatment Court supervision).</li>
+  <li>Any state opposition rooted in the strangulation charge alone &mdash; that is precisely the fact-pattern Article 17.032 exists to reach.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I invoke Texas Code of Criminal Procedure Article seventeen point zero three two."</li>
+  <li>"I am a Marine Corps Special Operations Command combat veteran, Silver Star, Purple Heart, one hundred percent Department of Veterans Affairs service-connected, with service-connected Traumatic Brain Injury and Post-Traumatic Stress Disorder."</li>
+  <li>"I move for bond reduction to personal recognizance with veteran-specific conditions."</li>
+  <li>"I preserve every Eighth Amendment excessive-bail objection."</li>
+</ul>
+
+<h3>Theory 8 &mdash; Veterans Treatment Court diversion (Texas Government Code Chapter 124)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Government Code Chapter 124</em> &mdash; the Texas statute authorizing Veterans Treatment Court programs and pre-trial diversion for eligible veterans.</li>
+  <li><em>Texas Code of Criminal Procedure Article 55.01 and Chapter 55</em> &mdash; the expunction statute that governs record-clearing after successful diversion.</li>
+  <li><em>Local Travis County Veterans Treatment Court operating rules</em> &mdash; program-specific eligibility and completion terms; Jolene Grajczyk is the coordinator of record.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle is a combat veteran with service-connected conditions.</li>
+  <li>Jolene Grajczyk has confirmed Kyle is eligible on the Felony Three strangulation charge.</li>
+  <li>Kyle is willing to complete a diversion program that clears his record.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Written application to Travis County Veterans Treatment Court via Jolene Grajczyk.</li>
+  <li>Motion in the criminal cause requesting transfer to Veterans Treatment Court supervision under Texas Government Code Chapter 124.</li>
+  <li>Program completion plan filed with the criminal court.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Dismissal front.</strong> Successful program completion equals dismissal on the Travis County matters.</li>
+  <li><strong>Expunction front.</strong> Post-dismissal expunction under Texas Code of Criminal Procedure Chapter 55 clears the record.</li>
+  <li><strong>Cleanest-record front.</strong> This is the cleanest no-record outcome available inside the Travis County system.</li>
+  <li><strong>Bond-mooting front.</strong> Acceptance into program can moot the bond question.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Coordinate with Chain of Command character-battalion signatories per §15 to file letters of support directly with Jolene Grajczyk.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are on the Veterans Treatment Court diversion track.<br>
+Under Texas Government Code Chapter one hundred twenty-four you are eligible for pre-trial diversion via Veterans Treatment Court.<br>
+Jolene Grajczyk, the Travis County Veterans Treatment Court coordinator, has already confirmed you are eligible on the Felony Three strangulation charge.<br>
+The written application is being filed with Jolene Grajczyk; the motion to transfer to Veterans Treatment Court supervision is being filed in the criminal cause.<br>
+Successful program completion equals dismissal on the Travis County matters.<br>
+Post-dismissal expunction under Texas Code of Criminal Procedure Chapter fifty-five clears the record.<br>
+This is the cleanest no-record outcome available inside the Travis County system.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any Assistant District Attorney objection to diversion &mdash; the objection must be reasoned; blanket refusal is grounds for the Theory 11 duty-of-justice appeal.</li>
+  <li>Court-scheduling references to a "Veterans docket day" &mdash; log the calendar.</li>
+  <li>Any suggestion Kyle must plead guilty as a condition of entering the program &mdash; some programs require it, some do not; a plea posture must be evaluated against Theories 2, 6, and 13 first.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I apply for Travis County Veterans Treatment Court under Texas Government Code Chapter one hundred twenty-four."</li>
+  <li>"I request transfer to Veterans Treatment Court supervision."</li>
+  <li>"I reserve my rights on Theories One through Seven and Ten through Thirteen pending program acceptance."</li>
+  <li>"On successful completion I move for dismissal and expunction under Texas Code of Criminal Procedure Chapter fifty-five."</li>
+</ul>
+
+<h3>Theory 9 &mdash; Article 42A.541 pre-trial diversion (Texas Code of Criminal Procedure)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 42A.541</em> &mdash; the Texas statute authorizing pre-trial diversion for veterans outside a specialty court; successful completion results in dismissal.</li>
+  <li><em>Texas Code of Criminal Procedure Chapter 55</em> &mdash; the expunction pathway following dismissal.</li>
+  <li><em>Texas Government Code Chapter 124</em> &mdash; the parallel Veterans Treatment Court authority; can operate stacked or in the alternative.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle is a combat veteran with service-connected conditions.</li>
+  <li>Kyle is willing to complete a pre-trial diversion program even if Travis County Veterans Treatment Court (Theory 8) is unavailable, delayed, or denied.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Motion under Texas Code of Criminal Procedure Article 42A.541 requesting court-ordered pre-trial diversion.</li>
+  <li>Diversion program plan detailing supervision, counseling, and reporting terms.</li>
+  <li>Written concurrence request to the Assistant District Attorney; refusal is preserved as a Theory 11 duty-of-justice issue.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Dismissal front.</strong> Successful diversion equals dismissal.</li>
+  <li><strong>Expunction front.</strong> Chapter 55 expunction eligibility follows.</li>
+  <li><strong>Alternative-track front.</strong> Preserves a diversion route if Veterans Treatment Court seats are unavailable or scheduling drags.</li>
+  <li><strong>Prosecutorial-pressure front.</strong> Refusal by the state to concur becomes exhibit in Theory 11 (Article 2.01 duty of justice).</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Parallel Theory 8 and Theory 9 filings; the state cannot refuse both without a written reason on the record.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the Article forty-two A point five four one pre-trial diversion track in parallel with Veterans Treatment Court.<br>
+Under Texas Code of Criminal Procedure Article forty-two A point five four one you are eligible for court-ordered pre-trial diversion for veterans, with successful completion equaling dismissal.<br>
+Under Texas Code of Criminal Procedure Chapter fifty-five expunction eligibility follows dismissal.<br>
+The diversion program plan is being filed today with supervision, counseling, and reporting terms specified.<br>
+Written concurrence request goes to the Assistant District Attorney; refusal will be preserved as exhibit for the Theory Eleven duty-of-justice appeal to the elected District Attorney under Texas Code of Criminal Procedure Article two point zero one.<br>
+Parallel Theory Eight and Theory Nine filings ensure the state cannot refuse both without a written reason on the record.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any Assistant District Attorney statement declining diversion &mdash; capture the exact language for Theory 11.</li>
+  <li>Court comment that "we usually route veterans to Veterans Treatment Court" &mdash; that supports Theory 8 as primary and Theory 9 as backup.</li>
+  <li>Any indication of a scheduling backlog on the Veterans Treatment Court docket &mdash; that supports Theory 9 as the faster path.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I move for pre-trial diversion under Texas Code of Criminal Procedure Article forty-two A point five four one."</li>
+  <li>"I am running Theory Eight (Veterans Treatment Court) and Theory Nine (Article forty-two A point five four one) in parallel; I ask the court to select whichever moves fastest."</li>
+  <li>"State refusal of both without written reason preserves my Theory Eleven appeal under Texas Code of Criminal Procedure Article two point zero one."</li>
+  <li>"On successful completion I move for dismissal and expunction under Texas Code of Criminal Procedure Chapter fifty-five."</li>
+</ul>
+
+<h3>Theory 10 &mdash; Sixth Amendment right to counsel of choice / Fair Defense Act</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Sixth Amendment to the United States Constitution</em> &mdash; guarantees the assistance of counsel for defense.</li>
+  <li><em>United States v. Gonzalez-Lopez</em>, 548 United States 140 (2006) &mdash; the Supreme Court case that says wrongful denial of counsel of choice is structural error, not subject to harmless-error review.</li>
+  <li><em>Texas Fair Defense Act &mdash; Texas Government Code Chapter 79 and Texas Code of Criminal Procedure Article 1.051</em> &mdash; requires prompt appointment of counsel in indigent cases, typically within three working days of the request.</li>
+  <li><em>Faretta v. California</em>, 422 United States 806 (1975) &mdash; the Supreme Court case that says a defendant has the right to represent himself pro se.</li>
+  <li><em>McKaskle v. Wiggins</em>, 465 United States 168 (1984) &mdash; the Supreme Court case that governs standby counsel when a defendant is pro se.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle fired both prior counsel with cause.</li>
+  <li>Kyle filed State Bar of Texas grievances against both.</li>
+  <li>Kyle is prepared to proceed pro se with standby counsel appointed under McKaskle if replacement counsel is not promptly seated.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Written invocation of counsel of choice and, in the alternative, pro se with standby counsel.</li>
+  <li>Motion under Texas Code of Criminal Procedure Article 1.051 and the Texas Fair Defense Act for prompt appointment.</li>
+  <li>Preservation of every date-stamped request and the state's response for a Gonzalez-Lopez structural-error record.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Counsel-appointment front.</strong> Court is forced to seat qualified counsel promptly or to seat standby counsel behind Kyle's pro se posture.</li>
+  <li><strong>Structural-error front.</strong> Wrongful denial of counsel of choice is structural error under Gonzalez-Lopez &mdash; automatic reversal on appeal.</li>
+  <li><strong>Pro se front.</strong> Faretta plus McKaskle preserves Kyle's autonomy while keeping standby counsel available for technical issues.</li>
+  <li><strong>Speedy-trial synergy front.</strong> Every counsel delay strengthens Theory 4 (Barker factors).</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Written Faretta invocation kept in the PRO SE DOSSIER; standby counsel request served in the alternative.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are locking your Sixth Amendment counsel-of-choice posture and your Faretta pro se posture in the alternative.<br>
+Under the Sixth Amendment to the United States Constitution you have the right to counsel of choice.<br>
+Under <em>United States v. Gonzalez-Lopez</em>, five hundred forty-eight United States one hundred forty, decided two thousand six, wrongful denial of counsel of choice is structural error &mdash; automatic reversal.<br>
+Under the Texas Fair Defense Act &mdash; Texas Government Code Chapter seventy-nine and Texas Code of Criminal Procedure Article one point zero five one &mdash; appointment of counsel in indigent cases must be prompt, typically within three working days of the request.<br>
+Under <em>Faretta v. California</em>, four hundred twenty-two United States eight hundred six, decided nineteen seventy-five, you have the right to represent yourself pro se.<br>
+Under <em>McKaskle v. Wiggins</em>, four hundred sixty-five United States one hundred sixty-eight, decided nineteen eighty-four, standby counsel is appointed to support a pro se defendant without displacing his autonomy.<br>
+The written Faretta invocation, the standby counsel request, and the Texas Fair Defense Act motion are all going into the record.<br>
+Every counsel-delay day strengthens the Theory Four speedy-trial factors under <em>Barker v. Wingo</em>.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Court statement that "you must accept the counsel we appoint" &mdash; that ignores counsel of choice; press with Gonzalez-Lopez.</li>
+  <li>Court statement that "pro se is a bad idea, you'll lose" &mdash; that violates Faretta; the right does not depend on the court's opinion.</li>
+  <li>Any suggestion standby counsel will "control" the trial &mdash; that violates McKaskle; standby supports, does not displace.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I invoke counsel of choice under the Sixth Amendment and <em>United States v. Gonzalez-Lopez</em>, five hundred forty-eight United States one hundred forty."</li>
+  <li>"In the alternative, I invoke Faretta pro se representation under <em>Faretta v. California</em>, four hundred twenty-two United States eight hundred six, with standby counsel under <em>McKaskle v. Wiggins</em>, four hundred sixty-five United States one hundred sixty-eight."</li>
+  <li>"I demand prompt appointment under the Texas Fair Defense Act, Texas Government Code Chapter seventy-nine, and Texas Code of Criminal Procedure Article one point zero five one."</li>
+  <li>"I preserve every day of counsel delay for my speedy-trial motion under <em>Barker v. Wingo</em>."</li>
+</ul>
+
+<h3>Theory 11 &mdash; Prosecutorial duty of justice (Texas Code of Criminal Procedure Article 2.01)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 2.01</em> &mdash; the Texas statute that says the prosecutor's duty "shall not be to convict, but to see that justice is done."</li>
+  <li><em>Texas Disciplinary Rules of Professional Conduct 3.09</em> &mdash; the special responsibilities of a prosecutor, including declining charges unsupported by probable cause and disclosing exculpatory evidence.</li>
+  <li><em>Berger v. United States</em>, 295 United States 78 (1935) &mdash; the Supreme Court case that describes the prosecutor as the "servant of the law" whose interest is that "justice shall be done."</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>The state is aware of the complainant's recantation.</li>
+  <li>The state is aware of Kyle's Marine Corps Special Operations Command combat history, Silver Star, Purple Heart, and 100 percent Department of Veterans Affairs service-connected posture.</li>
+  <li>The state is aware Kyle is eligible for Veterans Treatment Court diversion (Jolene Grajczyk confirmation).</li>
+  <li>The state has refused to concur in diversion or to move to drop the strangulation charge.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Written appeal to the elected Travis County District Attorney &mdash; not the line Assistant District Attorney &mdash; enumerating each duty-of-justice failing.</li>
+  <li>If refused, grievance to the State Bar of Texas under Rule 3.09.</li>
+  <li>If duty-of-justice failing crosses into willful Brady suppression, additional grievance under Rule 3.09(d).</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Elected-D.A. front.</strong> The elected District Attorney reviews the line Assistant District Attorney's decision; overrules or leaves standing.</li>
+  <li><strong>Bar-discipline front.</strong> A pending State Bar grievance changes the Assistant District Attorney's posture within the office.</li>
+  <li><strong>Public-record front.</strong> The appeal itself becomes exhibit for §17 political leverage.</li>
+  <li><strong>Trial-avoidance front.</strong> Duty-of-justice pressure is often what unlocks a dismissal or diversion where facts alone did not.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Copy of the written appeal delivered to the §15 Chain of Command Character Battalion and the §17 Political Leverage recipients so the elected District Attorney knows the appeal is not being pursued in isolation.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the Article two point zero one duty-of-justice appeal to the elected District Attorney.<br>
+Under Texas Code of Criminal Procedure Article two point zero one the prosecutor's duty is not to convict but to see that justice is done.<br>
+Under Texas Disciplinary Rules of Professional Conduct Rule three point zero nine the prosecutor must decline charges unsupported by probable cause and must disclose exculpatory evidence.<br>
+Under <em>Berger v. United States</em>, two hundred ninety-five United States seventy-eight, decided nineteen thirty-five, the prosecutor is the servant of the law.<br>
+The state is on notice of the complainant's recantation, of your Marine Corps Special Operations Command combat history, of your Silver Star, of your Purple Heart, of your one hundred percent Department of Veterans Affairs service-connected posture, and of Jolene Grajczyk's confirmation that you are Veterans Treatment Court eligible.<br>
+The refusal to concur in diversion or to drop the strangulation charge is the failure that grounds this appeal to the elected Travis County District Attorney.<br>
+State Bar of Texas grievance under Rule three point zero nine follows if the appeal is refused.<br>
+Copies of the appeal go to Chain of Command Character Battalion and the Political Leverage recipients so the elected District Attorney knows this is not proceeding in isolation.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any Assistant District Attorney statement that "the elected District Attorney backs my call" &mdash; that is either accurate (in which case the elected District Attorney owns the failure) or inaccurate (in which case the elected District Attorney will want to know).</li>
+  <li>Any hint that the office has "moved past" the strangulation charge &mdash; that suggests the appeal is landing.</li>
+  <li>Any comment about a "policy" of not diverting family-violence cases &mdash; that is a policy, not a duty-of-justice determination; press with Article 2.01.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I invoke Texas Code of Criminal Procedure Article two point zero one."</li>
+  <li>"I request the elected Travis County District Attorney's personal review of the line Assistant District Attorney's declination of diversion."</li>
+  <li>"I preserve my State Bar of Texas grievance under Texas Disciplinary Rules of Professional Conduct Rule three point zero nine."</li>
+  <li>"I incorporate <em>Berger v. United States</em>, two hundred ninety-five United States seventy-eight, into the record."</li>
+</ul>
+
+<h3>Theory 12 &mdash; Recantation evidence + witness-tampering shield (Texas Code of Criminal Procedure Article 38.371(b))</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 38.371(b)</em> &mdash; in family-violence cases, defense may present expert testimony to explain witness dynamics, including recantation.</li>
+  <li><em>Texas Rules of Evidence 613</em> &mdash; prior inconsistent statements of a witness are admissible for impeachment.</li>
+  <li><em>Texas Rules of Evidence 803(5) and 803(24)</em> &mdash; recorded recollection and statement against interest hearsay exceptions.</li>
+  <li><em>Texas Penal Code Section 36.05</em> &mdash; witness tampering statute; a shield, not a trap &mdash; Beth's conduct is documented as passive recording, not coercion.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>The complainant has stated to Beth that the events did not happen as originally reported.</li>
+  <li>Beth has a recorded conversation containing that recantation.</li>
+  <li>Beth is not a party to the criminal proceeding; the recording was made in the ordinary course of a personal conversation.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Sealed lodging of the recantation recording with counsel and preservation-of-evidence letter to the Assistant District Attorney.</li>
+  <li>Motion in limine to admit the recording and to admit expert testimony on recantation dynamics under Article 38.371(b).</li>
+  <li>If the state moves to bar the recording, cross-motion under Texas Rules of Evidence 613 and 803(24).</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Credibility-destruction front.</strong> The complainant's original statement collapses at trial.</li>
+  <li><strong>Reasonable-doubt front.</strong> Jury acquittal path opens.</li>
+  <li><strong>Pre-trial-dismissal front.</strong> The Assistant District Attorney does not want to try a losing case; leverage for dismissal or Theory 8 or 9 diversion increases.</li>
+  <li><strong>Witness-tampering shield front.</strong> Documented chain of custody and passive-recording posture protects Beth from any counter-allegation.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Beth's declaration under penalty of perjury describing when, where, and how the recording was made, with confirmation she did not induce, threaten, coerce, or offer anything of value for the complainant's statement.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the recantation and Article thirty-eight point three seven one sub b track.<br>
+Under Texas Code of Criminal Procedure Article thirty-eight point three seven one sub b, in family-violence cases the defense may present expert testimony to explain witness dynamics including recantation.<br>
+The recantation recording is sealed with counsel and a preservation-of-evidence letter has been sent to the Assistant District Attorney.<br>
+Under Texas Rules of Evidence six hundred thirteen the recording is admissible as a prior inconsistent statement for impeachment.<br>
+Under Texas Rules of Evidence eight hundred three sub five and sub twenty-four the recording may qualify as recorded recollection or as a statement against interest.<br>
+My declaration under penalty of perjury describes the recording circumstances and confirms no inducement, threat, coercion, or thing of value.<br>
+Texas Penal Code Section thirty-six point zero five witness tampering does not reach passive documentation.<br>
+The complainant's original statement collapses at trial; the reasonable-doubt threshold for acquittal opens; the pre-trial dismissal leverage increases.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any Assistant District Attorney suggestion that Beth "tampered" with the witness &mdash; the sworn declaration and chain of custody defeat the suggestion.</li>
+  <li>Any court comment about "family-violence victim-recantation studies" &mdash; that is the doorway to Article 38.371(b) expert testimony.</li>
+  <li>Any hint the state cannot locate the complainant &mdash; that is a readiness failure that feeds Theory 5.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I invoke Texas Code of Criminal Procedure Article thirty-eight point three seven one sub b."</li>
+  <li>"I move for admission of the recantation recording under Texas Rules of Evidence six hundred thirteen and eight hundred three sub twenty-four."</li>
+  <li>"I move for admission of expert testimony on recantation dynamics."</li>
+  <li>"I preserve the record against any Section thirty-six point zero five witness-tampering counter-allegation; the recording is passive documentation with chain of custody."</li>
+</ul>
+
+<h3>Theory 13 &mdash; No warrant shown, no paperwork given at arrest (Texas Code of Criminal Procedure Article 15.26 + Fourth / Sixth / Fourteenth Amendments)</h3>
+
+<p><strong>Rule stack.</strong></p>
+<ul>
+  <li><em>Texas Code of Criminal Procedure Article 15.26</em> &mdash; the Texas statute that says the officer executing an arrest warrant must, upon request, show the warrant or state its contents to the arrestee.</li>
+  <li><em>Fourth Amendment to the United States Constitution</em> &mdash; arrest requires a valid warrant or on-scene probable cause; the record must reflect one or the other.</li>
+  <li><em>Sixth Amendment to the United States Constitution</em> per <em>Russell v. United States</em>, 369 United States 749 (1962) &mdash; the Supreme Court case that says the accused has the right to be informed of the nature and cause of the accusation.</li>
+  <li><em>Fourteenth Amendment to the United States Constitution</em> &mdash; procedural due process requires notice of the basis of seizure.</li>
+  <li><em>Texas Code of Criminal Procedure Article 15.17</em> &mdash; prompt magistration includes being informed of the accusation on the record.</li>
+  <li><em>Franks v. Delaware</em>, 438 United States 154 (1978) &mdash; the Supreme Court case that says the defense's right to test the underlying affidavit is meaningless if the affidavit is never surfaced.</li>
+  <li><em>Texas Code of Criminal Procedure Article 38.23</em> &mdash; the Texas exclusionary rule; evidence obtained in violation of state law is inadmissible.</li>
+</ul>
+
+<p><strong>Kyle's stated fact.</strong></p>
+<ul>
+  <li>Kyle states at the time of arrest he was neither shown paperwork nor given paperwork.</li>
+  <li>Kyle did not see the warrant.</li>
+  <li>Kyle was not handed a copy of the affidavit.</li>
+  <li>Kyle was not walked through the charge on scene.</li>
+</ul>
+
+<p><strong>Trigger.</strong></p>
+<ul>
+  <li>Michael Morton Act request under <em>Texas Code of Criminal Procedure Article 39.14</em> for (a) the arrest warrant, (b) the supporting affidavit, (c) the return of service, (d) the arresting officer's incident report, (e) body-worn-camera footage of the arrest itself, and (f) dispatch audio.</li>
+  <li>Parallel Texas Public Information Act request under <em>Texas Government Code Chapter 552</em> to the Melissa Police Department (Collin County arrest agency for the out-of-county anchor) for the same six document classes plus the officer-shift roster and the warrant-return log.</li>
+  <li>Ten business day statutory response window on the Public Information Act request.</li>
+</ul>
+
+<p><strong>Effect &mdash; multi-front.</strong></p>
+<ul>
+  <li><strong>Suppression front.</strong> If the arresting officer did not show or announce the warrant when Kyle asked, statements taken post-arrest are suppressible under Texas Code of Criminal Procedure Article 38.23.</li>
+  <li><strong>Franks front.</strong> The State cannot both withhold the affidavit and claim the arrest was clean. Any material false statement or omission voids the warrant &mdash; downstream evidence collapses as fruit of the poisonous tree.</li>
+  <li><strong>Notice front.</strong> Sixth Amendment / Russell / Fourteenth Amendment demand for a bill of particulars &mdash; a court-ordered detailed statement of what Kyle is accused of, from whom, on what date, on what factual basis.</li>
+  <li><strong>Section 1983 preservation.</strong> If body-worn-camera or dispatch audio confirms Kyle asked to see the warrant and was refused, the individual officer loses qualified immunity on the Article 15.26 violation. Preservation posture only while Kyle is detained.</li>
+</ul>
+
+<p><strong>Companion move.</strong></p>
+<ul>
+  <li>Beth records Kyle stating this fact verbatim on the next jail call, timestamped. That recording is preserved as Kyle's contemporaneous statement and hardens the record against later officer memory-refresh at suppression hearing.</li>
+</ul>
+
+<p><strong>Siege Broadcast Read &mdash; verbatim jail-call script for Beth.</strong></p>
+<div class="callout small">
+This call is recorded by the Travis County Sheriff's Office.<br>
+Beth is not Kyle's attorney and this is not a privileged communication.<br>
+Kyle, we are opening the no-warrant-shown, no-paperwork-given track.<br>
+Under Texas Code of Criminal Procedure Article fifteen point twenty-six the officer executing an arrest warrant must, upon request, show the warrant or state its contents to the arrestee.<br>
+Under the Fourth Amendment to the United States Constitution the record must reflect a valid warrant or on-scene probable cause.<br>
+Under the Sixth Amendment to the United States Constitution and <em>Russell v. United States</em>, three hundred sixty-nine United States seven hundred forty-nine, decided nineteen sixty-two, you have the right to be informed of the nature and cause of the accusation.<br>
+Under the Fourteenth Amendment to the United States Constitution procedural due process requires notice of the basis of your seizure.<br>
+Under <em>Franks v. Delaware</em>, four hundred thirty-eight United States one hundred fifty-four, decided nineteen seventy-eight, the affidavit must be surfaced for defense testing.<br>
+The Michael Morton Act request under Texas Code of Criminal Procedure Article thirty-nine point fourteen and the parallel Texas Public Information Act request under Texas Government Code Chapter five hundred fifty-two to the Melissa Police Department are both being filed today.<br>
+Suppression under Texas Code of Criminal Procedure Article thirty-eight point twenty-three, Franks voiding of the warrant, a bill of particulars, and Section 1983 preservation under Title Forty-Two United States Code Section 1983 all open simultaneously.<br>
+State the fact verbatim now &mdash; that you were neither shown paperwork nor given paperwork at arrest.<br>
+Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel.
+</div>
+
+<p><strong>Things to listen for.</strong></p>
+<ul>
+  <li>Any officer testimony that "I told him what the warrant was for" without producing the warrant on scene &mdash; that is Article 15.26 partial compliance and does not cure the paperwork failure.</li>
+  <li>Body-worn-camera footage of Kyle asking to see the warrant &mdash; that is qualified-immunity killer under Section 1983.</li>
+  <li>Any refusal by Melissa Police Department to produce under Chapter 552 within ten business days &mdash; that is a Texas Public Information Act violation with attorney-fee shifting.</li>
+</ul>
+
+<p><strong>Specific verbiage &mdash; Kyle pro se on the record.</strong></p>
+<ul>
+  <li>"I invoke Texas Code of Criminal Procedure Article fifteen point twenty-six."</li>
+  <li>"I state on the record that I was neither shown paperwork nor given paperwork at the time of arrest."</li>
+  <li>"I demand production under Texas Code of Criminal Procedure Article thirty-nine point fourteen of the warrant, the affidavit, the return of service, the incident report, the body-worn-camera footage, and the dispatch audio."</li>
+  <li>"I demand a bill of particulars under the Sixth Amendment, <em>Russell v. United States</em>, three hundred sixty-nine United States seven hundred forty-nine, and the Fourteenth Amendment."</li>
+  <li>"I move to suppress under Texas Code of Criminal Procedure Article thirty-eight point twenty-three."</li>
+  <li>"I preserve my Section 1983 claim under Title Forty-Two United States Code Section 1983."</li>
+</ul>
+
+<h3>Attack-sequence recommended</h3>
+<div class="callout">
+<ol>
+  <li><strong>Immediate:</strong> Theory 6 (identify + attack out-of-county anchor). Nothing else matters until this is cleared.</li>
+  <li><strong>Parallel week-1:</strong> Theory 7 (Article 17.032 bond-reduction motion citing Marine Corps Special Operations Command combat service).</li>
+  <li><strong>Week-1 to week-2:</strong> Theory 3 (Michael Morton discovery demand); Theory 10 (counsel-of-choice motion if the court is stalling on new counsel).</li>
+  <li><strong>Week-2 to week-4:</strong> Theory 8 (Veterans Treatment Court diversion application via Jolene Grajczyk); Theory 12 (build recantation record).</li>
+  <li><strong>Reserve for trial-track:</strong> Theory 4 (speedy-trial motion once diversion path is fully explored); Theory 2 (Franks challenge if warrant affidavit obtained via discovery is defective); Theory 1 (Riverside challenge if booking records show &gt;48-hour delay).</li>
+  <li><strong>Escalation:</strong> Theory 11 (elected District Attorney appeal + State Bar complaint) if the line Assistant District Attorney refuses to move.</li>
+</ol>
+</div>
+
+<h2>17. POLITICAL LEVERAGE (Congressional + Senatorial + State)</h2>
+
+<p class="small"><em>Congressional constituent-services offices exist precisely to intervene when a constituent &mdash; especially a decorated combat veteran &mdash; is stuck inside a system that will not return calls. Kyle's residence in Melissa, Texas (Collin County) puts him in a specific United States Congressional District. His two United States Senators are Texas-wide. Character-battalion letters from a sitting Congressman, Senator, or Governor's Veterans Affairs office change the temperature of a case overnight. Not because they can order a judge to rule &mdash; they cannot &mdash; but because their inquiry puts every player on notice that the case is being watched.</em></p>
+
+<h3>Federal &mdash; primary</h3>
+<table>
+  <tr><th>Official</th><th>Office</th><th>Path</th></tr>
+  <tr><td><strong>United States Representative for Texas Congressional District 4</strong> (covers Melissa, Texas &mdash; verify current member via Live Fetch)</td><td>Constituent Services / Veterans Casework</td><td>Written request from Beth (as mother, constituent) for a Congressional Inquiry to the Department of Veterans Affairs (Veterans Justice Outreach status) + Bureau of Prisons + Department of Justice regarding pretrial detention conditions for a decorated combat veteran.</td></tr>
+  <tr><td><strong>United States Senator Ted Cruz</strong> (Texas)</td><td>Constituent Services &middot; Veterans Casework</td><td>via cruz.senate.gov &mdash; Casework Request. Combat-vet-in-crisis intake path.</td></tr>
+  <tr><td><strong>United States Senator John Cornyn</strong> (Texas)</td><td>Constituent Services &middot; Veterans Casework</td><td>via cornyn.senate.gov &mdash; Help with a Federal Agency. Cornyn has a documented history of veteran-affairs advocacy in Texas.</td></tr>
+</table>
+
+<h3>State &mdash; Texas</h3>
+<table>
+  <tr><th>Official</th><th>Office</th><th>Path</th></tr>
+  <tr><td><strong>Governor Greg Abbott &mdash; Texas Governor's Committee on People with Disabilities + Office of Veterans Affairs Liaison</strong></td><td>Governor's Office &middot; Constituent Services</td><td>via gov.texas.gov &mdash; specifically referencing service-connected Traumatic Brain Injury + Post-Traumatic Stress Disorder + Silver Star + Purple Heart.</td></tr>
+  <tr><td><strong>Texas State Senator for District covering Melissa</strong> (verify via Live Fetch)</td><td>State-level constituent services</td><td>State-court matters have more traction with state legislators than federal officials. Written inquiry to the Travis County District Attorney gets attention.</td></tr>
+  <tr><td><strong>Texas State Representative for House District covering Melissa</strong> (verify via Live Fetch)</td><td>State-level constituent services</td><td>Same. State House Rep can call the Assistant District Attorney directly.</td></tr>
+  <tr><td><strong>Texas Veterans Commission</strong></td><td>tvc.texas.gov</td><td>State-agency advocacy path. Has a Justice-Involved Veterans Program.</td></tr>
+</table>
+
+<h3>National advocacy voices (character amplification, not jurisdictional)</h3>
+<div class="callout">
+<em>These officials cannot intervene in a Texas state-court criminal matter. Their value is character-witness amplification and public-visibility escalation if the case stalls or the state overreaches on a decorated combat veteran. Reserved lever &mdash; deploy only if primary channels fail.</em>
+<br><br>
+<ul>
+  <li><strong>Tom Homan</strong> (Border Czar &mdash; retired federal law-enforcement, veteran-affinity voice)</li>
+  <li><strong>Doug Burgum</strong> (Secretary of the Interior &mdash; former North Dakota Governor, veteran-affinity Republican voice)</li>
+  <li><strong>National Marine Corps Special Operations Command Foundation board</strong> (already primary via 951-551-9309, but board members individually carry public voice)</li>
+  <li><strong>Military-affinity media</strong> &mdash; Task &amp; Purpose, Coffee or Die, SOFREP, We Are The Mighty &mdash; combat-vet-in-crisis stories move fast in the special-operations community</li>
+</ul>
+</div>
+
+<h3>How to open a Congressional Inquiry (mechanics)</h3>
+<ol>
+  <li><strong>Beth writes the letter</strong> (as mother, constituent, on plain letterhead). Facts only. No accusations. Ask specifically for: Congressional Inquiry to Department of Veterans Affairs Veterans Justice Outreach; Congressional Inquiry to Travis County Sheriff's Office regarding pretrial detention conditions; requested response to the office within 30 days.</li>
+  <li><strong>Attach:</strong> copy of Silver Star citation, Purple Heart citation, Department of Defense Form 214 (if available), Kyle's Travis County booking record showing 8+ months of pretrial detention.</li>
+  <li><strong>Submit via</strong> the Congressman / Senator's official Casework Request form (all three &mdash; House Rep + both Senators &mdash; simultaneously).</li>
+  <li><strong>Follow up in 10 days</strong> if no acknowledgement received. Congressional casework staffers respond to persistent, polite, well-documented requests.</li>
+  <li><strong>Do NOT</strong> attack the judge, the Assistant District Attorney, or the girlfriend in the letter. Congressional offices will not touch anything that reads as trying to influence the judiciary. Ask only for oversight, monitoring, and Department-of-Veterans-Affairs coordination.</li>
+</ol>
+
+<h2>18. BIRTHDAY REMINDER</h2>
+<div class="callout">
+Kyle turns 38 on 2026-07-17 &mdash; 6 days from today. Card to:
+<br><br>
+<strong>Kyle Harris #2530151<br>
+Travis County Correctional Complex<br>
+3614 Bill Price Road<br>
+Del Valle, Texas 78617</strong>
+<br><br>
+Commissary deposit via Global Tel Link / ConnectNetwork with booking number 2530151. Global Tel Link tablet email invite available.
+</div>
+
+<h2>19. BOND MATH &mdash; WHY 10% DOES NOT SPRING HIM</h2>
+
+<p>Fair question from family: if Kyle posts 10% of the anchor, does he walk? Short answer: no. The bond stack is not the blocker. The blocker is a no-bond hold buried in the charge stack.</p>
+
+<h3>Active bond stack (per §2 Custody + §3 Charge Stack)</h3>
+<table>
+  <tr><th>Charge</th><th>Bond amount</th><th>Bondsman premium (10%)</th></tr>
+  <tr><td>Charge 1 &mdash; Assault Family / Household Member Impede Breath (Felony 3)</td><td>$10,000</td><td>$1,000</td></tr>
+  <tr><td>Charge 2 &mdash; Terroristic Threat (Misdemeanor A)</td><td>$5,000</td><td>$500</td></tr>
+  <tr><td>Charge 3 &mdash; Unlawful Restraint (Misdemeanor A)</td><td>$5,000</td><td>$500</td></tr>
+  <tr><td><strong>Charge 6 &mdash; Out-of-County Felony (no-bond hold)</strong></td><td><strong>$0</strong></td><td><strong>Cannot be posted &mdash; no-bond hold</strong></td></tr>
+  <tr><td>Charge 7 &mdash; Out-of-County Felony (THE ANCHOR)</td><td>$100,000</td><td>$10,000</td></tr>
+  <tr><td><strong>Total bondable</strong></td><td><strong>$120,000</strong></td><td><strong>$12,000 premium + collateral</strong></td></tr>
+</table>
+
+<h3>Why the 10% path fails</h3>
+<p>Even if the family posts $12,000 in premium (plus collateral) to a bondsman and the bondsman posts the full $120,000 to the court, <strong>Charge 6 keeps Kyle inside.</strong> A "no-bond hold" in Texas custody language means the issuing county has directed the jail to hold the person without release option regardless of what is paid elsewhere. There is no bond amount that satisfies a no-bond hold. Only the issuing county can release the hold, either by (a) quashing or dismissing the underlying charge, (b) issuing a bond amount that then becomes posted, or (c) transferring Kyle to that county's jurisdiction for direct handling.</p>
+
+<h3>Why the ankle-monitor refusal is rational at every layer</h3>
+<p>The court offered release on the Travis County matters conditioned on ankle monitor plus curfew. Kyle refused for two reasons: (1) he had no residence address to be monitored from, making the monitor meaningless as a condition and setting him up to violate; (2) even accepting the monitor and posting the Travis bond would not spring him because Charges 6 and 7 remain. The refusal is not stubbornness. It is a correct read that no partial-release move actually delivers release under this charge stack.</p>
+
+<h3>Real release paths (in order of leverage)</h3>
+<ol>
+  <li><strong>Attack Charge 6 (the no-bond hold).</strong> Decode the issuing county. Local counsel there files to quash or moves for a bond to be set. This is the true blocker. Nothing else releases him while Charge 6 stands.</li>
+  <li><strong>Attack Charge 7 (the $100,000 anchor).</strong> Theory 6 (collateral attack on the out-of-county warrant) plus Theory 13 (no warrant shown, no paperwork given at arrest). If the anchor drops, $10,000 in bondsman premium comes off the table.</li>
+  <li><strong>Article 17.032 veteran bond reduction on Travis stack (Theory 7).</strong> Combat veteran with Silver Star, Purple Heart, and 100% Veterans Affairs service-connected posture forces reconsideration of the $20,000 Travis stack. Reduction, or personal recognizance with veteran-specific conditions in place of the ankle monitor.</li>
+  <li><strong>Article 17.151 mandatory release (Theory 5).</strong> If the State is not ready for trial within 90 days on the Felony 3, personal recognizance is mandatory. Removes the money question from the Travis side but does not touch Charges 6 and 7.</li>
+  <li><strong>Troy's residence as monitored address (last-resort fallback).</strong> Only meaningful after Charges 6 and 7 are resolved. Layered on top of the release paths above, gives the ankle monitor an address to run from if the court still requires it.</li>
+</ol>
+
+<h3>Cash-vs-surety mechanics (for family reference)</h3>
+<ul>
+  <li><strong>Cash bond.</strong> Post 100% of the bond amount to the court in cash. Refunded when the case concludes minus court fees. On a $120,000 stack, that is $120,000 in cash held by the court &mdash; not the everyday path.</li>
+  <li><strong>Surety bond (bondsman).</strong> Pay 10% of the bond amount to a licensed Texas bail bondsman as a non-refundable premium, plus post collateral (real estate, vehicle title, cash reserve). Bondsman posts the full amount to the court. On a $120,000 stack, that is $12,000 premium + collateral. Standard family path.</li>
+  <li><strong>Personal recognizance bond.</strong> No money, promise to appear. Granted by the magistrate or judge. The Article 17.032 (veteran) and Article 17.151 (mandatory release) theories in §16 both target this outcome.</li>
+</ul>
+
+<h2>20. KYLE ORDERS LOG &mdash; 2026-07-12 JAIL CALLS</h2>
+<p>Beth read the Element 16 / Email v19 shipped script to Kyle on the 4:00 PM and 7:00 PM Central Daylight Time jail calls on 2026-07-12. Kyle's answers are the commander's orders. Every answer &mdash; including "I need to think" &mdash; is a lawful order and is logged.</p>
+
+<h3>4:00 PM Call &mdash; Signature Authorities</h3>
+<ul>
+  <li><strong>Objective 1 &middot; Confirm Durable Power of Attorney [DPOA].</strong> Kyle Harris and Troy DanDurand as co-agents under Texas Estates Code Chapter 752. Revocable in writing by Kyle at any time. Mobile notary rides to the jail with the packet. <em>Answer: [captured on call]</em></li>
+  <li><strong>Objective 2 &middot; Execute Medical Power of Attorney [MPOA].</strong> Beth Martin as sole agent under Texas Health and Safety Code Chapter 166. Separate instrument. This is what the Veterans Affairs system requires to pull the Department of Defense Form 214 and medical records in days instead of weeks. <em>Answer: [captured on call]</em></li>
+  <li><strong>Objective 3 &middot; Secure the military pension.</strong> Bank name plus last four digits of the account. Two purposes: confirm the pension is intact, and route a portion to Kyle's jail commissary. <em>Answer: [captured on call]</em></li>
+  <li><strong>Objective 4 &middot; Lock the employer for post-release.</strong> Employer name plus phone. A job in place at release strengthens the bond hearing and sentencing posture. <em>Answer: [captured on call]</em></li>
+  <li><strong>Objective 5 &middot; Court posture: Pro Se with public defender riding along.</strong> Faretta v. California [422 U.S. 806 (1975)] plus McKaskle v. Wiggins [465 U.S. 168 (1984)] standby framework. <em>Answer: [captured on call]</em></li>
+</ul>
+
+<h3>7:00 PM Call &mdash; Strategy Plus Recovery</h3>
+<ul>
+  <li><strong>Objective 6 &middot; Separate the fight.</strong> Kyle argues pro se for transfer of Front A to Collin County under Texas Code of Criminal Procedure Article 31.03 / 31.04. Fight Front A there. Return to Travis County for Front B afterward, with leverage. <em>Answer: [captured on call]</em></li>
+  <li><strong>Objective 7 &middot; Bring Gunner home.</strong> Post-notarization, Troy calls Collin County Animal Services as Kyle's authorized owner-agent. Fallback: Texas Public Information Act request under Texas Government Code Chapter 552 (ten business day statutory response). <em>Answer: [captured on call]</em></li>
+  <li><strong>Objective 8 &middot; Battlefield recording.</strong> Beth records future calls with Kyle's knowledge. Preserves exact orders. <em>Answer: [captured on call]</em></li>
+</ul>
+
+<h3>Non-Answer Log</h3>
+<p>"I need to think" is a lawful order and gets logged. Non-answers roll to the next call in the sequence they were surfaced. No pressure applied. Non-answers do not reset the mission clock &mdash; parallel-track objectives continue running.</p>
+
+<h2>21. BOBBI JO PUBLIC-RECORDS DRONE SWEEP</h2>
+<p>Cross-source identity intelligence deposit on the counter-party. Preservation posture, not preserved animus. Anchor identifier for the intelligence sweep: <code>bobbijocatering@gmail.com</code>.</p>
+
+<h3>Primary Identity</h3>
+<ul>
+  <li><strong>Name:</strong> Bobbi Jo Rice. Prior married name Costello &mdash; married Michael Costello, Texas, 2020-09-05; marriage since dissolved (Michael Costello = ex-husband, operator-confirmed 2026-07-12). Restored to maiden name Rice. Michael Costello DOB anchor June 1980, age 46 as of 2026-07-12 (operator-supplied public records).</li>
+  <li><strong>Age:</strong> 45&ndash;46 years old as of 2026. Public business records and news profiles indicate a birth year of approximately 1981. A high-profile media feature published in early 2016 (Austin Chronicle food column, 2016-01-29) cited her age at the time as 34, corroborating the 1981 birth-year estimate.</li>
+  <li><strong>Anchor email:</strong> bobbijocatering@gmail.com</li>
+  <li><strong>Anchor phone:</strong> (512) 373-5955 &mdash; T-Mobile mobile line, Austin exchange.</li>
+  <li><strong>Business of record:</strong> Bobbi Jo's Catering / Bobbi Jo Bakes at 11601 Century Oaks Terrace, Austin, Texas 78758.</li>
+</ul>
+
+<h3>Digital Footprint Points of Interest</h3>
+<ul>
+  <li>LinkedIn: linkedin.com/in/bobbi-jo-rice-7a64942b1/</li>
+  <li>Instagram: instagram.com/bobbi_jo_rice_/</li>
+  <li>Facebook (business): facebook.com/BobbiJoBakes/</li>
+  <li>Business site: bobbijocatering.com/</li>
+  <li>Press hits: Austin Chronicle food column (2016-01-29); Vice food-culture profile.</li>
+  <li>Phone-line intel: localcallingguide.com / telcodata.us confirm 512-373 as T-Mobile mobile prefix.</li>
+</ul>
+
+<h3>Standout Sweep Finding</h3>
+<p>Zero direct dog-rescue, animal-shelter, or dog-fostering public footprint tied to Bobbi Jo Rice in the sweep window. Catering and baking business presence dominates the digital fingerprint. This is preservation-only intelligence &mdash; no filing occurs while Kyle is detained. Framework held for the Harris v. Rice offensive posture under advisement of counsel.</p>
+
+<h2>22. COLLIN COUNTY ANIMAL SERVICES &mdash; GUNNER LOCATION CONFIRMED</h2>
+<p>On 2025-12-01 (Monday) Beth Harris received a text message from Collin County Animal Services confirming Gunner is in their physical custody. The message was preserved as an iPhone Messages screenshot pair on 2026-07-12 evening. This closes the Gunner-location question. Every downstream Bring Gunner Home action now runs against a fixed location.</p>
+
+<h3>Message Verbatim &mdash; 2025-12-01 &mdash; To Beth Harris (harrisbeth71@yahoo.com)</h3>
+<div class="callout">
+"Hi Beth,<br><br>
+We do have a dog named Gunner here and I have a note in his file saying that the owner would be picking him up Wednesday. We just need proof of ownership, photos, vet records, and preferably a rabies tag.<br><br>
+Thank you,<br>
+Collin County Animal Services<br>
+Animal Services<br>
+<strong>972-547-7292</strong>"
+</div>
+
+<h3>Facts Locked</h3>
+<ul>
+  <li><strong>Gunner confirmed at Collin County Animal Services.</strong> Named by name in a government-agency communication. Physical custody.</li>
+  <li><strong>Internal file note.</strong> References pickup by "the owner" on the Wednesday following 2025-12-01 (Wednesday 2025-12-03). Kyle in Travis County Jail continuously across that window &mdash; he did not and could not have made that representation. Whoever did is now a person of interest, and the identity of that party is discoverable under Texas Government Code Chapter 552.</li>
+  <li><strong>Proof-of-ownership requirements stated in writing by the shelter:</strong> proof of ownership, photos, vet records, preferably a rabies tag.</li>
+  <li><strong>Direct line:</strong> 972-547-7292 (government agency).</li>
+  <li><strong>Recipient of record:</strong> Beth Harris via harrisbeth71@yahoo.com &mdash; already the recognized family channel at the shelter.</li>
+</ul>
+
+<h3>Troy's Execution Sequence &mdash; Post-Durable-Power-of-Attorney Notarization</h3>
+<ol>
+  <li>Call 972-547-7292 as Kyle's Durable Power of Attorney [DPOA] owner-agent. Reference the 2025-12-01 message. Confirm current status and identity of the officer who authored the file note.</li>
+  <li>Confirm the file note is still live and no adverse action has been taken (transfer to rescue, adoption, euthanasia hold, or release to any party other than Kyle's authorized agent). Record officer name and time.</li>
+  <li>Submit the proof-of-ownership packet: Durable Power of Attorney [DPOA] copy, Kyle-with-Gunner photos, any vet record Kyle names on the jail call, rabies tag information if available.</li>
+  <li>If any element is missing, put the missing-element status in writing and open a Texas Public Information Act request under Texas Government Code Chapter 552 for (a) the intake record for Gunner, (b) the file note referenced in the 2025-12-01 message, (c) all communications about Gunner in Collin County Animal Services custody, and (d) the identity of the party who represented that "the owner would be picking him up Wednesday." Ten business day statutory response.</li>
+  <li>Schedule the physical pickup at the earliest available slot. Beth or Troy signs as authorized agent under the Durable Power of Attorney [DPOA].</li>
+  <li>Chain-of-custody photograph at pickup. Vehicle transport with witness. Immediate vet visit for wellness check and record refresh.</li>
+</ol>
+
+<h3>Evidentiary Weight</h3>
+<p>Under Texas Rules of Evidence 901 (authentication), the 2025-12-01 message is self-authenticating as a government-agency communication with recipient corroboration. Under Rule 803(6), business-record posture with a Collin County Animal Services custodian. Under Rule 803(8), public record of an agency's regularly conducted activity. Anchors Kyle's ownership claim, documents the shelter's actual knowledge of Gunner in custody, and forecloses any later argument that Gunner's location was unknown to the agency.</p>
+
+<hr>
+
+<div class="footer">
+<strong>VERSION LOG</strong><br>
+v1.0 &mdash; 2026-07-10 &mdash; initial case ledger<br>
+v1.1 &mdash; 2026-07-11 &mdash; HTML conversion + day count refreshed<br>
+v1.2 &mdash; 2026-07-11 &mdash; dark-navy display palette + bullet-format sweep + terminology cleanup<br>
+v1.3 &mdash; 2026-07-11 &mdash; §11 Ignition Sequence converted to bullets + full acronym spell-out sweep (feedback_no_acronyms.md hard-lock 2026-07-11)<br>
+v1.4 &mdash; 2026-07-11 &mdash; Added Judge Advocate General subsection to §10 + new §15 Chain of Command Character Battalion + new §16 Lethal Polemic Legal Theories (12 attack theories with recommended sequence) + new §17 Political Leverage (Congressional + Senatorial + State + national advocacy amplification). Birthday renumbered §14 &rarr; §18.<br>
+v1.5 &mdash; 2026-07-12 &mdash; Added §19 Kyle Orders Log (2026-07-12 jail calls, Objectives 1&ndash;8 with answer slots and non-answer log) + §20 Bobbi Jo Public-Records Drone Sweep (identity locked via bobbijocatering@gmail.com anchor, catering/baking business footprint, zero dog-rescue footprint, preservation posture only) + §21 Collin County Animal Services Gunner Location Confirmed (2025-12-01 shelter text to Beth Harris, message verbatim, proof-of-ownership checklist, Troy's post-notarization six-step execution sequence, evidentiary weight under Texas Rules of Evidence 901 / 803(6) / 803(8)).<br>
+v1.6 &mdash; 2026-07-12 &mdash; Added §16 Theory 13 &mdash; No warrant shown, no paperwork given at arrest. Rule stack: Texas Code of Criminal Procedure Article 15.26 + Fourth / Sixth / Fourteenth Amendments + Russell v. United States [369 U.S. 749 (1962)] + Franks v. Delaware [438 U.S. 154 (1978)] + Texas Code of Criminal Procedure Article 15.17 + Article 38.23. Two-track discovery move (Michael Morton Act Article 39.14 + Texas Public Information Act Chapter 552 to Melissa Police Department). Four attack fronts: suppression, Franks, notice / bill of particulars, Section 1983 preservation.<br>
+v1.9 &mdash; 2026-07-12 &mdash; §21 Bobbi Jo Public-Records Drone Sweep &mdash; added Age intelligence line: 45&ndash;46 years old as of 2026, birth year approximately 1981, corroborated by 2016-01-29 Austin Chronicle food column citing her age at the time as 34. Standing formatting rule locked: every date in every file, everywhere, carries the four-digit year annotation because Kyle was arrested in 2025 and remains in custody in 2026 &mdash; year-less dates create ambiguity and are prohibited. Hub portal ksh-exp.profitfuel.us Little John story card year-annotated (Saturday 2026-07-11).<br>
+v1.8 &mdash; 2026-07-12 &mdash; §16 Lethal Polemic Legal Theories retrofitted to LETHAL POLEMIC FULL SPINE format across Theories 1&ndash;13. Every theory now carries eight elements: (1) Rule stack (bulleted, exact article cited with plain-English gloss), (2) Kyle's stated fact (bulleted), (3) Trigger (bulleted discovery / motion sequence), (4) Effect &mdash; multi-front (bulleted attack fronts), (5) Companion move (record-hardening action), (6) Siege Broadcast Read (verbatim jail-call script for Beth, one sentence per line, loaded with flag terms, closes with "Kyle authorizes his Durable Power of Attorney agents to prepare this theory with counsel"), (7) Things to listen for (bulleted signals across DA, court, officer, jail staff), (8) Specific verbiage Kyle can say pro se on the record (bulleted quotation-ready lines). MIND MAP framing added to intro. LETHAL POLEMIC DECEPTION AENEAS-ONASANDER PROTOCOL (LPD-AO) / THE SIEGE BROADCAST doctrine locked: legally true theory-of-attack read openly on the Travis County Sheriff's Office recorded line, no factual admissions to charged elements, no speaking TO complainant, no threats to named actors, no third-party coordination via call, channel named at top of every read. Sentence-per-line dyslexia-safe formatting throughout.<br>
+v1.7 &mdash; 2026-07-12 &mdash; Added §19 Bond Math &mdash; Why 10% Does Not Spring Him. Clarifies why bondsman path fails: Charge 6 no-bond hold blocks release regardless of what is posted on Charges 1&ndash;3, 7. Real release paths ordered by leverage: attack Charge 6 (issuing county unknown, decode required); attack Charge 7 anchor (Theory 6 + Theory 13); Article 17.032 veteran bond reduction on Travis stack (Theory 7); Article 17.151 mandatory release (Theory 5); Troy's residence as monitored address (last-resort fallback). Cash-vs-surety-vs-personal-recognizance mechanics table for family reference. Kyle Orders Log renumbered &sect;19 &rarr; &sect;20; Bobbi Jo sweep &sect;20 &rarr; &sect;21; Collin County Animal Services confirmation &sect;21 &rarr; &sect;22.<br>
+Storage: My Book primary + iCloud + My Book II mirror
+</div>
+
+</body>
+</html>
