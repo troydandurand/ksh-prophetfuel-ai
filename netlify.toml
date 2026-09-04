@@ -12,6 +12,30 @@
   node_bundler = "esbuild"
 
 # ============================================================
+# STRIP .html FROM INCOMING URLs — force clean address bar
+# pretty_urls only rewrites <a href> tags at build time;
+# these redirects catch direct navigation / bookmarks / typed URLs.
+# ============================================================
+
+[[redirects]]
+  from = "/*/index.html"
+  to = "/:splat/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*.html"
+  to = "/:splat"
+  status = 301
+  force = true
+
+# ============================================================
 # BUCKET 4 HARDENING — D-S337-EXT7-VAULT (2026-07-19)
 # Kill deploy previews + branch deploys. Only production serves.
 # Deploy previews bypass the 2FA gate and would leak the portal
