@@ -2,38 +2,15 @@
   publish = "."
   functions = "netlify/functions"
 
-[build.processing]
-  skip_processing = false
-
-[build.processing.html]
-  pretty_urls = true
-
 [functions]
   node_bundler = "esbuild"
 
 # ============================================================
-# STRIP .html FROM INCOMING URLs — force clean address bar
-# pretty_urls only rewrites <a href> tags at build time;
-# these redirects catch direct navigation / bookmarks / typed URLs.
+# MELVINA STANDARD (N438, 2026-09-04) — dossier IS index.html
+# Gate is DOM state in the same file. Zero navigation.
+# URL is always subdomain-only: ksh.prophetfuel.ai
+# Pretty-URL redirects removed — obsolete under single-file pattern.
 # ============================================================
-
-[[redirects]]
-  from = "/*/index.html"
-  to = "/:splat/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/index.html"
-  to = "/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/*.html"
-  to = "/:splat"
-  status = 301
-  force = true
 
 # ============================================================
 # BUCKET 4 HARDENING — D-S337-EXT7-VAULT (2026-07-19)
@@ -60,9 +37,3 @@
     Referrer-Policy = "no-referrer"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
-
-[[headers]]
-  for = "/case/vault/*"
-  [headers.values]
-    Cache-Control = "no-store, no-cache, must-revalidate, private"
-    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet, notranslate"
